@@ -223,6 +223,39 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
             pointer-events: none;
         }
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            background: rgba(5, 7, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            padding: 100px 32px 40px;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-menu-overlay.active {
+            transform: translateX(0);
+        }
+        .mobile-menu-overlay a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 0;
+            font-size: 18px;
+            font-weight: 500;
+            color: #bbc9cf;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: color 0.2s, padding-left 0.2s;
+        }
+        .mobile-menu-overlay a:hover,
+        .mobile-menu-overlay a:active {
+            color: #00cfff;
+            padding-left: 8px;
+        }
     </style>
 </head>
 <body class="font-body-md text-body-md antialiased relative selection:bg-primary-container selection:text-black">
@@ -355,11 +388,29 @@ void main() {
                 </a>
 </div>
 <!-- Mobile Menu Toggle -->
-<button class="md:hidden text-primary">
+<button id="mobile-menu-toggle" class="md:hidden text-primary p-2 -mr-2" aria-label="Toggle mobile menu">
 <span class="material-symbols-outlined text-3xl">menu</span>
 </button>
 </div>
 </nav>
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu-overlay" class="mobile-menu-overlay md:hidden">
+<button id="mobile-menu-close" class="absolute top-5 right-5 text-white/70 hover:text-primary transition-colors p-2" aria-label="Close menu">
+<span class="material-symbols-outlined text-3xl">close</span>
+</button>
+<nav class="flex flex-col gap-0 mt-4">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="domains.html">Domains</a>
+<a href="projects.html">Projects</a>
+<a href="events.html">Events</a>
+<a href="team.html">Team</a>
+<a href="faq.html">FAQ</a>
+</nav>
+<div class="mt-auto pt-8">
+<a href="#join" class="inline-flex items-center justify-center w-full px-8 py-4 bg-primary-container text-black font-label-md text-label-md rounded hover:bg-primary transition-all duration-300 shadow-[0_0_20px_rgba(0,207,255,0.5)] font-bold text-base">Join Sphere</a>
+</div>
+</div>
 <main class="pt-24 md:pt-32 flex-1 flex flex-col min-h-[80vh] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-16 space-y-12">
     <!-- Header -->
     <div class="text-center w-full max-w-4xl mx-auto space-y-4">

@@ -1,30 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.querySelector('button.md\\:hidden');
-    const navLinks = document.querySelector('.hidden.md\\:flex');
-    const actionBtn = document.querySelector('.hidden.md\\:block');
+    // =========================================
+    // Mobile Menu — Full-screen Overlay Drawer
+    // =========================================
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu-overlay');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenuLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
+    const menuIcon = menuToggle ? menuToggle.querySelector('.material-symbols-outlined') : null;
+
+    function openMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (menuIcon) menuIcon.textContent = 'close';
+    }
+
+    function closeMobileMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+        if (menuIcon) menuIcon.textContent = 'menu';
+    }
 
     if (menuToggle) {
         menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('hidden');
-            navLinks.classList.toggle('flex');
-            navLinks.classList.toggle('flex-col');
-            navLinks.classList.toggle('absolute');
-            navLinks.classList.toggle('top-full');
-            navLinks.classList.toggle('left-0');
-            navLinks.classList.toggle('w-full');
-            navLinks.classList.toggle('bg-surface');
-            navLinks.classList.toggle('p-4');
-            
-            actionBtn.classList.toggle('hidden');
-            actionBtn.classList.toggle('block');
-            actionBtn.classList.toggle('absolute');
-            actionBtn.classList.toggle('top-[100%]');
-            actionBtn.classList.toggle('right-4');
-            actionBtn.classList.toggle('mt-4');
+            if (mobileMenu && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
         });
     }
 
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+    }
+
+    // Close menu when any link is clicked
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMobileMenu();
+    });
+
+
+    // =========================================
     // Google Form Modal Logic
+    // =========================================
     const joinButtons = document.querySelectorAll('a[href="#join"], a[href="#register"]');
     if (joinButtons.length > 0) {
         // Create modal overlay
@@ -53,9 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const openModal = (e) => {
             e.preventDefault();
+            // Close mobile menu first if open
+            closeMobileMenu();
             modalOverlay.classList.remove('opacity-0', 'pointer-events-none');
             modalContent.classList.remove('scale-95');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         };
 
         const closeModal = () => {
