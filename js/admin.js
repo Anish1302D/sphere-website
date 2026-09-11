@@ -290,28 +290,93 @@ const teamList = document.getElementById('team-list');
 
 addTeamForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const submitBtn = addTeamForm.querySelector('button[type="submit"]');
-    submitBtn.textContent = 'Uploading...'; submitBtn.disabled = true;
+    const submitBtn = document.getElementById('tm-submit-btn');
+    const editId = document.getElementById('tm-edit-id').value;
+    const isEditing = !!editId;
+    
+    submitBtn.textContent = isEditing ? 'Updating...' : 'Uploading...';
+    submitBtn.disabled = true;
     try {
-        const imageURL = await getImageURL('tm-image-file', 'tm-image');
+        const fileInput = document.getElementById('tm-image-file');
+        const urlInput = document.getElementById('tm-image');
+        const hasNewFile = fileInput && fileInput.files && fileInput.files[0];
+        const hasNewUrl = urlInput && urlInput.value.trim();
         
-        await addDoc(teamCol, {
+        const memberData = {
             name: document.getElementById('tm-name').value,
             role: document.getElementById('tm-role').value,
-            image: imageURL,
             linkedin: document.getElementById('tm-linkedin').value,
             github: document.getElementById('tm-github').value,
-            createdAt: serverTimestamp()
-        });
-        addTeamForm.reset();
-        document.getElementById('tm-image-preview').classList.add('hidden');
+        };
+        
+        if (isEditing) {
+            // Only update image if a new one is provided
+            if (hasNewFile || hasNewUrl) {
+                memberData.image = await getImageURL('tm-image-file', 'tm-image');
+            }
+            await updateDoc(doc(db, 'team', editId), memberData);
+        } else {
+            memberData.image = await getImageURL('tm-image-file', 'tm-image');
+            memberData.createdAt = serverTimestamp();
+            await addDoc(teamCol, memberData);
+        }
+        
+        cancelTeamEdit();
         await loadTeam();
     } catch (error) {
-        alert("Error adding team member: " + error.message);
+        alert("Error " + (isEditing ? 'updating' : 'adding') + " team member: " + error.message);
     } finally {
-        submitBtn.textContent = 'Add Member'; submitBtn.disabled = false;
+        submitBtn.textContent = isEditing ? 'Update Member' : 'Add Member';
+        submitBtn.disabled = false;
     }
 });
+
+// --- TEAM EDIT HELPERS ---
+async function editTeamMember(docId) {
+    try {
+        const docSnap = await getDoc(doc(db, 'team', docId));
+        if (!docSnap.exists()) { alert('Member not found.'); return; }
+        const data = docSnap.data();
+        
+        document.getElementById('tm-edit-id').value = docId;
+        document.getElementById('tm-name').value = data.name || '';
+        document.getElementById('tm-role').value = data.role || '';
+        document.getElementById('tm-image').value = (data.image && !data.image.startsWith('data:')) ? data.image : '';
+        document.getElementById('tm-linkedin').value = data.linkedin || '';
+        document.getElementById('tm-github').value = data.github || '';
+        
+        // Show existing image preview
+        if (data.image) {
+            document.getElementById('tm-preview-img').src = data.image;
+            document.getElementById('tm-image-preview').classList.remove('hidden');
+        }
+        
+        // Switch form to edit mode
+        document.getElementById('team-form-title').textContent = 'Edit Team Member';
+        document.getElementById('tm-submit-btn').textContent = 'Update Member';
+        document.getElementById('tm-submit-btn').classList.remove('bg-secondary', 'hover:bg-secondary/90');
+        document.getElementById('tm-submit-btn').classList.add('bg-primary', 'hover:bg-primary/90');
+        document.getElementById('tm-cancel-edit-btn').classList.remove('hidden');
+        
+        // Scroll to form
+        document.getElementById('team-form-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (error) {
+        alert('Error loading member data: ' + error.message);
+    }
+}
+
+function cancelTeamEdit() {
+    document.getElementById('tm-edit-id').value = '';
+    addTeamForm.reset();
+    document.getElementById('tm-image-preview').classList.add('hidden');
+    document.getElementById('team-form-title').textContent = 'Add Team Member';
+    document.getElementById('tm-submit-btn').textContent = 'Add Member';
+    document.getElementById('tm-submit-btn').classList.remove('bg-primary', 'hover:bg-primary/90');
+    document.getElementById('tm-submit-btn').classList.add('bg-secondary', 'hover:bg-secondary/90');
+    document.getElementById('tm-cancel-edit-btn').classList.add('hidden');
+}
+
+document.getElementById('tm-cancel-edit-btn').addEventListener('click', cancelTeamEdit);
 
 async function loadTeam() {
     teamList.innerHTML = '<p class="text-white/50 text-center py-8">Loading...</p>';
@@ -336,7 +401,10 @@ async function loadTeam() {
                 '<h4 class="text-white font-bold">' + data.name + '</h4>' +
                 '<p class="text-white/60 text-xs">' + data.role + '</p>' +
                 '</div></div>' +
-                '<button class="delete-btn text-error" data-id="' + docSnap.id + '" data-col="team"><span class="material-symbols-outlined text-sm">delete</span></button>';
+                '<div class="flex items-center gap-2">' +
+                '<button class="edit-team-btn text-primary hover:text-primary/80 transition-colors" data-id="' + docSnap.id + '" title="Edit member"><span class="material-symbols-outlined text-sm">edit</span></button>' +
+                '<button class="delete-btn text-error" data-id="' + docSnap.id + '" data-col="team"><span class="material-symbols-outlined text-sm">delete</span></button>' +
+                '</div>';
             teamList.appendChild(card);
         });
         attachListListeners();
@@ -396,6 +464,13 @@ function attachListListeners() {
         };
     });
 
+    document.querySelectorAll('.edit-team-btn').forEach(btn => {
+        btn.onclick = (e) => {
+            const id = e.currentTarget.getAttribute('data-id');
+            editTeamMember(id);
+        };
+    });
+
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.onclick = async (e) => {
             if(confirm("Are you sure you want to delete this item?")) {
@@ -404,7 +479,7 @@ function attachListListeners() {
                 await deleteDoc(doc(db, collectionName, id));
                 if (collectionName === 'events') loadEvents();
                 if (collectionName === 'projects') loadProjects();
-                if (collectionName === 'team') loadTeam();
+                if (collectionName === 'team') { cancelTeamEdit(); loadTeam(); }
             }
         };
     });

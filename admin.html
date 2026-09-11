@@ -510,8 +510,9 @@ void main() {
         <!-- TAB: Team -->
         <div id="tab-team" class="tab-content grid grid-cols-1 lg:grid-cols-3 gap-8 hidden">
             <div class="lg:col-span-1 glass-panel p-6 rounded-xl h-fit">
-                <h3 class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-4">Add Team Member</h3>
+                <h3 id="team-form-title" class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-4">Add Team Member</h3>
                 <form id="add-team-form" class="space-y-4">
+                    <input type="hidden" id="tm-edit-id" value="" />
                     <div><input type="text" id="tm-name" required placeholder="Name" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
                     <div><input type="text" id="tm-role" required placeholder="Role (e.g. Founder, Developer)" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
                     <div>
@@ -527,7 +528,8 @@ void main() {
                     </div>
                     <div><input type="url" id="tm-linkedin" placeholder="LinkedIn URL" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
                     <div><input type="url" id="tm-github" placeholder="GitHub URL" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <button type="submit" class="w-full py-2 bg-secondary text-black font-bold rounded mt-4 text-sm hover:bg-secondary/90 transition-colors">Add Member</button>
+                    <button type="submit" id="tm-submit-btn" class="w-full py-2 bg-secondary text-black font-bold rounded mt-4 text-sm hover:bg-secondary/90 transition-colors">Add Member</button>
+                    <button type="button" id="tm-cancel-edit-btn" class="w-full py-2 bg-white/10 text-white font-bold rounded text-sm hover:bg-white/20 transition-colors hidden">Cancel Edit</button>
                 </form>
             </div>
             <div class="lg:col-span-2 glass-panel p-6 rounded-xl">
