@@ -56,10 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalOverlay = document.createElement('div');
         modalOverlay.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4 md:p-8';
         modalOverlay.innerHTML = `
-            <div class="relative w-full max-w-4xl h-[90vh] glass-panel rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(0,207,255,0.3)] transform scale-95 transition-transform duration-300 flex flex-col">
-                <div class="flex items-center justify-between p-4 border-b border-white/10 bg-black/40">
-                    <h3 class="font-display text-xl text-white font-bold tracking-tight">Join Sphere Coding Club</h3>
-                    <button class="modal-close text-white/50 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
+            <div class="relative w-full max-w-4xl h-[90vh] bg-surface-container-lowest border border-outline-variant rounded-2xl overflow-hidden shadow-lg transform scale-95 transition-transform duration-300 flex flex-col">
+                <div class="flex items-center justify-between p-4 border-b border-outline-variant bg-surface-container-low">
+                    <h3 class="font-headline-md text-xl text-on-surface font-bold tracking-tight">Join Sphere Community</h3>
+                    <button class="modal-close text-on-surface-variant hover:text-on-surface transition-colors p-2 rounded-full hover:bg-surface-container-highest">
                         <span class="material-symbols-outlined">close</span>
                     </button>
                 </div>
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         document.body.appendChild(modalOverlay);
 
-        const modalContent = modalOverlay.querySelector('.glass-panel');
+        const modalContent = modalOverlay.querySelector('.relative.w-full.max-w-4xl');
         const closeBtn = modalOverlay.querySelector('.modal-close');
 
         const openModal = (e) => {

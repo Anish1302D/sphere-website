@@ -1,0 +1,162 @@
+{
+  "routes": {
+    "index.html": {
+      "url": "http://localhost:3000/index.html",
+      "title": "Sphere Community",
+      "console_logs": [
+        "http://localhost:3000/favicon.ico - Failed to load resource: the server responded with a status of 404 (File not found)"
+      ],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "about.html": {
+      "url": "http://localhost:3000/about.html",
+      "title": "Sphere Community",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "leadership.html": {
+      "url": "http://localhost:3000/leadership.html",
+      "title": "Sphere \u2014 Leadership",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "domains.html": {
+      "url": "http://localhost:3000/domains.html",
+      "title": "Sphere Community - Domains",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "events.html": {
+      "url": "http://localhost:3000/events.html",
+      "title": "Sphere Community",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "projects.html": {
+      "url": "http://localhost:3000/projects.html",
+      "title": "Sphere Community",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "team.html": {
+      "url": "http://localhost:3000/team.html",
+      "title": "Sphere \u2014 Team",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "faq.html": {
+      "url": "http://localhost:3000/faq.html",
+      "title": "Sphere Community",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "brand.html": {
+      "url": "http://localhost:3000/brand.html",
+      "title": "Sphere \u2014 Brand Guidelines",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "privacy.html": {
+      "url": "http://localhost:3000/privacy.html",
+      "title": "Sphere \u2014 Privacy Policy",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    },
+    "terms.html": {
+      "url": "http://localhost:3000/terms.html",
+      "title": "Sphere \u2014 Terms of Service",
+      "console_logs": [],
+      "overflow": [],
+      "visible_text_checks": {
+        "has_old_brand": false,
+        "has_glass_panel": false
+      },
+      "elements": {
+        "nav_exists": true,
+        "footer_exists": true
+      }
+    }
+  },
+  "global_console_errors": [],
+  "global_network_errors": []
+}

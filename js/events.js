@@ -1,6 +1,45 @@
 import { db } from './firebase-config.js';
 import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+// Global filter function required by Stitch Events UI
+window.filterEvents = function(category, buttonEl) {
+    // Update active tab buttons styling
+    const buttons = document.querySelectorAll('.event-filter-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+        btn.classList.add('text-on-surface-variant');
+    });
+    buttonEl.classList.remove('text-on-surface-variant');
+    buttonEl.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+
+    // Filter cards
+    const cards = document.querySelectorAll('.event-card');
+    cards.forEach(card => {
+        if (category === 'all') {
+            card.style.display = 'flex';
+        } else {
+            const cardCategory = card.getAttribute('data-category');
+            if (cardCategory === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        }
+    });
+};
+
+const escapeHTML = (str) => {
+    return (str || '').toString().replace(/[&<>'"]/g, 
+        tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        }[tag] || tag)
+    );
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
     const eventsGrid = document.getElementById('dynamic-events-grid');
     if (!eventsGrid) return;
@@ -11,58 +50,70 @@ document.addEventListener('DOMContentLoaded', async () => {
         const snapshot = await getDocs(q);
         
         if (snapshot.empty) {
-            eventsGrid.innerHTML = '<p class="text-white/50 text-center col-span-full py-12">No upcoming events found. Check back later!</p>';
+            eventsGrid.innerHTML = '<p class="text-on-surface-variant text-center col-span-full py-12">No upcoming events found. Check back later!</p>';
             return;
         }
 
         eventsGrid.innerHTML = '';
         
-        let i = 0;
         snapshot.forEach(docSnap => {
             const data = docSnap.data();
             const el = document.createElement('div');
             
-            // Alternate border colors based on index for styling
-            const borderColor = i % 2 === 0 ? 'border-t-primary/30' : 'border-t-secondary/30';
-            const shadowColor = i % 2 === 0 ? 'hover:shadow-[0_10px_30px_rgba(0,207,255,0.1)]' : 'hover:shadow-[0_10px_30px_rgba(116,246,49,0.1)]';
-            const btnClass = i % 2 === 0 ? 'border-primary/50 text-primary hover:bg-primary/10' : 'border-secondary/50 text-secondary hover:bg-secondary/10';
-            const badgeClass = data.status === 'done' ? 'bg-white/10 text-white/50 border-white/20' : (i % 2 === 0 ? 'bg-primary/20 text-primary border-primary/50' : 'bg-secondary/20 text-secondary border-secondary/50');
+            const isDone = data.status === 'done';
             
-            el.className = `glass-panel p-6 rounded-xl border-t ${borderColor} hover:-translate-y-2 transition-all duration-300 flex flex-col shadow-[0_5px_15px_rgba(0,0,0,0.5)] ${shadowColor}`;
+            el.className = 'event-card group bg-surface-container-lowest p-6 rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between';
+            const category = data.category ? data.category.toLowerCase() : 'all';
+            el.setAttribute('data-category', escapeHTML(category));
             
             let imgHtml = '';
             if (data.image) {
-                imgHtml = `<div class="w-full h-32 mb-4 rounded-lg overflow-hidden relative">
-                    <img src="${data.image}" alt="${data.title}" class="absolute inset-0 w-full h-full object-cover">
+                // Ensure URL itself doesn't contain bad chars (URL encoding would be better, but basic escape helps)
+                const safeImg = data.image.replace(/"/g, '&quot;');
+                imgHtml = `
+                <div class="w-full h-40 mb-6 rounded-xl overflow-hidden relative">
+                    <img src="${safeImg}" alt="${escapeHTML(data.title)}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>`;
             }
 
             el.innerHTML = `
-                ${imgHtml}
-                <div class="flex justify-between items-start mb-2 gap-2">
-                    <h3 class="text-xl font-bold text-white leading-tight">${data.title}</h3>
-                    <span class="px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider rounded border ${badgeClass}">${data.status}</span>
-                </div>
-                <div class="space-y-2 text-xs text-white/80 mb-6 flex-1 mt-2">
-                    <div class="flex justify-between border-b border-white/10 pb-1">
-                        <span class="text-white/50">Date</span>
-                        <span class="font-medium text-right">${data.date}</span>
+                <div class="flex flex-col gap-4">
+                    ${imgHtml}
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-full ${isDone ? 'bg-surface-container-high' : 'bg-surface-container'} ${isDone ? 'text-on-surface' : 'text-secondary'} font-label-caps text-label-caps">
+                          ${escapeHTML(data.status ? data.status.toUpperCase() : 'EVENT')}
+                        </span>
+                        <span class="font-telemetry-code text-telemetry-code text-on-surface-variant">DURATION N/A</span>
                     </div>
-                    ${data.location ? `
-                    <div class="flex justify-between border-b border-white/10 pb-1">
-                        <span class="text-white/50">Location</span>
-                        <span class="font-medium text-right">${data.location}</span>
+                    <div class="flex flex-col gap-2">
+                        <span class="font-telemetry-code text-telemetry-code text-on-surface-variant">${escapeHTML(data.date || 'TBA')}</span>
+                        <h4 class="font-headline-md text-headline-md text-on-surface group-hover:text-secondary transition-colors">
+                          ${escapeHTML(data.title)}
+                        </h4>
+                        ${data.description ? `<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">${escapeHTML(data.description)}</p>` : ''}
+                    </div>
+                </div>
+                <div class="pt-6 mt-6 flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            ${data.location ? `
+                            <div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-on-surface font-label-caps text-label-caps font-bold">
+                                LOC
+                            </div>
+                            <span class="font-body-sm text-body-sm text-on-surface font-medium">${escapeHTML(data.location)}</span>
+                            ` : ''}
+                        </div>
+                    </div>
+                    ${data.link ? `
+                    <div class="flex items-center gap-3">
+                        <a href="${data.link.replace(/"/g, '&quot;')}" target="_blank" class="w-full py-2.5 rounded-lg ${isDone ? 'bg-surface-container-low text-on-surface hover:bg-surface-container-high' : 'bg-secondary-container text-on-secondary hover:bg-secondary'} font-title-caps text-title-caps transition-all text-center block">
+                          ${isDone ? 'VIEW DETAILS' : 'REGISTER NOW'}
+                        </a>
                     </div>
                     ` : ''}
                 </div>
-                ${data.link ? `
-                <a href="${data.link}" target="_blank" class="block text-center w-full py-2 rounded border ${btnClass} transition-colors font-bold tracking-wide text-sm mt-auto">
-                    ${data.status === 'done' ? 'View Details' : 'Register Now'}
-                </a>
-                ` : ''}
             `;
             eventsGrid.appendChild(el);
-            i++;
         });
 
     } catch (error) {

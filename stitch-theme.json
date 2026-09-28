@@ -1,0 +1,168 @@
+{
+  "colorMode": "LIGHT",
+  "font": "SPACE_GROTESK",
+  "roundness": "ROUND_EIGHT",
+  "customColor": "#071a3a",
+  "headlineFont": "SPACE_GROTESK",
+  "bodyFont": "INTER",
+  "labelFont": "JETBRAINS_MONO",
+  "namedColors": {
+    "surface_variant": "#d3e3ff",
+    "on_error_container": "#93000a",
+    "primary": "#000000",
+    "on_background": "#0b1c31",
+    "on_surface": "#0b1c31",
+    "surface_container_highest": "#d3e3ff",
+    "primary_container": "#081b3b",
+    "tertiary_fixed_dim": "#afc6ff",
+    "on_secondary_fixed": "#001550",
+    "on_tertiary_fixed_variant": "#004299",
+    "surface_container_low": "#eff3ff",
+    "on_primary_container": "#7484a9",
+    "on_primary_fixed": "#081b3b",
+    "inverse_on_surface": "#ebf1ff",
+    "error_container": "#ffdad6",
+    "surface_tint": "#4e5e82",
+    "primary_fixed_dim": "#b6c6ef",
+    "secondary_container": "#115afe",
+    "on_tertiary_fixed": "#001944",
+    "on_surface_variant": "#44474e",
+    "tertiary_fixed": "#d9e2ff",
+    "on_secondary_container": "#e9ebff",
+    "surface_container": "#e6eeff",
+    "surface_dim": "#cadbf7",
+    "on_tertiary": "#ffffff",
+    "secondary_fixed_dim": "#b6c4ff",
+    "tertiary": "#000000",
+    "on_secondary": "#ffffff",
+    "inverse_primary": "#b6c6ef",
+    "surface_container_high": "#dde9ff",
+    "inverse_surface": "#213147",
+    "tertiary_container": "#001944",
+    "surface_container_lowest": "#ffffff",
+    "on_primary_fixed_variant": "#364669",
+    "on_secondary_fixed_variant": "#003ab2",
+    "on_tertiary_container": "#377ffc",
+    "outline_variant": "#c5c6cf",
+    "background": "#f8f9ff",
+    "outline": "#75777f",
+    "secondary": "#0044cc",
+    "error": "#ba1a1a",
+    "secondary_fixed": "#dce1ff",
+    "on_primary": "#ffffff",
+    "surface": "#f8f9ff",
+    "on_error": "#ffffff",
+    "primary_fixed": "#d8e2ff",
+    "surface_bright": "#f8f9ff"
+  },
+  "designMd": "---\nname: Orbital Precision & Luminous Aerospace\ncolors:\n  surface: '#f8f9ff'\n  surface-dim: '#cadbf7'\n  surface-bright: '#f8f9ff'\n  surface-container-lowest: '#ffffff'\n  surface-container-low: '#eff3ff'\n  surface-container: '#e6eeff'\n  surface-container-high: '#dde9ff'\n  surface-container-highest: '#d3e3ff'\n  on-surface: '#0b1c31'\n  on-surface-variant: '#44474e'\n  inverse-surface: '#213147'\n  inverse-on-surface: '#ebf1ff'\n  outline: '#75777f'\n  outline-variant: '#c5c6cf'\n  surface-tint: '#4e5e82'\n  primary: '#000000'\n  on-primary: '#ffffff'\n  primary-container: '#081b3b'\n  on-primary-container: '#7484a9'\n  inverse-primary: '#b6c6ef'\n  secondary: '#0044cc'\n  on-secondary: '#ffffff'\n  secondary-container: '#115afe'\n  on-secondary-container: '#e9ebff'\n  tertiary: '#000000'\n  on-tertiary: '#ffffff'\n  tertiary-container: '#001944'\n  on-tertiary-container: '#377ffc'\n  error: '#ba1a1a'\n  on-error: '#ffffff'\n  error-container: '#ffdad6'\n  on-error-container: '#93000a'\n  primary-fixed: '#d8e2ff'\n  primary-fixed-dim: '#b6c6ef'\n  on-primary-fixed: '#081b3b'\n  on-primary-fixed-variant: '#364669'\n  secondary-fixed: '#dce1ff'\n  secondary-fixed-dim: '#b6c4ff'\n  on-secondary-fixed: '#001550'\n  on-secondary-fixed-variant: '#003ab2'\n  tertiary-fixed: '#d9e2ff'\n  tertiary-fixed-dim: '#afc6ff'\n  on-tertiary-fixed: '#001944'\n  on-tertiary-fixed-variant: '#004299'\n  background: '#f8f9ff'\n  on-background: '#0b1c31'\n  surface-variant: '#d3e3ff'\ntypography:\n  display-hero:\n    fontFamily: Space Grotesk\n    fontSize: 56px\n    fontWeight: '700'\n    lineHeight: 64px\n    letterSpacing: 0.08em\n  display-hero-mobile:\n    fontFamily: Space Grotesk\n    fontSize: 36px\n    fontWeight: '700'\n    lineHeight: 44px\n    letterSpacing: 0.06em\n  headline-lg:\n    fontFamily: Space Grotesk\n    fontSize: 32px\n    fontWeight: '600'\n    lineHeight: 40px\n    letterSpacing: 0.05em\n  headline-lg-mobile:\n    fontFamily: Space Grotesk\n    fontSize: 26px\n    fontWeight: '600'\n    lineHeight: 32px\n    letterSpacing: 0.04em\n  headline-md:\n    fontFamily: Space Grotesk\n    fontSize: 22px\n    fontWeight: '600'\n    lineHeight: 28px\n    letterSpacing: 0.04em\n  headline-sm:\n    fontFamily: Space Grotesk\n    fontSize: 18px\n    fontWeight: '600'\n    lineHeight: 24px\n    letterSpacing: 0.03em\n  title-caps:\n    fontFamily: Space Grotesk\n    fontSize: 13px\n    fontWeight: '700'\n    lineHeight: 18px\n    letterSpacing: 0.22em\n  body-lg:\n    fontFamily: Inter\n    fontSize: 16px\n    fontWeight: '400'\n    lineHeight: 26px\n    letterSpacing: -0.01em\n  body-md:\n    fontFamily: Inter\n    fontSize: 14px\n    fontWeight: '400'\n    lineHeight: 22px\n    letterSpacing: 0em\n  body-sm:\n    fontFamily: Inter\n    fontSize: 12px\n    fontWeight: '400'\n    lineHeight: 18px\n    letterSpacing: 0.01em\n  telemetry-code:\n    fontFamily: JetBrains Mono\n    fontSize: 12px\n    fontWeight: '500'\n    lineHeight: 16px\n    letterSpacing: 0.05em\n  label-caps:\n    fontFamily: JetBrains Mono\n    fontSize: 11px\n    fontWeight: '600'\n    lineHeight: 14px\n    letterSpacing: 0.14em\nrounded:\n  sm: 0.25rem\n  DEFAULT: 0.5rem\n  md: 0.75rem\n  lg: 1rem\n  xl: 1.5rem\n  full: 9999px\nspacing:\n  gutter: 1.5rem\n  gutter-sm: 1rem\n  gutter-lg: 2rem\n  margin: 2rem\n  margin-sm: 1rem\n  margin-lg: 4rem\n  space-xs: 0.25rem\n  space-sm: 0.5rem\n  space-md: 1rem\n  space-lg: 1.5rem\n  space-xl: 2.5rem\n  space-2xl: 4rem\n---\n\n## Brand & Style\n\nThis design system synthesizes high-grade aerospace engineering precision with luminous, celestial digital interfaces. It draws directly from the clean, hyper-refined technical authority of missions like Artemis, Apple design labs, and Vercel infrastructure, while sustaining the forward-leaning energy of high-potential tech talent collectives.\n\nThe visual language bridges two physical metaphors:\n1. **Luminous Orbital Horizons:** Soft, curved, diffuse planetary atmospheres that bloom with deep optical blues over sterile, pristine whites.\n2. **Machined Chrome & Specular Chrome Nodes:** Crisp vector precision, 1px aerospace-grade structural borders, orbital concentric rings, and metallic accents that imply industrial mastery.\n\nThe interface rejects noisy cyberpunk cliches, harsh purple/neon gradients, and playful illustrative clutter. Instead, it commits to ultra-wide kerning, architectural monospaced telemetry, crystalline frosted glass panels, and deep cobalt-to-navy typography with impeccable optical contrast.\n\n## Colors\n\nThe system is built on a crisp, hyper-clean luminous canvas with sharp, optical contrast and deep atmospheric blue gradations.\n\n### Core Swatches & Roles\n- **Canvas Base (`#F7FAFF`):** An airy, high-luminance off-white with a minute cool blue cast that prevents digital glare and creates an ambient tropospheric ground.\n- **Surface Layer (`#FFFFFF`):** High-opacity pure white utilized for front-line glassmorphic panels, data cards, and interactive modal sheets.\n- **Primary Navy (`#071A3A` / Deep Nocturne `#031126`):** The definitive typographic and high-prominence structural anchor, replacing generic pure black with deep oceanic authority.\n- **Royal Blue (`#145BFF`):** Primary action trigger, active navigation indicator, and high-priority directional accent.\n- **Electric Blue (`#3B82FF`):** Specular highlights, orbital ring paths, luminous rim lights, and focused interactive states.\n- **Atmospheric Blue Tint (`#8EC5FF`):** Subdued secondary badges, hover glows, and soft telemetry markers.\n- **Precision Border (`#D8E4F4`):** 1px structural hair-line separators that maintain sharp spatial definition without visual clutter.\n- **Metallic Chrome Gradient:** `linear-gradient(135deg, #FFFFFF 0%, #D8E4F4 45%, #94A3B8 50%, #F1F5F9 100%)` for metallic emblems, badges, and hardware-inspired trims.\n- **Luminous Atmospheric Glow:** `rgba(59, 130, 255, 0.15)` for ambient spherical backlights and orbital focus rings.\n\n## Typography\n\nThe typography system relies on a three-tier technical hierarchy:\n- **Headings & Display (`Space Grotesk`):** Editorial, architectural, and geometric. Primary titles use uppercase transformations paired with deliberate letter-spacing (`0.05em` to `0.22em`) to mirror aerospace instrumentation and mission headers.\n- **Narrative & Body (`Inter`):** Systematic, crystal-clear readability with neutral grotesque qualities and optimized neutral color contrasts (`#0A1733` primary, `#52627A` secondary).\n- **Telemetry & Labels (`JetBrains Mono`):** Used for metadata, role capsules, skill metrics, status markers, and numerical timestamps. Monospaced clarity conveys precision and analytical rigor.\n\n## Layout & Spacing\n\nThe layout is grounded in a symmetrical, modular 12-column responsive fluid grid with generous, balanced margins to let visual components breathe.\n\n### Grid Rhythm & Adapters\n- **Desktop (1200px+):** 12-column grid, `margin: 4rem`, `gutter: 2rem`. Content container max-width: 1280px centered.\n- **Tablet (768px - 1199px):** 8-column grid, `margin: 2rem`, `gutter: 1.5rem`.\n- **Mobile (320px - 767px):** 4-column grid, `margin: 1rem`, `gutter: 1rem`. Full reflow of horizontal metric cards into vertical, edge-to-edge stacks.\n\n### Structural Whitespace\nNegative space is deliberately maintained around orbital badges, avatar portals, and quote cards to give interfaces an open, atmospheric expansiveness reminiscent of flight instruments and planetary horizons.\n\n## Elevation & Depth\n\nVisual depth is achieved through translucent surfaces, 1px luminous light-catcher borders, and chromatic backlights instead of heavy, muddy dropshadows.\n\n### The Elevation Stack\n- **Level 0 (Atmosphere Ground):** Flat `#F7FAFF` with optional radial blue background wash: `radial-gradient(circle at 50% 0%, rgba(142, 197, 255, 0.25) 0%, rgba(247, 250, 255, 0) 70%)`.\n- **Level 1 (Orbital Glass Surface):** Pure `#FFFFFF` at 85% opacity with `backdrop-filter: blur(16px)`, bound by a crisp hairline border: `1px solid #D8E4F4`. Subtle ambient lift: `box-shadow: 0 4px 20px -2px rgba(7, 26, 58, 0.04)`.\n- **Level 2 (Floating Instrument Card):** `#FFFFFF` layered over subtle blue ambient glow: `box-shadow: 0 12px 32px -4px rgba(7, 26, 58, 0.08), 0 0 0 1px #E2EDFA`.\n- **Level 3 (Spherical Glow / Interactive Popover):** Deep optical halo effect: `box-shadow: 0 20px 40px -8px rgba(20, 91, 255, 0.16), 0 0 24px 2px rgba(59, 130, 255, 0.20)`.\n- **Orbital Rim Highlight:** Circular elements (such as profile apertures or badges) feature an internal rim light: `box-shadow: inset 0 0 0 2px #FFFFFF, 0 0 0 3px #8EC5FF, 0 8px 30px rgba(59, 130, 255, 0.35)`.\n\n## Shapes\n\nThe shape hierarchy combines mechanical rectangles with cosmic curvature:\n- **Core Cards & Panels:** Smooth `0.75rem` to `1rem` corner rounding, delivering structured composure without severe corners.\n- **Pill Badges & Role Capsules:** Full pill radiuses (`9999px`) used strictly for classification chips, category tags, and command indicators.\n- **Orbital Portals & Celestial Accents:** Perfect 1:1 circular shapes with outer planetary rings, subtle 1px planetary latitude/longitude vector arcs, and satellite spherical beads.\n\n## Components\n\n### Buttons\n- **Primary Action:** Solid Primary Navy (`#071A3A`) or Royal Blue (`#145BFF`) fill, crisp white Space Grotesk text, subtle pill or 0.5rem radius, micro-glow on hover (`0 0 20px rgba(20, 91, 255, 0.4)`).\n- **Secondary / Glass Button:** High-transparency white surface (`rgba(255, 255, 255, 0.8)`), 1px border in `#D8E4F4`, text in `#071A3A`. Hover transitions surface to white with `#145BFF` border.\n- **Ghost / Telemetry Button:** Monospaced JetBrains text, no background, accompanied by directional chevron with trailing hairline rule.\n\n### Orbital Avatar Portals\n- Profile imagery housed within a concentric circular framing:\n  - Inner image masked in a true circle.\n  - Border 1: 3px pure white spacer ring.\n  - Border 2: 2px electric blue glow ring (`#3B82FF`).\n  - Exterior accent: Thin 1px vector orbital ellipse slicing across the avatar horizon with an offset chrome satellite sphere.\n\n### Chips & Classification Badges\n- Compact capsules utilizing `JetBrains Mono` uppercase text (`letter-spacing: 0.14em`).\n- Frosted gradient fill (`linear-gradient(180deg, #FFFFFF 0%, #EDF4FD 100%)`) with 1px border `#D8E4F4`.\n- Co-founder / Role badge: Royal Blue pill (`#145BFF`) with crisp white typography and soft outer electric blue bloom.\n\n### Data & Quote Cards\n- Translucent white container (`#FFFFFF` with 90% opacity), `1rem` radius, subtle 1px line border.\n- Quote cards feature dual oversized quotation glyphs in Electric Sky Blue (`#3B82FF`), paired with high-contrast centered typography.\n- Metric grids utilize 3-column layouts separated by 1px vertical borders in `#D8E4F4` rather than heavy dividers.\n\n### Form Inputs & Checkboxes\n- **Input Fields:** `#FFFFFF` fill, 1px border `#D8E4F4`, `0.5rem` radius. Focused state introduces an Electric Blue perimeter ring (`#3B82FF`) with a soft `rgba(59, 130, 255, 0.15)` aura. Placeholder text in `#8B9BB4`.\n- **Checkboxes & Radios:** Precision-machined circular or softly rounded squares with deep navy active state containing high-contrast white vector checks.\n\n### Timeline Nodes & Interactive Tabs\n- Segmented tabs enclosed in a pill or rounded container with active tab elevated via a pure white card surface and subtle ambient blue shadow.\n- Vertical timeline tracks represented by 1px electric hairline connections punctuated by glowing, dual-concentric spherical beads.",
+  "colorVariant": "FIDELITY",
+  "overridePrimaryColor": "#071a3a",
+  "overrideSecondaryColor": "#145bff",
+  "overrideTertiaryColor": "#3b82ff",
+  "overrideNeutralColor": "#52627a",
+  "spacingScale": 2,
+  "typography": {
+    "headline-sm": {
+      "fontFamily": "Space Grotesk",
+      "fontSize": "18px",
+      "fontWeight": "600",
+      "lineHeight": "24px",
+      "letterSpacing": "0.03em"
+    },
+    "body-sm": {
+      "fontFamily": "Inter",
+      "fontSize": "12px",
+      "fontWeight": "400",
+      "lineHeight": "18px",
+      "letterSpacing": "0.01em"
+    },
+    "display-hero": {
+      "fontFamily": "Space Grotesk",
+      "fontSize": "56px",
+      "fontWeight": "700",
+      "lineHeight": "64px",
+      "letterSpacing": "0.08em"
+    },
+    "headline-md": {
+      "fontFamily": "Space Grotesk",
+      "fontSize": "22px",
+      "fontWeight": "600",
+      "lineHeight": "28px",
+      "letterSpacing": "0.04em"
+    },
+    "telemetry-code": {
+      "fontFamily": "JetBrains Mono",
+      "fontSize": "12px",
+      "fontWeight": "500",
+      "lineHeight": "16px",
+      "letterSpacing": "0.05em"
+    },
+    "title-caps": {
+      "fontFamily": "Space Grotesk",
+      "fontSize": "13px",
+      "fontWeight": "700",
+      "lineHeight": "18px",
+      "letterSpacing": "0.22em"
+    },
+    "headline-lg": {
+      "fontFamily": "Space Grotesk",
+      "fontSize": "32px",
+      "fontWeight": "600",
+      "lineHeight": "40px",
+      "letterSpacing": "0.05em"
+    },
+    "display-hero-mobile": {
+      "fontFamily": "Space Grotesk",
+      "fontSize": "36px",
+      "fontWeight": "700",
+      "lineHeight": "44px",
+      "letterSpacing": "0.06em"
+    },
+    "body-lg": {
+      "fontFamily": "Inter",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "26px",
+      "letterSpacing": "-0.01em"
+    },
+    "label-caps": {
+      "fontFamily": "JetBrains Mono",
+      "fontSize": "11px",
+      "fontWeight": "600",
+      "lineHeight": "14px",
+      "letterSpacing": "0.14em"
+    },
+    "body-md": {
+      "fontFamily": "Inter",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "22px",
+      "letterSpacing": "0em"
+    },
+    "headline-lg-mobile": {
+      "fontFamily": "Space Grotesk",
+      "fontSize": "26px",
+      "fontWeight": "600",
+      "lineHeight": "32px",
+      "letterSpacing": "0.04em"
+    }
+  },
+  "spacing": {
+    "space-xl": "2.5rem",
+    "space-lg": "1.5rem",
+    "margin-lg": "4rem",
+    "space-md": "1rem",
+    "gutter-sm": "1rem",
+    "space-2xl": "4rem",
+    "margin": "2rem",
+    "space-sm": "0.5rem",
+    "margin-sm": "1rem",
+    "gutter-lg": "2rem",
+    "space-xs": "0.25rem",
+    "gutter": "1.5rem"
+  },
+  "headlineFontFamily": "Space Grotesk",
+  "bodyFontFamily": "Inter",
+  "labelFontFamily": "JetBrains Mono"
+}
