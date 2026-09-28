@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Firestore</title>
+</head>
+<body>
+    <div id="status">Starting...</div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUHSwTph2yTD8HipTbQLfwD94yC3dAVl4",
+            authDomain: "sphere-website-311be.firebaseapp.com",
+            projectId: "sphere-website-311be",
+            storageBucket: "sphere-website-311be.firebasestorage.app",
+            messagingSenderId: "495675943081",
+            appId: "1:495675943081:web:9b428a6f79dd6574c961b8",
+            measurementId: "G-52XPWYMP6N"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function run() {
+            try {
+                const teamRef = collection(db, "team");
+
+                // 1. Create Anish
+                await addDoc(teamRef, {
+                    name: "Anish Mogam",
+                    role: "Founder",
+                    github: "https://github.com/Anish1302D",
+                    linkedin: "https://www.linkedin.com/in/anish-mogam/"
+                });
+                
+                // 2. Create Shreyash
+                await addDoc(teamRef, {
+                    name: "Shreyash Atre",
+                    role: "Co-Founder",
+                    github: "https://github.com/shreyash0216",
+                    linkedin: "https://www.linkedin.com/in/shreyash-atre-901340317/"
+                });
+                
+                // 3. Create Isha
+                await addDoc(teamRef, {
+                    name: "Isha Joshi",
+                    role: "Administrator",
+                    github: "https://github.com/ishaj306",
+                    linkedin: "https://www.linkedin.com/in/isha-joshi-4b1074319/"
+                });
+
+                // 4. Update Mihir
+                const mihirRef = doc(db, "team", "wsekcj2dOHzSucWdn9jn");
+                await updateDoc(mihirRef, {
+                    role: "Core Team Lead"
+                });
+
+                document.getElementById("status").innerText = "SUCCESS";
+            } catch (err) {
+                document.getElementById("status").innerText = "ERROR: " + err.message;
+            }
+        }
+
+        run();
+    </script>
+</body>
+</html>

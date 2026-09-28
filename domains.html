@@ -1,630 +1,1097 @@
-<!DOCTYPE html>
-
-<html class="dark scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sphere Coding Club</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Geist:wght@300..700&amp;family=JetBrains+Mono:wght@100..800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "error": "#ffb4ab",
-                      "primary-container": "#00cfff",
-                      "surface-tint": "#54d5ff",
-                      "secondary-fixed": "#7eff3e",
-                      "surface-variant": "#323539",
-                      "on-surface": "#e1e2e7",
-                      "on-error-container": "#ffdad6",
-                      "tertiary-fixed": "#e2e2e2",
-                      "inverse-on-surface": "#2e3134",
-                      "tertiary-container": "#bebfbf",
-                      "surface-dim": "#111417",
-                      "primary-fixed-dim": "#54d5ff",
-                      "on-primary-container": "#00546a",
-                      "secondary-container": "#58d900",
-                      "inverse-primary": "#006780",
-                      "on-secondary-fixed-variant": "#1d5200",
-                      "surface-bright": "#37393d",
-                      "surface-container": "#1d2023",
-                      "on-error": "#690005",
-                      "outline": "#869399",
-                      "surface-container-low": "#191c1f",
-                      "on-secondary": "#113800",
-                      "on-secondary-container": "#205900",
-                      "secondary": "#74f631",
-                      "primary-fixed": "#b8eaff",
-                      "background": "#111417",
-                      "primary": "#a1e4ff",
-                      "tertiary": "#dbdbdb",
-                      "surface-container-lowest": "#0c0e12",
-                      "on-tertiary-fixed": "#1a1c1c",
-                      "surface": "#111417",
-                      "on-primary": "#003544",
-                      "error-container": "#93000a",
-                      "on-tertiary": "#2f3131",
-                      "tertiary-fixed-dim": "#c6c6c6",
-                      "outline-variant": "#3c494e",
-                      "on-background": "#e1e2e7",
-                      "on-tertiary-container": "#4c4e4e",
-                      "surface-container-highest": "#323539",
-                      "on-primary-fixed": "#001f28",
-                      "on-surface-variant": "#bbc9cf",
-                      "secondary-fixed-dim": "#60e215",
-                      "on-secondary-fixed": "#072100",
-                      "surface-container-high": "#282a2e",
-                      "inverse-surface": "#e1e2e7",
-                      "on-tertiary-fixed-variant": "#454747",
-                      "on-primary-fixed-variant": "#004d61"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.25rem",
-                      "lg": "0.5rem",
-                      "xl": "0.75rem",
-                      "full": "9999px"
-              },
-              "spacing": {
-                      "gutter": "24px",
-                      "unit": "4px",
-                      "margin-mobile": "16px",
-                      "container-max": "1440px",
-                      "margin-desktop": "64px"
-              },
-              "fontFamily": {
-                      "body-md": [
-                              "Geist"
-                      ],
-                      "label-sm": [
-                              "JetBrains Mono"
-                      ],
-                      "label-md": [
-                              "JetBrains Mono"
-                      ],
-                      "body-lg": [
-                              "Geist"
-                      ],
-                      "headline-lg-mobile": [
-                              "Space Grotesk"
-                      ],
-                      "display-lg": [
-                              "Space Grotesk"
-                      ],
-                      "headline-lg": [
-                              "Space Grotesk"
-                      ],
-                      "headline-xl": [
-                              "Space Grotesk"
-                      ]
-              },
-              "fontSize": {
-                      "body-md": [
-                              "16px",
-                              {
-                                      "lineHeight": "1.6",
-                                      "fontWeight": "400"
-                              }
-                      ],
-                      "label-sm": [
-                              "12px",
-                              {
-                                      "lineHeight": "1.0",
-                                      "fontWeight": "500"
-                              }
-                      ],
-                      "label-md": [
-                              "14px",
-                              {
-                                      "lineHeight": "1.0",
-                                      "letterSpacing": "0.05em",
-                                      "fontWeight": "500"
-                              }
-                      ],
-                      "body-lg": [
-                              "18px",
-                              {
-                                      "lineHeight": "1.6",
-                                      "fontWeight": "400"
-                              }
-                      ],
-                      "headline-lg-mobile": [
-                              "28px",
-                              {
-                                      "lineHeight": "1.3",
-                                      "fontWeight": "600"
-                              }
-                      ],
-                      "display-lg": [
-                              "72px",
-                              {
-                                      "lineHeight": "1.1",
-                                      "letterSpacing": "-0.04em",
-                                      "fontWeight": "700"
-                              }
-                      ],
-                      "headline-lg": [
-                              "32px",
-                              {
-                                      "lineHeight": "1.3",
-                                      "fontWeight": "600"
-                              }
-                      ],
-                      "headline-xl": [
-                              "48px",
-                              {
-                                      "lineHeight": "1.2",
-                                      "letterSpacing": "-0.02em",
-                                      "fontWeight": "600"
-                              }
-                      ]
-              }
-            },
-          },
-        }
-    </script>
-<style>
+<!doctype html>
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sphere Community - Domains</title>
+    <link href="css/design-system.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-config.js"></script>
+    <style>
+      @layer base {
+        html,
         body {
-            background-color: #000000;
-            color: #e1e2e7;
-            overflow-x: hidden;
-        }
-        
-        /* Glassmorphism Utilities */
-        .glass-panel {
-            background: rgba(5, 7, 10, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            border-right: 1px solid rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+          margin: 0;
+          padding: 0;
+          scroll-behavior: smooth;
         }
 
-        .glow-hover:hover {
-            box-shadow: 0 0 25px rgba(0, 207, 255, 0.2);
-            border-color: rgba(0, 207, 255, 0.5);
+        body {
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+      }
+
+      @keyframes orbit-slow {
+        0% {
+          transform: rotate(0deg);
         }
 
-        .text-glow {
-            text-shadow: 0 0 20px rgba(0, 207, 255, 0.4);
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes orbit-reverse {
+        0% {
+          transform: rotate(360deg);
         }
 
-        /* Forms */
-        .input-glass {
-            background: rgba(17, 20, 23, 0.6);
-            border-bottom: 1px solid #869399;
-            transition: all 0.3s ease;
+        100% {
+          transform: rotate(0deg);
         }
-        .input-glass:focus {
-            border-bottom-color: #00cfff;
-            box-shadow: 0 4px 15px -3px rgba(0, 207, 255, 0.2);
-            outline: none;
+      }
+
+      @keyframes float-gentle {
+        0%,
+        100% {
+          transform: translateY(0px) scale(1);
         }
 
-        /* Marquee */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
+        50% {
+          transform: translateY(-12px) scale(1.02);
         }
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 30s linear infinite;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+      }
+
+      @keyframes float-planet-1 {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
         }
 
-        /* Background Particle Noise */
-        .bg-noise {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            pointer-events: none;
+        33% {
+          transform: translate3d(10px, -15px, 0) rotate(6deg);
         }
-        /* Mobile Menu Overlay */
-        .mobile-menu-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 60;
-            background: rgba(5, 7, 10, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            padding: 100px 32px 40px;
-            transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        66% {
+          transform: translate3d(-8px, -8px, 0) rotate(-4deg);
         }
-        .mobile-menu-overlay.active {
-            transform: translateX(0);
+      }
+
+      @keyframes float-planet-2 {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0) rotate(0deg);
         }
-        .mobile-menu-overlay a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 0;
-            font-size: 18px;
-            font-weight: 500;
-            color: #bbc9cf;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: color 0.2s, padding-left 0.2s;
+
+        50% {
+          transform: translate3d(-14px, -18px, 0) rotate(-6deg);
         }
-        .mobile-menu-overlay a:hover,
-        .mobile-menu-overlay a:active {
-            color: #00cfff;
-            padding-left: 8px;
+      }
+
+      @keyframes planet-shine {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.45));
         }
+
+        50% {
+          filter: drop-shadow(0 0 32px rgba(56, 189, 248, 0.85));
+        }
+      }
+
+      @keyframes emblem-glow {
+        0%,
+        100% {
+          box-shadow:
+            0 12px 45px -8px rgba(20, 91, 255, 0.35),
+            0 0 25px rgba(56, 189, 248, 0.25);
+        }
+
+        50% {
+          box-shadow:
+            0 18px 60px -4px rgba(20, 91, 255, 0.6),
+            0 0 45px rgba(56, 189, 248, 0.5);
+        }
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scale(0.85);
+        }
+
+        50% {
+          opacity: 1;
+          transform: scale(1.25);
+        }
+      }
+
+      @keyframes shimmer-sweep {
+        0% {
+          transform: translateX(-150%) skewX(-20deg);
+        }
+
+        100% {
+          transform: translateX(250%) skewX(-20deg);
+        }
+      }
+
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(0.95);
+          opacity: 0.5;
+        }
+
+        50% {
+          transform: scale(1.05);
+          opacity: 0.85;
+        }
+
+        100% {
+          transform: scale(0.95);
+          opacity: 0.5;
+        }
+      }
+
+      .animate-orbit-slow {
+        animation: orbit-slow 28s linear infinite;
+      }
+
+      .animate-orbit-reverse {
+        animation: orbit-reverse 40s linear infinite;
+      }
+
+      .animate-float-gentle {
+        animation: float-gentle 6s ease-in-out infinite;
+      }
+
+      .animate-float-planet-1 {
+        animation: float-planet-1 8s ease-in-out infinite;
+      }
+
+      .animate-float-planet-2 {
+        animation: float-planet-2 10s ease-in-out infinite;
+      }
+
+      .animate-planet-glow {
+        animation: planet-shine 4s ease-in-out infinite;
+      }
+
+      .animate-twinkle-fast {
+        animation: twinkle 3s ease-in-out infinite;
+      }
+
+      .animate-twinkle-slow {
+        animation: twinkle 5s ease-in-out infinite 1.5s;
+      }
+
+      .animate-pulse-ring {
+        animation: pulse-ring 4s ease-in-out infinite;
+      }
+
+      .animate-emblem-breathing {
+        animation: emblem-glow 4.5s ease-in-out infinite;
+      }
+
+      .globe-3d-azure {
+        background: radial-gradient(
+          circle at 30% 28%,
+          #ffffff 0%,
+          #bae6fd 16%,
+          #38bdf8 42%,
+          #0284c7 72%,
+          #0369a1 90%,
+          #075985 100%
+        );
+        box-shadow:
+          inset -5px -5px 12px rgba(3, 105, 161, 0.8),
+          inset 4px 4px 10px rgba(255, 255, 255, 0.9),
+          0 10px 25px -4px rgba(14, 165, 233, 0.4),
+          0 0 20px rgba(56, 189, 248, 0.35);
+      }
+
+      .globe-3d-pearl {
+        background: radial-gradient(
+          circle at 32% 26%,
+          #ffffff 0%,
+          #e0f2fe 28%,
+          #7dd3fc 60%,
+          #0284c7 88%,
+          #0369a1 100%
+        );
+        box-shadow:
+          inset -4px -4px 8px rgba(3, 105, 161, 0.7),
+          inset 3px 3px 8px rgba(255, 255, 255, 0.95),
+          0 8px 20px -3px rgba(14, 165, 233, 0.35),
+          0 0 15px rgba(125, 211, 252, 0.4);
+      }
+
+      .globe-3d-deep {
+        background: radial-gradient(
+          circle at 28% 28%,
+          #e0f2fe 0%,
+          #38bdf8 25%,
+          #0284c7 60%,
+          #075985 85%,
+          #0c4a6e 100%
+        );
+        box-shadow:
+          inset -7px -7px 16px rgba(12, 74, 110, 0.85),
+          inset 5px 5px 14px rgba(255, 255, 255, 0.85),
+          0 14px 32px -6px rgba(2, 132, 199, 0.45),
+          0 0 30px rgba(56, 189, 248, 0.4);
+      }
+
+      .globe-atmosphere {
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px;
+        background: radial-gradient(
+          circle at 30% 30%,
+          transparent 60%,
+          rgba(224, 242, 254, 0.6) 88%,
+          rgba(255, 255, 255, 0.9) 100%
+        );
+        pointer-events: none;
+      }
+
+      .shimmer-btn {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .shimmer-btn::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          60deg,
+          transparent 20%,
+          rgba(255, 255, 255, 0.25) 45%,
+          rgba(255, 255, 255, 0.4) 50%,
+          rgba(255, 255, 255, 0.25) 55%,
+          transparent 80%
+        );
+        transform: translateX(-150%) skewX(-20deg);
+        pointer-events: none;
+      }
+
+      .shimmer-btn:hover::after {
+        animation: shimmer-sweep 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-pulse-glow {
+        box-shadow: 0 8px 30px rgba(17, 90, 254, 0.35);
+        animation: btn-glow-pulse 3s infinite;
+      }
+
+      @keyframes btn-glow-pulse {
+        0%,
+        100% {
+          box-shadow: 0 8px 30px rgba(17, 90, 254, 0.35);
+        }
+
+        50% {
+          box-shadow: 0 12px 38px rgba(17, 90, 254, 0.6);
+        }
+      }
+
+      .card-hover-interactive {
+        transition:
+          transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+
+      .card-hover-interactive:hover {
+        transform: translateY(-6px) scale(1.015);
+        box-shadow:
+          0 16px 36px -8px rgba(17, 90, 254, 0.16),
+          0 0 0 1.5px rgba(17, 90, 254, 0.32);
+      }
+
+      .leadership-tilt-card {
+        transition:
+          transform 0.25s cubic-bezier(0.2, 0.8, 0.4, 1),
+          box-shadow 0.3s ease;
+      }
+
+      .leadership-tilt-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px -10px rgba(17, 90, 254, 0.22);
+      }
+
+      .faq-answer-container {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.35s ease,
+          opacity 0.25s ease;
+      }
+
+      .faq-answer-container.expanded {
+        max-height: 300px;
+        opacity: 1;
+      }
     </style>
-</head>
-<body class="font-body-md text-body-md antialiased relative selection:bg-primary-container selection:text-black">
-<!-- Global Background Shader -->
-<div class="fixed inset-0 z-[-2] w-full h-full pointer-events-none">
-<canvas id="bg-shader-canvas" style="display:block;width:100%;height:100%"></canvas>
-<script>
-(function() {
-  const canvas = document.getElementById('bg-shader-canvas');
-
-  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
-  function syncSize() {
-    const w = canvas.clientWidth  || 1280;
-    const h = canvas.clientHeight || 720;
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width  = w;
-      canvas.height = h;
-    }
-  }
-  if (typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(syncSize).observe(canvas);
-  }
-  syncSize();
-
-  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-  if (!gl) return;
-  const vs = `attribute vec2 a_position;
-varying vec2 v_texCoord;
-void main() {
-  v_texCoord = a_position * 0.5 + 0.5;
-  gl_Position = vec4(a_position, 0.0, 1.0);
-}`;
-  const fs = `precision highp float;
-uniform float u_time;
-uniform vec2 u_resolution;
-
-float network(vec2 uv, float t) {
-    vec2 p = fract(uv * 10.0) - 0.5;
-    vec2 id = floor(uv * 10.0);
-    float n = fract(sin(dot(id, vec2(12.9898, 78.233))) * 43758.5453);
-    float d = length(p);
-    float m = smoothstep(0.3, 0.0, d) * smoothstep(0.0, 1.0, n);
-    return m * (0.5 + 0.5 * sin(t + n * 6.28));
-}
-
-void main() {
-    vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.y, u_resolution.x);
-    float t = u_time * 0.5;
-    
-    vec3 color = vec3(0.02, 0.03, 0.05); // Deep navy background
-    
-    float n = network(uv + t * 0.05, t);
-    vec3 cyan = vec3(0.0, 0.81, 1.0) * n * 0.4;
-    vec3 green = vec3(0.48, 1.0, 0.22) * network(uv * 1.5 - t * 0.03, t * 1.2) * 0.3;
-    
-    color += cyan + green;
-    
-    // Vignette
-    color *= 1.0 - length(uv) * 0.5;
-    
-    gl_FragColor = vec4(color, 1.0);
-}`;
-  function cs(type, src) {
-    const s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    return s;
-  }
-  const prog = gl.createProgram();
-  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
-  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
-  gl.linkProgram(prog);
-  gl.useProgram(prog);
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-  const pos = gl.getAttribLocation(prog, 'a_position');
-  gl.enableVertexAttribArray(pos);
-  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
-  const uTime = gl.getUniformLocation(prog, 'u_time');
-  const uRes = gl.getUniformLocation(prog, 'u_resolution');
-  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
-
-  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
-  window.addEventListener('mousemove', (event) => {
-    const rect = canvas.getBoundingClientRect();
-    if (rect.width && rect.height) {
-      const nx = (event.clientX - rect.left) / rect.width;
-      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
-      mouse.x = nx * canvas.width;
-      mouse.y = ny * canvas.height;
-    }
-  });
-
-  function render(t) {
-    if (typeof ResizeObserver === 'undefined') syncSize();
-    gl.viewport(0, 0, canvas.width, canvas.height);
-    if (uTime) gl.uniform1f(uTime, t * 0.001);
-    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
-    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(render);
-  }
-  render(0);
-})();
-</script>
-</div>
-<div class="fixed inset-0 z-[-1] bg-noise"></div>
-<!-- Top Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,207,255,0.15)] transition-all duration-300 ease-in-out">
-<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
-<!-- Brand -->
-<a class="flex items-center gap-3 group" href="index.html">
-<img alt="Sphere Coding Club Logo" class="w-10 h-10 object-contain rounded-full shadow-[0_0_15px_rgba(0,207,255,0.3)] group-hover:shadow-[0_0_25px_rgba(0,207,255,0.6)] transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9nVxiwOC9s1HBxsHitDQbXct5v6nVVSvv7L5rMkbGcRIxFHqyZ1X_9aXJ2lAjsZf0g48PhhzFDaDhIb0reZnHPZ9d2bisVnE5XwlLj8D1EV6_tfIgPx7tjxkRInoIDBOOV5HR9d4NASopBYTSG-PZVPxl04ELVBfY--QeUufVZJuAcT1AbASvDQbAiUbXCfymkicv5vkKQ54FvjDmnPuqZuBJJ6dpvozYqM6eYXzUWj4NuAyQPA0mHg5lWsWVL416m5reaVnP8hc"/>
-<span class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary tracking-tighter">Sphere Coding Club</span>
-</a>
-<!-- Desktop Nav Links -->
-<div class="hidden md:flex items-center gap-8 font-label-md text-label-md">
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="about.html">About</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="domains.html">Domains</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="projects.html">Projects</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="events.html">Events</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="team.html">Team</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="faq.html">FAQ</a>
-</div>
-<!-- Trailing Action -->
-<div class="hidden md:block">
-<a class="inline-flex items-center justify-center px-6 py-2 bg-primary-container text-black font-label-md text-label-md rounded hover:bg-primary transition-all duration-300 shadow-[0_0_15px_rgba(0,207,255,0.4)] hover:shadow-[0_0_25px_rgba(0,207,255,0.6)]" href="#join">
-                    Join Club
-                </a>
-</div>
-<!-- Mobile Menu Toggle -->
-<button id="mobile-menu-toggle" class="md:hidden text-primary p-2 -mr-2" aria-label="Toggle mobile menu">
-<span class="material-symbols-outlined text-3xl">menu</span>
-</button>
-</div>
-</nav>
-<!-- Mobile Menu Overlay -->
-<div id="mobile-menu-overlay" class="mobile-menu-overlay md:hidden">
-<button id="mobile-menu-close" class="absolute top-5 right-5 text-white/70 hover:text-primary transition-colors p-2" aria-label="Close menu">
-<span class="material-symbols-outlined text-3xl">close</span>
-</button>
-<nav class="flex flex-col gap-0 mt-4">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="domains.html">Domains</a>
-<a href="projects.html">Projects</a>
-<a href="events.html">Events</a>
-<a href="team.html">Team</a>
-<a href="faq.html">FAQ</a>
-</nav>
-<div class="mt-auto pt-8">
-<a href="#join" class="inline-flex items-center justify-center w-full px-8 py-4 bg-primary-container text-black font-label-md text-label-md rounded hover:bg-primary transition-all duration-300 shadow-[0_0_20px_rgba(0,207,255,0.5)] font-bold text-base">Join Sphere</a>
-</div>
-</div>
-<main class="pt-24 md:pt-32 flex-1 flex flex-col min-h-[80vh] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-16 space-y-12">
-    <!-- Header -->
-    <div class="text-center w-full max-w-4xl mx-auto space-y-4">
-        <h1 class="font-display-lg text-[40px] leading-[1.1] sm:text-[56px] md:text-display-lg text-white font-bold tracking-tighter text-glow">
-            Innovation <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container to-secondary">Domains</span>
-        </h1>
-        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
-            Explore the core areas of technology we focus on at Sphere Coding Club.
-        </p>
+  </head>
+  <body
+    class="font-body-md text-body-md antialiased text-on-surface bg-background"
+  >
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(7,26,58,0.04)]"
+    >
+      <div
+        class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-4">
+          <a class="flex items-center gap-4" href="index.html">
+            <img
+              alt="SPHERE LOGO"
+              class="h-10 w-10 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]"
+              src="assets/images/sphere-logo.png"
+            />
+            <div class="flex flex-col">
+              <span class="font-title-caps text-title-caps text-on-surface"
+                >SPHERE</span
+              >
+              <span
+                class="font-telemetry-code text-[10px] text-secondary tracking-widest uppercase"
+                >Community</span
+              >
+            </div>
+          </a>
+        </div>
+        <nav
+          class="hidden xl:flex items-center gap-space-md"
+          data-active-classes="text-secondary font-semibold"
+        >
+          <a
+            class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs"
+            data-path="home"
+            href="index.html"
+            >HOME</a
+          >
+          <a
+            class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs"
+            data-path="leadership"
+            href="leadership.html"
+            >LEADERSHIP</a
+          >
+          <a
+            class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs"
+            data-path="about"
+            href="about.html"
+            >ABOUT</a
+          >
+          <a
+            class="font-title-caps text-title-caps transition-colors py-space-xs px-space-xs text-secondary font-semibold"
+            data-path="domains"
+            href="domains.html"
+            >DOMAINS</a
+          >
+          <a
+            class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs"
+            data-path="events"
+            href="events.html"
+            >EVENTS</a
+          >
+          <a
+            class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs"
+            data-path="projects"
+            href="projects.html"
+            >PROJECTS</a
+          >
+          <a
+            class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs"
+            data-path="team"
+            href="team.html"
+            >TEAM</a
+          >
+          <a
+            class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs"
+            data-path="faq"
+            href="faq.html"
+            >FAQ</a
+          >
+        </nav>
+        <div class="flex items-center gap-space-md">
+          <a
+            class="inline-flex items-center justify-center px-space-lg py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-caps text-label-caps transition-all shadow-[0_0_20px_rgba(17,90,254,0.25)] hover:shadow-[0_0_25px_rgba(17,90,254,0.45)]"
+            href="#join"
+            >JOIN COMMUNITY</a
+          >
+          <!-- Mobile menu toggle -->
+          <button
+            aria-label="Toggle mobile menu"
+            class="xl:hidden text-on-surface p-2"
+            id="mobile-menu-toggle"
+          >
+            <span class="material-symbols-outlined text-[24px]">menu</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <div
+      class="fixed inset-0 z-60 bg-surface/95 backdrop-blur-xl flex flex-col p-8 transform translate-x-full transition-transform duration-300 xl:hidden"
+      id="mobile-menu-overlay"
+    >
+      <button
+        aria-label="Close menu"
+        class="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface p-2"
+        id="mobile-menu-close"
+      >
+        <span class="material-symbols-outlined text-[32px]">close</span>
+      </button>
+      <nav class="flex flex-col gap-6 mt-16">
+        <a
+          class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
+          href="index.html"
+          >Home</a
+        >
+        <a
+          class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
+          href="leadership.html"
+          >Leadership</a
+        >
+        <a
+          class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
+          href="about.html"
+          >About</a
+        >
+        <a
+          class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
+          href="domains.html"
+          >Domains</a
+        >
+        <a
+          class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
+          href="events.html"
+          >Events</a
+        >
+        <a
+          class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
+          href="projects.html"
+          >Projects</a
+        >
+        <a
+          class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
+          href="team.html"
+          >Team</a
+        >
+        <a
+          class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
+          href="faq.html"
+          >FAQ</a
+        >
+      </nav>
+      <div class="mt-auto pt-8">
+        <a
+          class="inline-flex items-center justify-center w-full px-8 py-4 bg-secondary text-on-secondary font-label-caps text-label-caps rounded-full shadow-[0_0_20px_rgba(17,90,254,0.3)]"
+          href="#join"
+          >Join Sphere</a
+        >
+      </div>
     </div>
-
-    <!-- Domains Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-        <!-- 1 -->
-        <div class="glass-panel p-6 rounded-2xl flex flex-col h-full border-t border-primary/30 hover:border-primary/60 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,207,255,0.1)] group">
-            <div class="text-4xl mb-4 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform origin-left">💻</div>
-            <h3 class="text-xl font-bold text-white mb-3">Full-Stack Development</h3>
-            <p class="text-on-surface-variant text-sm mb-6 flex-1">Build modern, scalable web applications using the latest frontend and backend technologies.</p>
-            <div>
-                <div class="text-xs text-primary uppercase tracking-widest font-label-sm mb-2">Tech Stack</div>
-                <div class="flex flex-wrap gap-2 text-xs text-white/80">
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">React</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Next.js</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Node.js</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Express</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">MongoDB</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">PostgreSQL</span>
-                </div>
+    <main class="w-full pt-20 min-h-screen bg-[#f3f7fd]">
+      <div class="flex flex-col w-full">
+        <!-- Telemetry Sub-Bar -->
+        <section class="w-full bg-surface-container-low px-6 py-4">
+          <div
+            class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4"
+          >
+            <div class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container text-on-secondary font-label-caps text-label-caps uppercase"
+              >
+                <span
+                  class="w-1.5 h-1.5 rounded-full bg-surface-bright animate-ping"
+                ></span>
+                SYS DOMAINS // 2026.1
+              </span>
+              <span
+                class="font-telemetry-code text-telemetry-code text-on-surface-variant font-medium"
+                >CORE CURRICULUM &amp; SQUAD DISCIPLINES</span
+              >
             </div>
-        </div>
-
-        <!-- 2 -->
-        <div class="glass-panel p-6 rounded-2xl flex flex-col h-full border-t border-secondary/30 hover:border-secondary/60 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(116,246,49,0.1)] group">
-            <div class="text-4xl mb-4 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform origin-left">🤖</div>
-            <h3 class="text-xl font-bold text-white mb-3">Artificial Intelligence & Machine Learning</h3>
-            <p class="text-on-surface-variant text-sm mb-6 flex-1">Develop intelligent applications using computer vision, NLP, deep learning, and generative AI.</p>
-            <div>
-                <div class="text-xs text-secondary uppercase tracking-widest font-label-sm mb-2">Tech Stack</div>
-                <div class="flex flex-wrap gap-2 text-xs text-white/80">
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Python</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">TensorFlow</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">PyTorch</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">OpenCV</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Hugging Face</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">LangChain</span>
-                </div>
+            <div
+              class="flex items-center gap-6 font-telemetry-code text-telemetry-code text-on-surface-variant"
+            >
+              <span class=""
+                >TRACKS:
+                <strong class="text-on-surface">09 ACTIVE</strong></span
+              >
             </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="glass-panel p-6 rounded-2xl flex flex-col h-full border-t border-primary/30 hover:border-primary/60 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,207,255,0.1)] group">
-            <div class="text-4xl mb-4 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform origin-left">🛡</div>
-            <h3 class="text-xl font-bold text-white mb-3">Cyber Security</h3>
-            <p class="text-on-surface-variant text-sm mb-6 flex-1">Learn ethical hacking, penetration testing, digital forensics, network security, and secure software development.</p>
-            <div>
-                <div class="text-xs text-primary uppercase tracking-widest font-label-sm mb-2">Tech Stack</div>
-                <div class="flex flex-wrap gap-2 text-xs text-white/80">
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Kali Linux</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Burp Suite</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Wireshark</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Metasploit</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">OWASP</span>
-                </div>
+          </div>
+        </section>
+        <!-- Hero Headline Block -->
+        <section class="w-full px-6 pt-10 pb-8 bg-surface">
+          <div class="max-w-7xl mx-auto flex flex-col gap-4">
+            <div class="flex items-center gap-2">
+              <span
+                class="font-label-caps text-label-caps uppercase text-secondary font-bold"
+                >Orbital Technical Divisions</span
+              >
+              <span class="w-8 h-px bg-secondary"></span>
             </div>
-        </div>
-
-        <!-- 4 -->
-        <div class="glass-panel p-6 rounded-2xl flex flex-col h-full border-t border-secondary/30 hover:border-secondary/60 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(116,246,49,0.1)] group">
-            <div class="text-4xl mb-4 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform origin-left">📊</div>
-            <h3 class="text-xl font-bold text-white mb-3">Data Science & Analytics</h3>
-            <p class="text-on-surface-variant text-sm mb-6 flex-1">Transform raw data into meaningful insights through data analysis, visualization, and predictive modelling.</p>
-            <div>
-                <div class="text-xs text-secondary uppercase tracking-widest font-label-sm mb-2">Tech Stack</div>
-                <div class="flex flex-wrap gap-2 text-xs text-white/80">
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Python</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Pandas</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">NumPy</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Power BI</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Tableau</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">SQL</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5 -->
-        <div class="glass-panel p-6 rounded-2xl flex flex-col h-full border-t border-primary/30 hover:border-primary/60 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,207,255,0.1)] group">
-            <div class="text-4xl mb-4 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform origin-left">☁</div>
-            <h3 class="text-xl font-bold text-white mb-3">Cloud & DevOps</h3>
-            <p class="text-on-surface-variant text-sm mb-6 flex-1">Deploy, automate, and manage modern applications using cloud platforms and DevOps practices.</p>
-            <div>
-                <div class="text-xs text-primary uppercase tracking-widest font-label-sm mb-2">Tech Stack</div>
-                <div class="flex flex-wrap gap-2 text-xs text-white/80">
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">AWS</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Docker</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Kubernetes</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">GitHub Actions</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Linux</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Terraform</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 6 -->
-        <div class="glass-panel p-6 rounded-2xl flex flex-col h-full border-t border-secondary/30 hover:border-secondary/60 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(116,246,49,0.1)] group">
-            <div class="text-4xl mb-4 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform origin-left">📱</div>
-            <h3 class="text-xl font-bold text-white mb-3">Mobile App Development</h3>
-            <p class="text-on-surface-variant text-sm mb-6 flex-1">Create high-performance Android, iOS, and cross-platform applications.</p>
-            <div>
-                <div class="text-xs text-secondary uppercase tracking-widest font-label-sm mb-2">Tech Stack</div>
-                <div class="flex flex-wrap gap-2 text-xs text-white/80">
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Flutter</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Kotlin</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Swift</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">React Native</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Firebase</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 7 -->
-        <div class="glass-panel p-6 rounded-2xl flex flex-col h-full border-t border-primary/30 hover:border-primary/60 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,207,255,0.1)] group">
-            <div class="text-4xl mb-4 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform origin-left">🎨</div>
-            <h3 class="text-xl font-bold text-white mb-3">UI/UX Design</h3>
-            <p class="text-on-surface-variant text-sm mb-6 flex-1">Design intuitive, accessible, and visually engaging digital experiences.</p>
-            <div>
-                <div class="text-xs text-primary uppercase tracking-widest font-label-sm mb-2">Tools</div>
-                <div class="flex flex-wrap gap-2 text-xs text-white/80">
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Figma</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Framer</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Adobe XD</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Illustrator</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Photoshop</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 8 -->
-        <div class="glass-panel p-6 rounded-2xl flex flex-col h-full border-t border-secondary/30 hover:border-secondary/60 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(116,246,49,0.1)] group">
-            <div class="text-4xl mb-4 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform origin-left">🌍</div>
-            <h3 class="text-xl font-bold text-white mb-3">Open Source</h3>
-            <p class="text-on-surface-variant text-sm mb-6 flex-1">Collaborate with developers worldwide, contribute to impactful projects, and strengthen your GitHub profile.</p>
-            <div>
-                <div class="text-xs text-secondary uppercase tracking-widest font-label-sm mb-2">Platforms</div>
-                <div class="flex flex-wrap gap-2 text-xs text-white/80">
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">GitHub</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">GitLab</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Hacktoberfest</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 9 -->
-        <div class="glass-panel p-6 rounded-2xl flex flex-col h-full border-t border-primary/30 hover:border-primary/60 transition-all hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,207,255,0.1)] group">
-            <div class="text-4xl mb-4 opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-transform origin-left">🏆</div>
-            <h3 class="text-xl font-bold text-white mb-3">Hackathons & Innovation</h3>
-            <p class="text-on-surface-variant text-sm mb-6 flex-1">Solve real-world problems through rapid prototyping, teamwork, and innovation while competing nationally and internationally.</p>
-            <div>
-                <div class="text-xs text-primary uppercase tracking-widest font-label-sm mb-2">Activities</div>
-                <div class="flex flex-wrap gap-2 text-xs text-white/80">
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Ideation</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">MVP Development</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Pitching</span>
-                    <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Product Design</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-<footer class="w-full py-16 bg-surface-container-lowest border-t border-white/5">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<div class="md:col-span-1 space-y-6">
-<div class="font-headline-xl text-headline-lg-mobile md:text-[40px] leading-[1.1] sm:text-[56px] text-primary-container font-bold tracking-tighter">Sphere Coding Club</div>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">
-                    Engineered for the Future. Building the next generation of digital innovators.
+            <div
+              class="flex flex-col lg:flex-row lg:items-end justify-between gap-6"
+            >
+              <div>
+                <h1
+                  class="font-display-hero text-display-hero uppercase text-primary-container tracking-tight"
+                >
+                  CORE ENGINEERING
+                  <span class="text-secondary-container">DOMAINS</span>
+                </h1>
+                <p
+                  class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mt-3 font-medium"
+                >
+                  The six specialized engineering tracks powering Sphere
+                  Community squads, production systems, and collegiate builder
+                  cohorts. Zero superficial theory — students build, audit, and
+                  deploy production-grade orbital infrastructure.
                 </p>
-<div class="flex gap-4">
-<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="index.html"><span class="material-symbols-outlined">code</span></a>
-<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="index.html"><span class="material-symbols-outlined">share</span></a>
-<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="index.html"><span class="material-symbols-outlined">mail</span></a>
-</div>
-</div>
-<div class="space-y-4">
-<h4 class="font-label-md text-label-md text-white uppercase tracking-wider">Platform</h4>
-<div class="flex flex-col gap-3 font-body-md text-body-md">
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="projects.html">Projects</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="events.html">Events</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="domains.html">Domains</a>
-</div>
-</div>
-<div class="space-y-4">
-<h4 class="font-label-md text-label-md text-white uppercase tracking-wider">Legal</h4>
-<div class="flex flex-col gap-3 font-body-md text-body-md">
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="privacy.html">Privacy Policy</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="terms.html">Terms of Service</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="brand.html">Brand Assets</a>
-</div>
-</div>
-<div class="space-y-4">
-<h4 class="font-label-md text-label-md text-white uppercase tracking-wider">Connect</h4>
-<div class="flex flex-col gap-3 font-body-md text-body-md">
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="mailto:spherecclub@gmail.com">Contact Us</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="https://discord.gg/sphere" target="_blank">Join Discord</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="https://www.instagram.com/spherecclub/" target="_blank">Instagram</a>
-</div>
-</div>
-<div class="col-span-1 md:col-span-4 mt-8 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="font-body-md text-body-md text-on-surface-variant opacity-60">© 2026 Sphere Coding Club. Engineered for the Future.</p>
-<div class="flex items-center gap-2 text-on-surface-variant opacity-60 text-sm">
-<span>Status:</span>
-<span class="w-2 h-2 rounded-full bg-secondary inline-block animate-pulse"></span>
-<span>Systems Operational</span>
-</div>
-</div>
-</div>
-</footer>
-<script src="js/main.js"></script>
-</body></html>
+              </div>
+              <div class="flex items-center gap-3 shrink-0">
+                <a
+                  class="px-4 py-3 rounded-lg bg-surface-container text-on-surface font-label-caps text-label-caps uppercase hover:bg-surface-container-high transition-colors"
+                  href="#domain-tracks"
+                >
+                  View All Tracks
+                </a>
+              </div>
+            </div>
+            <!-- Domain Category Segment Filter -->
+          </div>
+        </section>
+        <!-- 6 Domain Cards Grid -->
+        <section class="w-full px-6 py-8 bg-surface" id="domain-tracks">
+          <div
+            class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <article
+              class="domain-card flex flex-col justify-between rounded-xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-telemetry-code text-telemetry-code font-bold text-secondary-container uppercase"
+                  >
+                    DOM-01
+                  </span>
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-low text-secondary-container"
+                  >
+                    <span class="material-symbols-outlined"> language </span>
+                  </span>
+                </div>
+                <div>
+                  <h2
+                    class="font-headline-md text-headline-md text-primary-container"
+                  >
+                    Full-Stack Development
+                  </h2>
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface font-medium leading-relaxed"
+                >
+                  Build modern, scalable web applications using the latest
+                  frontend and backend technologies.
+                </p>
+                <div class="flex flex-col gap-2 pt-2">
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >React</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Next.js</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Node.js</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Express</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >MongoDB</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >PostgreSQL</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article
+              class="domain-card flex flex-col justify-between rounded-xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-telemetry-code text-telemetry-code font-bold text-secondary-container uppercase"
+                  >
+                    DOM-02
+                  </span>
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-low text-secondary-container"
+                  >
+                    <span class="material-symbols-outlined"> psychology </span>
+                  </span>
+                </div>
+                <div>
+                  <h2
+                    class="font-headline-md text-headline-md text-primary-container"
+                  >
+                    Artificial Intelligence &amp; Machine Learning
+                  </h2>
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface font-medium leading-relaxed"
+                >
+                  Develop intelligent applications using computer vision, NLP,
+                  deep learning, and generative AI.
+                </p>
+                <div class="flex flex-col gap-2 pt-2">
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Python</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >TensorFlow</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >PyTorch</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >OpenCV</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Hugging Face</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >LangChain</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article
+              class="domain-card flex flex-col justify-between rounded-xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-telemetry-code text-telemetry-code font-bold text-secondary-container uppercase"
+                  >
+                    DOM-03
+                  </span>
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-low text-secondary-container"
+                  >
+                    <span class="material-symbols-outlined"> security </span>
+                  </span>
+                </div>
+                <div>
+                  <h2
+                    class="font-headline-md text-headline-md text-primary-container"
+                  >
+                    Cyber Security
+                  </h2>
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface font-medium leading-relaxed"
+                >
+                  Learn ethical hacking, penetration testing, digital forensics,
+                  network security, and secure software development.
+                </p>
+                <div class="flex flex-col gap-2 pt-2">
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Kali Linux</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Burp Suite</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Wireshark</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Metasploit</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >OWASP</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article
+              class="domain-card flex flex-col justify-between rounded-xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-telemetry-code text-telemetry-code font-bold text-secondary-container uppercase"
+                  >
+                    DOM-04
+                  </span>
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-low text-secondary-container"
+                  >
+                    <span class="material-symbols-outlined"> analytics </span>
+                  </span>
+                </div>
+                <div>
+                  <h2
+                    class="font-headline-md text-headline-md text-primary-container"
+                  >
+                    Data Science &amp; Analytics
+                  </h2>
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface font-medium leading-relaxed"
+                >
+                  Transform raw data into meaningful insights through data
+                  analysis, visualization, and predictive modelling.
+                </p>
+                <div class="flex flex-col gap-2 pt-2">
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Python</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Pandas</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >NumPy</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Power BI</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Tableau</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >SQL</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article
+              class="domain-card flex flex-col justify-between rounded-xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-telemetry-code text-telemetry-code font-bold text-secondary-container uppercase"
+                  >
+                    DOM-05
+                  </span>
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-low text-secondary-container"
+                  >
+                    <span class="material-symbols-outlined"> cloud_sync </span>
+                  </span>
+                </div>
+                <div>
+                  <h2
+                    class="font-headline-md text-headline-md text-primary-container"
+                  >
+                    Cloud &amp; DevOps
+                  </h2>
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface font-medium leading-relaxed"
+                >
+                  Deploy, automate, and manage modern applications using cloud
+                  platforms and DevOps practices.
+                </p>
+                <div class="flex flex-col gap-2 pt-2">
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >AWS</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Docker</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Kubernetes</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >GitHub Actions</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Linux</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Terraform</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article
+              class="domain-card flex flex-col justify-between rounded-xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-telemetry-code text-telemetry-code font-bold text-secondary-container uppercase"
+                  >
+                    DOM-06
+                  </span>
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-low text-secondary-container"
+                  >
+                    <span class="material-symbols-outlined"> smartphone </span>
+                  </span>
+                </div>
+                <div>
+                  <h2
+                    class="font-headline-md text-headline-md text-primary-container"
+                  >
+                    Mobile App Development
+                  </h2>
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface font-medium leading-relaxed"
+                >
+                  Create high-performance Android, iOS, and cross-platform
+                  applications.
+                </p>
+                <div class="flex flex-col gap-2 pt-2">
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Flutter</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Kotlin</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Swift</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >React Native</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Firebase</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article
+              class="domain-card flex flex-col justify-between rounded-xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-telemetry-code text-telemetry-code font-bold text-secondary-container uppercase"
+                  >
+                    DOM-07
+                  </span>
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-low text-secondary-container"
+                  >
+                    <span class="material-symbols-outlined">
+                      design_services
+                    </span>
+                  </span>
+                </div>
+                <div>
+                  <h2
+                    class="font-headline-md text-headline-md text-primary-container"
+                  >
+                    UI/UX Design
+                  </h2>
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface font-medium leading-relaxed"
+                >
+                  Design intuitive, accessible, and visually engaging digital
+                  experiences.
+                </p>
+                <div class="flex flex-col gap-2 pt-2">
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Figma</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Framer</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Adobe XD</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Illustrator</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Photoshop</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article
+              class="domain-card flex flex-col justify-between rounded-xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-telemetry-code text-telemetry-code font-bold text-secondary-container uppercase"
+                  >
+                    DOM-08
+                  </span>
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-low text-secondary-container"
+                  >
+                    <span class="material-symbols-outlined"> public </span>
+                  </span>
+                </div>
+                <div>
+                  <h2
+                    class="font-headline-md text-headline-md text-primary-container"
+                  >
+                    Open Source
+                  </h2>
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface font-medium leading-relaxed"
+                >
+                  Collaborate with developers worldwide, contribute to impactful
+                  projects, and strengthen your GitHub profile.
+                </p>
+                <div class="flex flex-col gap-2 pt-2">
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >GitHub</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >GitLab</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Hacktoberfest</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article
+              class="domain-card flex flex-col justify-between rounded-xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="font-telemetry-code text-telemetry-code font-bold text-secondary-container uppercase"
+                  >
+                    DOM-09
+                  </span>
+                  <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-surface-container-low text-secondary-container"
+                  >
+                    <span class="material-symbols-outlined">
+                      rocket_launch
+                    </span>
+                  </span>
+                </div>
+                <div>
+                  <h2
+                    class="font-headline-md text-headline-md text-primary-container"
+                  >
+                    Hackathons &amp; Innovation
+                  </h2>
+                </div>
+                <p
+                  class="font-body-md text-body-md text-on-surface font-medium leading-relaxed"
+                >
+                  Solve real-world problems through rapid prototyping, teamwork,
+                  and innovation while competing nationally and internationally.
+                </p>
+                <div class="flex flex-col gap-2 pt-2">
+                  <div class="flex flex-wrap gap-1.5 mt-2">
+                    <span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Ideation</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >MVP Development</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Pitching</span
+                    ><span
+                      class="inline-flex items-center px-2 py-1 rounded bg-surface-container font-telemetry-code text-[10px] uppercase text-on-surface-variant font-bold border border-outline-variant/30"
+                      >Product Design</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+
+      </div>
+    </main>
+    <footer class="relative z-10 w-full bg-surface-container-lowest mt-space-2xl border-t border-surface-container-high/60">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter-lg mb-space-xl">
+        <div class="lg:col-span-2 flex flex-col gap-space-md">
+          <div class="flex items-center gap-3">
+            <img alt="SPHERE LOGO PFP.png"
+              class="h-8 w-8 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]"
+              src="assets/images/sphere-logo.png">
+            <span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight uppercase">SPHERE COMMUNITY</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+            Building the next generation of innovators. Synthesizing technology, talent, and collaboration for real-world impact.
+          </p>
+          <div
+            class="flex items-center gap-2 font-telemetry-code text-telemetry-code text-[#2563eb] bg-[#eff6ff] px-3 py-1.5 rounded-full w-fit mt-2">
+            <span class="material-symbols-outlined text-[14px]">satellite_alt</span>
+            <span class="tracking-widest font-bold">SYSTEMS: NOMINAL</span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-sm">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Platform</span>
+          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="projects.html">Projects</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="events.html">Events</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="domains.html">Domains</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-sm">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Legal</span>
+          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="privacy.html">Privacy Policy</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="terms.html">Terms of Service</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="brand.html">Brand Assets</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-sm">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Connect</span>
+          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="mailto:spherecclub@gmail.com">Contact Us</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://discord.gg/sphere" target="_blank">Join Discord</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://www.instagram.com/spherecclub/" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex flex-col md:flex-row items-center justify-between gap-space-md bg-[#f0f4ff] rounded-xl px-6 py-5 mt-8">
+        <p class="font-body-sm text-body-sm text-on-surface-variant m-0">&copy; 2026 Sphere Community. Engineered for the Future.</p>
+        <div class="flex items-center gap-2">
+          <span class="font-telemetry-code text-telemetry-code text-on-surface-variant text-[12px] tracking-widest">Sphere Orbital v2.0</span>
+          <span class="w-2 h-2 rounded-full bg-[#3b82f6]"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+    <script src="js/main.js"></script>
+  </body>
+</html>

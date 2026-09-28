@@ -1,668 +1,1774 @@
 <!DOCTYPE html>
 
-<html class="dark scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sphere Coding Club</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Geist:wght@300..700&amp;family=JetBrains+Mono:wght@100..800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "error": "#ffb4ab",
-                      "primary-container": "#00cfff",
-                      "surface-tint": "#54d5ff",
-                      "secondary-fixed": "#7eff3e",
-                      "surface-variant": "#323539",
-                      "on-surface": "#e1e2e7",
-                      "on-error-container": "#ffdad6",
-                      "tertiary-fixed": "#e2e2e2",
-                      "inverse-on-surface": "#2e3134",
-                      "tertiary-container": "#bebfbf",
-                      "surface-dim": "#111417",
-                      "primary-fixed-dim": "#54d5ff",
-                      "on-primary-container": "#00546a",
-                      "secondary-container": "#58d900",
-                      "inverse-primary": "#006780",
-                      "on-secondary-fixed-variant": "#1d5200",
-                      "surface-bright": "#37393d",
-                      "surface-container": "#1d2023",
-                      "on-error": "#690005",
-                      "outline": "#869399",
-                      "surface-container-low": "#191c1f",
-                      "on-secondary": "#113800",
-                      "on-secondary-container": "#205900",
-                      "secondary": "#74f631",
-                      "primary-fixed": "#b8eaff",
-                      "background": "#111417",
-                      "primary": "#a1e4ff",
-                      "tertiary": "#dbdbdb",
-                      "surface-container-lowest": "#0c0e12",
-                      "on-tertiary-fixed": "#1a1c1c",
-                      "surface": "#111417",
-                      "on-primary": "#003544",
-                      "error-container": "#93000a",
-                      "on-tertiary": "#2f3131",
-                      "tertiary-fixed-dim": "#c6c6c6",
-                      "outline-variant": "#3c494e",
-                      "on-background": "#e1e2e7",
-                      "on-tertiary-container": "#4c4e4e",
-                      "surface-container-highest": "#323539",
-                      "on-primary-fixed": "#001f28",
-                      "on-surface-variant": "#bbc9cf",
-                      "secondary-fixed-dim": "#60e215",
-                      "on-secondary-fixed": "#072100",
-                      "surface-container-high": "#282a2e",
-                      "inverse-surface": "#e1e2e7",
-                      "on-tertiary-fixed-variant": "#454747",
-                      "on-primary-fixed-variant": "#004d61"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.25rem",
-                      "lg": "0.5rem",
-                      "xl": "0.75rem",
-                      "full": "9999px"
-              },
-              "spacing": {
-                      "gutter": "24px",
-                      "unit": "4px",
-                      "margin-mobile": "16px",
-                      "container-max": "1440px",
-                      "margin-desktop": "64px"
-              },
-              "fontFamily": {
-                      "body-md": [
-                              "Geist"
-                      ],
-                      "label-sm": [
-                              "JetBrains Mono"
-                      ],
-                      "label-md": [
-                              "JetBrains Mono"
-                      ],
-                      "body-lg": [
-                              "Geist"
-                      ],
-                      "headline-lg-mobile": [
-                              "Space Grotesk"
-                      ],
-                      "display-lg": [
-                              "Space Grotesk"
-                      ],
-                      "headline-lg": [
-                              "Space Grotesk"
-                      ],
-                      "headline-xl": [
-                              "Space Grotesk"
-                      ]
-              },
-              "fontSize": {
-                      "body-md": [
-                              "16px",
-                              {
-                                      "lineHeight": "1.6",
-                                      "fontWeight": "400"
-                              }
-                      ],
-                      "label-sm": [
-                              "12px",
-                              {
-                                      "lineHeight": "1.0",
-                                      "fontWeight": "500"
-                              }
-                      ],
-                      "label-md": [
-                              "14px",
-                              {
-                                      "lineHeight": "1.0",
-                                      "letterSpacing": "0.05em",
-                                      "fontWeight": "500"
-                              }
-                      ],
-                      "body-lg": [
-                              "18px",
-                              {
-                                      "lineHeight": "1.6",
-                                      "fontWeight": "400"
-                              }
-                      ],
-                      "headline-lg-mobile": [
-                              "28px",
-                              {
-                                      "lineHeight": "1.3",
-                                      "fontWeight": "600"
-                              }
-                      ],
-                      "display-lg": [
-                              "72px",
-                              {
-                                      "lineHeight": "1.1",
-                                      "letterSpacing": "-0.04em",
-                                      "fontWeight": "700"
-                              }
-                      ],
-                      "headline-lg": [
-                              "32px",
-                              {
-                                      "lineHeight": "1.3",
-                                      "fontWeight": "600"
-                              }
-                      ],
-                      "headline-xl": [
-                              "48px",
-                              {
-                                      "lineHeight": "1.2",
-                                      "letterSpacing": "-0.02em",
-                                      "fontWeight": "600"
-                              }
-                      ]
-              },
-              animation: {
-                  'spin-slow': 'spin 8s linear infinite',
-              }
-            },
-          },
-        }
-    </script>
-<style>
-        body {
-            background-color: #000000;
-            color: #e1e2e7;
-            overflow-x: hidden;
-        }
-        
-        /* Glassmorphism Utilities */
-        .glass-panel {
-            background: rgba(5, 7, 10, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            border-right: 1px solid rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-        }
+<html class="scroll-smooth" lang="en">
 
-        .glow-hover:hover {
-            box-shadow: 0 0 25px rgba(0, 207, 255, 0.2);
-            border-color: rgba(0, 207, 255, 0.5);
-        }
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Sphere Community</title>
 
-        .text-glow {
-            text-shadow: 0 0 20px rgba(0, 207, 255, 0.4);
-        }
+  <link rel="stylesheet" href="css/design-system.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-config.js"></script>
 
-        /* Forms */
-        .input-glass {
-            background: rgba(17, 20, 23, 0.6);
-            border-bottom: 1px solid #869399;
-            transition: all 0.3s ease;
-        }
-        .input-glass:focus {
-            border-bottom-color: #00cfff;
-            box-shadow: 0 4px 15px -3px rgba(0, 207, 255, 0.2);
-            outline: none;
-        }
 
-        /* Marquee */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 30s linear infinite;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+  <style>
+    @layer base {
 
-        /* Background Particle Noise */
-        .bg-noise {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            pointer-events: none;
-        }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
 
-        /* Mobile Menu Overlay */
-        .mobile-menu-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 60;
-            background: rgba(5, 7, 10, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            padding: 100px 32px 40px;
-            transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .mobile-menu-overlay.active {
-            transform: translateX(0);
-        }
-        .mobile-menu-overlay a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 0;
-            font-size: 18px;
-            font-weight: 500;
-            color: #bbc9cf;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: color 0.2s, padding-left 0.2s;
-        }
-        .mobile-menu-overlay a:hover,
-        .mobile-menu-overlay a:active {
-            color: #00cfff;
-            padding-left: 8px;
-        }
-    </style>
+      body {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+    }
+
+    @keyframes orbit-slow {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes orbit-reverse {
+      0% {
+        transform: rotate(360deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes float-gentle {
+
+      0%,
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+
+      50% {
+        transform: translateY(-12px) scale(1.02);
+      }
+    }
+
+    @keyframes float-planet-1 {
+
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+      }
+
+      33% {
+        transform: translate3d(10px, -15px, 0) rotate(6deg);
+      }
+
+      66% {
+        transform: translate3d(-8px, -8px, 0) rotate(-4deg);
+      }
+    }
+
+    @keyframes float-planet-2 {
+
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+      }
+
+      50% {
+        transform: translate3d(-14px, -18px, 0) rotate(-6deg);
+      }
+    }
+
+    @keyframes planet-shine {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.45));
+      }
+
+      50% {
+        filter: drop-shadow(0 0 32px rgba(56, 189, 248, 0.85));
+      }
+    }
+
+    @keyframes emblem-glow {
+
+      0%,
+      100% {
+        box-shadow: 0 12px 45px -8px rgba(20, 91, 255, 0.35), 0 0 25px rgba(56, 189, 248, 0.25);
+      }
+
+      50% {
+        box-shadow: 0 18px 60px -4px rgba(20, 91, 255, 0.6), 0 0 45px rgba(56, 189, 248, 0.5);
+      }
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: scale(0.85);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.25);
+      }
+    }
+
+    @keyframes shimmer-sweep {
+      0% {
+        transform: translateX(-150%) skewX(-20deg);
+      }
+
+      100% {
+        transform: translateX(250%) skewX(-20deg);
+      }
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 0.85;
+      }
+
+      100% {
+        transform: scale(0.95);
+        opacity: 0.5;
+      }
+    }
+
+    .animate-orbit-slow {
+      animation: orbit-slow 28s linear infinite;
+    }
+
+    .animate-orbit-reverse {
+      animation: orbit-reverse 40s linear infinite;
+    }
+
+    .animate-float-gentle {
+      animation: float-gentle 6s ease-in-out infinite;
+    }
+
+    .animate-float-planet-1 {
+      animation: float-planet-1 8s ease-in-out infinite;
+    }
+
+    .animate-float-planet-2 {
+      animation: float-planet-2 10s ease-in-out infinite;
+    }
+
+    .animate-planet-glow {
+      animation: planet-shine 4s ease-in-out infinite;
+    }
+
+    .animate-twinkle-fast {
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .animate-twinkle-slow {
+      animation: twinkle 5s ease-in-out infinite 1.5s;
+    }
+
+    .animate-pulse-ring {
+      animation: pulse-ring 4s ease-in-out infinite;
+    }
+
+    .animate-emblem-breathing {
+      animation: emblem-glow 4.5s ease-in-out infinite;
+    }
+
+    .globe-3d-azure {
+      background: radial-gradient(circle at 30% 28%, #ffffff 0%, #bae6fd 16%, #38bdf8 42%, #0284c7 72%, #0369a1 90%, #075985 100%);
+      box-shadow: inset -5px -5px 12px rgba(3, 105, 161, 0.8),
+        inset 4px 4px 10px rgba(255, 255, 255, 0.9),
+        0 10px 25px -4px rgba(14, 165, 233, 0.4),
+        0 0 20px rgba(56, 189, 248, 0.35);
+    }
+
+    .globe-3d-pearl {
+      background: radial-gradient(circle at 32% 26%, #ffffff 0%, #e0f2fe 28%, #7dd3fc 60%, #0284c7 88%, #0369a1 100%);
+      box-shadow: inset -4px -4px 8px rgba(3, 105, 161, 0.7),
+        inset 3px 3px 8px rgba(255, 255, 255, 0.95),
+        0 8px 20px -3px rgba(14, 165, 233, 0.35),
+        0 0 15px rgba(125, 211, 252, 0.4);
+    }
+
+    .globe-3d-deep {
+      background: radial-gradient(circle at 28% 28%, #e0f2fe 0%, #38bdf8 25%, #0284c7 60%, #075985 85%, #0c4a6e 100%);
+      box-shadow: inset -7px -7px 16px rgba(12, 74, 110, 0.85),
+        inset 5px 5px 14px rgba(255, 255, 255, 0.85),
+        0 14px 32px -6px rgba(2, 132, 199, 0.45),
+        0 0 30px rgba(56, 189, 248, 0.4);
+    }
+
+    .globe-atmosphere {
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 30% 30%, transparent 60%, rgba(224, 242, 254, 0.6) 88%, rgba(255, 255, 255, 0.9) 100%);
+      pointer-events: none;
+    }
+
+    .shimmer-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg,
+          transparent 20%,
+          rgba(255, 255, 255, 0.25) 45%,
+          rgba(255, 255, 255, 0.4) 50%,
+          rgba(255, 255, 255, 0.25) 55%,
+          transparent 80%);
+      transform: translateX(-150%) skewX(-20deg);
+      pointer-events: none;
+    }
+
+    .shimmer-btn:hover::after {
+      animation: shimmer-sweep 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-pulse-glow {
+      box-shadow: 0 8px 30px rgba(17, 90, 254, 0.35);
+      animation: btn-glow-pulse 3s infinite;
+    }
+
+    @keyframes btn-glow-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 8px 30px rgba(17, 90, 254, 0.35);
+      }
+
+      50% {
+        box-shadow: 0 12px 38px rgba(17, 90, 254, 0.6);
+      }
+    }
+
+    .card-hover-interactive {
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card-hover-interactive:hover {
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 16px 36px -8px rgba(17, 90, 254, 0.16), 0 0 0 1.5px rgba(17, 90, 254, 0.32);
+    }
+
+    .leadership-tilt-card {
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.4, 1), box-shadow 0.3s ease;
+    }
+
+    .leadership-tilt-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -10px rgba(17, 90, 254, 0.22);
+    }
+
+    .faq-answer-container {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.25s ease;
+    }
+
+    .faq-answer-container.expanded {
+      max-height: 300px;
+      opacity: 1;
+    }
+  </style>
 </head>
-<body class="font-body-md text-body-md antialiased relative selection:bg-primary-container selection:text-black">
-<!-- Global Background Shader -->
-<div class="fixed inset-0 z-[-2] w-full h-full pointer-events-none">
-<canvas id="bg-shader-canvas" style="display:block;width:100%;height:100%"></canvas>
-<script>
-(function() {
-  const canvas = document.getElementById('bg-shader-canvas');
 
-  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
-  function syncSize() {
-    const w = canvas.clientWidth  || 1280;
-    const h = canvas.clientHeight || 720;
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width  = w;
-      canvas.height = h;
-    }
-  }
-  if (typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(syncSize).observe(canvas);
-  }
-  syncSize();
+<body class="font-body-md text-body-md antialiased text-on-surface bg-background">
 
-  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-  if (!gl) return;
-  const vs = `attribute vec2 a_position;
-varying vec2 v_texCoord;
-void main() {
-  v_texCoord = a_position * 0.5 + 0.5;
-  gl_Position = vec4(a_position, 0.0, 1.0);
-}`;
-  const fs = `precision highp float;
-uniform float u_time;
-uniform vec2 u_resolution;
+  <!-- Page Atmosphere (Stitch Design) -->
+  <div class="page-atmosphere">
+    <div class="atmosphere-blob atmosphere-blob-1"></div>
+    <div class="atmosphere-blob atmosphere-blob-2"></div>
+    <div class="atmosphere-blob atmosphere-blob-3"></div>
+  </div>
 
-float network(vec2 uv, float t) {
-    vec2 p = fract(uv * 10.0) - 0.5;
-    vec2 id = floor(uv * 10.0);
-    float n = fract(sin(dot(id, vec2(12.9898, 78.233))) * 43758.5453);
-    float d = length(p);
-    float m = smoothstep(0.3, 0.0, d) * smoothstep(0.0, 1.0, n);
-    return m * (0.5 + 0.5 * sin(t + n * 6.28));
-}
 
-void main() {
-    vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.y, u_resolution.x);
-    float t = u_time * 0.5;
-    
-    vec3 color = vec3(0.02, 0.03, 0.05); // Deep navy background
-    
-    float n = network(uv + t * 0.05, t);
-    vec3 cyan = vec3(0.0, 0.81, 1.0) * n * 0.4;
-    vec3 green = vec3(0.48, 1.0, 0.22) * network(uv * 1.5 - t * 0.03, t * 1.2) * 0.3;
-    
-    color += cyan + green;
-    
-    // Vignette
-    color *= 1.0 - length(uv) * 0.5;
-    
-    gl_FragColor = vec4(color, 1.0);
-}`;
-  function cs(type, src) {
-    const s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    return s;
-  }
-  const prog = gl.createProgram();
-  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
-  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
-  gl.linkProgram(prog);
-  gl.useProgram(prog);
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-  const pos = gl.getAttribLocation(prog, 'a_position');
-  gl.enableVertexAttribArray(pos);
-  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
-  const uTime = gl.getUniformLocation(prog, 'u_time');
-  const uRes = gl.getUniformLocation(prog, 'u_resolution');
-  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
-
-  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
-  window.addEventListener('mousemove', (event) => {
-    const rect = canvas.getBoundingClientRect();
-    if (rect.width && rect.height) {
-      const nx = (event.clientX - rect.left) / rect.width;
-      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
-      mouse.x = nx * canvas.width;
-      mouse.y = ny * canvas.height;
-    }
-  });
-
-  function render(t) {
-    if (typeof ResizeObserver === 'undefined') syncSize();
-    gl.viewport(0, 0, canvas.width, canvas.height);
-    if (uTime) gl.uniform1f(uTime, t * 0.001);
-    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
-    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(render);
-  }
-  render(0);
-})();
-</script>
-</div>
-<div class="fixed inset-0 z-[-1] bg-noise"></div>
-<!-- Top Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,207,255,0.15)] transition-all duration-300 ease-in-out">
-<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
-<!-- Brand -->
-<a class="flex items-center gap-3 group" href="index.html">
-<img alt="Sphere Coding Club Logo" class="w-10 h-10 object-contain rounded-full shadow-[0_0_15px_rgba(0,207,255,0.3)] group-hover:shadow-[0_0_25px_rgba(0,207,255,0.6)] transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9nVxiwOC9s1HBxsHitDQbXct5v6nVVSvv7L5rMkbGcRIxFHqyZ1X_9aXJ2lAjsZf0g48PhhzFDaDhIb0reZnHPZ9d2bisVnE5XwlLj8D1EV6_tfIgPx7tjxkRInoIDBOOV5HR9d4NASopBYTSG-PZVPxl04ELVBfY--QeUufVZJuAcT1AbASvDQbAiUbXCfymkicv5vkKQ54FvjDmnPuqZuBJJ6dpvozYqM6eYXzUWj4NuAyQPA0mHg5lWsWVL416m5reaVnP8hc"/>
-<span class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary tracking-tighter">Sphere Coding Club</span>
-</a>
-<!-- Desktop Nav Links -->
-<div class="hidden md:flex items-center gap-8 font-label-md text-label-md">
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="about.html">About</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="domains.html">Domains</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="projects.html">Projects</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="events.html">Events</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="team.html">Team</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="faq.html">FAQ</a>
-</div>
-<!-- Trailing Action -->
-<div class="hidden md:block">
-<a class="inline-flex items-center justify-center px-6 py-2 bg-primary-container text-black font-label-md text-label-md rounded hover:bg-primary transition-all duration-300 shadow-[0_0_15px_rgba(0,207,255,0.4)] hover:shadow-[0_0_25px_rgba(0,207,255,0.6)]" href="#join">
-                    Join Club
-                </a>
-</div>
-<!-- Mobile Menu Toggle -->
-<button id="mobile-menu-toggle" class="md:hidden text-primary p-2 -mr-2" aria-label="Toggle mobile menu">
-<span class="material-symbols-outlined text-3xl">menu</span>
-</button>
-</div>
+  <header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(7,26,58,0.04)]">
+    <div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="flex items-center gap-4">
+          <img alt="SPHERE LOGO" class="h-10 w-10 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]"
+            src="assets/images/sphere-logo.png">
+          <div class="flex flex-col">
+            <span class="font-title-caps text-title-caps text-on-surface">SPHERE</span>
+            <span class="font-telemetry-code text-[10px] text-secondary tracking-widest uppercase">Community</span>
+          </div>
+        </a>
+      </div>
+      <nav class="hidden xl:flex items-center gap-space-md" data-active-classes="text-secondary font-semibold">
+<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="home" href="index.html">HOME</a>
+<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="leadership" href="leadership.html">LEADERSHIP</a>
+<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="about" href="about.html">ABOUT</a>
+<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="domains" href="domains.html">DOMAINS</a>
+<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="events" href="events.html">EVENTS</a>
+<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="projects" href="projects.html">PROJECTS</a>
+<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="team" href="team.html">TEAM</a>
+<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="faq" href="faq.html">FAQ</a>
 </nav>
-<!-- Mobile Menu Overlay -->
-<div id="mobile-menu-overlay" class="mobile-menu-overlay md:hidden">
-<button id="mobile-menu-close" class="absolute top-5 right-5 text-white/70 hover:text-primary transition-colors p-2" aria-label="Close menu">
-<span class="material-symbols-outlined text-3xl">close</span>
-</button>
-<nav class="flex flex-col gap-0 mt-4">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="domains.html">Domains</a>
-<a href="projects.html">Projects</a>
-<a href="events.html">Events</a>
-<a href="team.html">Team</a>
-<a href="faq.html">FAQ</a>
+      <div class="flex items-center gap-space-md">
+        <a class="inline-flex items-center justify-center px-space-lg py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-caps text-label-caps transition-all shadow-[0_0_20px_rgba(17,90,254,0.25)] hover:shadow-[0_0_25px_rgba(17,90,254,0.45)]"
+          href="#join">JOIN COMMUNITY</a>
+        <!-- Mobile menu toggle -->
+        <button id="mobile-menu-toggle" class="xl:hidden text-on-surface p-2" aria-label="Toggle mobile menu">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- Light Mobile Menu Overlay -->
+  <div id="mobile-menu-overlay"
+    class="fixed inset-0 z-60 bg-surface/95 backdrop-blur-xl flex flex-col p-8 transform translate-x-full transition-transform duration-300 xl:hidden">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface p-2"
+      aria-label="Close menu">
+      <span class="material-symbols-outlined text-[32px]">close</span>
+    </button>
+    <nav class="flex flex-col gap-6 mt-16">
+<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="index.html">Home</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="leadership.html">Leadership</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="about.html">About</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="domains.html">Domains</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="events.html">Events</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="projects.html">Projects</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="team.html">Team</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="faq.html">FAQ</a>
 </nav>
-<div class="mt-auto pt-8">
-<a href="#join" class="inline-flex items-center justify-center w-full px-8 py-4 bg-primary-container text-black font-label-md text-label-md rounded hover:bg-primary transition-all duration-300 shadow-[0_0_20px_rgba(0,207,255,0.5)] font-bold text-base">Join Sphere</a>
-</div>
-</div>
-<main class="pt-24 md:pt-32">
-<!-- Hero Section -->
-<section class="relative min-h-[70vh] md:min-h-[90vh] flex items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto overflow-hidden">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
-<div class="space-y-8">
-<div class="relative inline-flex items-center gap-2 sm:gap-3 px-1 py-1 pr-4 sm:pr-6 border border-primary/20 bg-surface/40 backdrop-blur shadow-[inset_0_0_15px_rgba(0,207,255,0.1)] group transition-all duration-300 hover:border-primary/50 hover:bg-primary/5" style="clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));">
-    <!-- Inner glowing square -->
-    <div class="flex items-center justify-center w-8 h-8 bg-primary/10 border border-primary/30">
-        <span class="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#00cfff] animate-pulse"></span>
+    <div class="mt-auto pt-8">
+      <a href="#join"
+        class="inline-flex items-center justify-center w-full px-8 py-4 bg-secondary text-on-secondary font-label-caps text-label-caps rounded-full shadow-[0_0_20px_rgba(17,90,254,0.3)]">Join
+        Sphere</a>
     </div>
-    <!-- Text with terminal prefix -->
-    <span class="font-label-md text-[11px] sm:text-label-md text-white uppercase tracking-[0.1em] sm:tracking-[0.15em]">
-        <span class="text-primary font-bold mr-1 sm:mr-2">&gt;_</span>Empowering Student Developers
-    </span>
-    <!-- Tech corners -->
-    <div class="absolute right-0 bottom-0 w-4 h-4 border-r-2 border-b-2 border-primary opacity-50"></div>
-    <div class="absolute left-0 top-0 w-4 h-4 border-l-2 border-t-2 border-primary opacity-50"></div>
-</div>
-<h1 class="font-display-lg text-[40px] leading-[1.1] sm:text-[56px] md:text-display-lg text-white font-bold tracking-tighter text-glow">
-                        Code.<br/>
-                        Collaborate.<br/>
-<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container to-secondary">Create.</span>
-</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-                        Sphere Coding Club brings together passionate students from Computer Science, Data Science, Cyber Security and AI/ML to build projects, participate in hackathons and innovate together.
-                    </p>
-<div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-4">
-<a class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-primary-container text-black font-label-md text-label-md rounded hover:bg-primary transition-all duration-300 shadow-[0_0_20px_rgba(0,207,255,0.5)] hover:shadow-[0_0_30px_rgba(0,207,255,0.8)] gap-2" href="#join">
-                            Join Sphere <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</a>
-<a class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-transparent border border-outline text-white font-label-md text-label-md rounded hover:border-primary hover:text-primary transition-all duration-300 hover:bg-primary/5" href="projects.html">
-                            Explore Projects
-                        </a>
-</div>
-</div>
-<div class="relative h-[280px] sm:h-[400px] lg:h-[600px] w-full rounded-2xl overflow-hidden glass-panel flex items-center justify-center group cursor-crosshair">
-<!-- Data Scanner Overlay -->
-<div class="absolute inset-0 pointer-events-none z-20 transition-opacity duration-500 opacity-0 group-hover:opacity-100 flex flex-col justify-between p-6">
-    <div class="flex items-start justify-between">
-        <div class="font-label-sm text-primary tracking-widest uppercase text-glow animate-pulse">
-            Upcoming Event<br>
-            <span class="text-white" id="stat-hackathon">Hackathon: SphereBuild 2024</span>
+  </div>
+
+  <main class="w-full pt-20 bg-background min-h-screen" id="home">
+    <!-- Atmospheric Zone -->
+    <div class="relative w-full overflow-hidden bg-background">
+      <!-- Right Celestial Skyblue Sphere -->
+      <div
+        class="absolute -top-10 -right-24 md:-right-16 lg:right-[-40px] w-[380px] h-[380px] sm:w-[500px] sm:h-[500px] lg:w-[620px] lg:h-[620px] pointer-events-none z-0">
+        <div
+          class="absolute -top-10 -left-12 w-[115%] h-[115%] rounded-full border border-secondary/20 shadow-[0_0_20px_rgba(17,90,254,0.08)] animate-orbit-slow">
         </div>
-        <div class="w-8 h-8 border-t-2 border-r-2 border-primary opacity-50 transition-all duration-300 group-hover:scale-110"></div>
-    </div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-dashed border-primary/30 rounded-full animate-spin-slow pointer-events-none"></div>
-    <div class="flex items-end justify-between">
-        <div class="w-8 h-8 border-b-2 border-l-2 border-primary opacity-50 transition-all duration-300 group-hover:scale-110"></div>
-        <div class="text-right font-label-sm text-secondary tracking-widest uppercase">
-            Active Projects: <span id="stat-projects">12</span><br>
-            <span class="text-white/70" id="stat-meetup">Meetup: Fri 5PM, Lab 3</span>
+        <div
+          class="absolute top-8 -left-8 w-[105%] h-[105%] rounded-full border border-secondary/15 animate-orbit-reverse">
         </div>
+        <div class="w-full h-full rounded-full animate-float-gentle"
+          style="background: radial-gradient(circle at 36% 32%, #ffffff 0%, #dbeafe 20%, #93c5fd 48%, #60a5fa 72%, #2563eb 95%, #1d4ed8 100%); opacity: 0.88; box-shadow: inset -15px -15px 40px rgba(30, 64, 175, 0.45), inset 8px 8px 24px rgba(255, 255, 255, 0.95), 0 25px 60px -12px rgba(37, 99, 235, 0.25);">
+        </div>
+        <div
+          class="absolute bottom-20 left-10 w-4 h-4 rounded-full globe-3d-azure shadow-[0_0_12px_rgba(56,189,248,0.85)] animate-pulse">
+        </div>
+      </div>
+      <!-- Left Ambient Skyblue Orb -->
+      <div
+        class="absolute top-48 -left-28 sm:-left-20 lg:-left-12 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px] pointer-events-none z-0">
+        <div class="w-full h-full rounded-full animate-float-planet-2"
+          style="background: radial-gradient(circle at 40% 34%, #ffffff 0%, #e0f2fe 22%, #bae6fd 48%, #7dd3fc 74%, #0284c7 98%); opacity: 0.82; box-shadow: inset -10px -10px 30px rgba(3, 105, 161, 0.35), inset 6px 6px 18px rgba(255, 255, 255, 0.95), 0 20px 45px -10px rgba(14, 165, 233, 0.22);">
+        </div>
+        <div
+          class="absolute top-1/4 right-8 w-3 h-3 rounded-full bg-secondary-container/80 shadow-[0_0_10px_rgba(17,90,254,0.6)] animate-ping">
+        </div>
+      </div>
+      <!-- Radial Bloom & Orbit Curves -->
+      <div
+        class="absolute -top-40 left-1/2 -translate-x-1/2 w-[1200px] h-[750px] bg-gradient-to-b from-surface-container-high/40 via-surface-container/30 to-transparent rounded-[100%] blur-3xl pointer-events-none -z-0 animate-pulse-ring">
+      </div>
+      <div
+        class="absolute top-24 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full pointer-events-none -z-0 opacity-40 border border-dashed border-secondary/20 animate-orbit-slow">
+      </div>
+      <!-- Hero Section -->
+      <section class="relative z-10 max-w-7xl mx-auto px-6 pt-12 pb-16 flex flex-col items-center text-center">
+        <!-- Eyebrow Telemetry Badge -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-lowest shadow-sm text-on-surface border border-surface-container hover:border-secondary/40 transition-all cursor-default">
+            <span class="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
+            <span class="font-label-caps text-xs tracking-[0.2em] uppercase text-secondary font-semibold">SPHERE
+              COMMUNITY</span>
+          </div>
+          <div
+            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface font-label-caps text-xs tracking-[0.16em] uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            <span>PEOPLE • IDEAS • IMPACT</span>
+          </div>
+        </div>
+        <!-- Massive Headline -->
+        <h1
+          class="font-display-hero text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-[0.08em] text-on-surface max-w-5xl leading-tight mb-4">
+          BUILD. LEARN. GROW. <br class="hidden sm:inline" />
+          <span
+            class="text-secondary inline-block hover:scale-[1.03] transition-transform duration-300">TOGETHER.</span>
+        </h1>
+        <p class="font-body-lg text-lg text-on-surface-variant max-w-2xl mx-auto mb-8 leading-relaxed">
+          A premier technology collective where ambitious engineers, architects, and designers unite to build
+          breakthrough software, master emerging frontiers, and engineer planetary impact.
+        </p>
+        <!-- Dual CTA buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <a class="shimmer-btn group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-secondary-container text-on-secondary font-title-caps text-sm uppercase tracking-[0.18em] shadow-[0_8px_30px_rgba(17,90,254,0.35)] hover:shadow-[0_14px_40px_rgba(17,90,254,0.6)] hover:bg-secondary hover:scale-105 active:scale-95 transition-all duration-200 btn-pulse-glow"
+            href="#domains">
+            <span>EXPLORE SPHERE</span>
+            <span
+              class="material-symbols-outlined text-[18px] group-hover:rotate-45 transition-transform duration-300">rocket_launch</span>
+          </a>
+          <a class="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-surface-container-lowest text-on-surface font-title-caps text-sm uppercase tracking-[0.18em] shadow-sm hover:bg-surface-container-high hover:scale-105 active:scale-95 border border-surface-container hover:border-secondary/40 transition-all duration-200"
+            href="#leadership">
+            <span>MEET THE COMMUNITY</span>
+            <span
+              class="material-symbols-outlined text-[18px] group-hover:translate-x-1.5 transition-transform duration-200">arrow_forward</span>
+          </a>
+        </div>
+        <!-- Center Orbital Stage with Emblem -->
+        <div class="relative w-full max-w-xl aspect-square flex items-center justify-center my-4">
+          <!-- Floating Telemetry Chips -->
+          <div
+            class="absolute -top-4 left-6 px-3 py-1.5 rounded-full bg-surface-container-lowest shadow-md flex items-center gap-2 border border-surface-container animate-float-gentle z-20 hover:scale-105 transition-transform cursor-default">
+            <span class="material-symbols-outlined text-secondary text-[16px] animate-spin"
+              style="animation-duration: 8s;">orbit</span>
+            <span id="stat-hackathon" class="font-telemetry-code text-xs text-on-surface-variant font-medium">Hackathon:
+              SphereBuild 2024</span>
+          </div>
+          <div
+            class="absolute -bottom-2 right-8 px-3 py-1.5 rounded-full bg-surface-container-lowest shadow-md flex items-center gap-2 border border-surface-container animate-float-gentle z-20 hover:scale-105 transition-transform cursor-default"
+            style="animation-delay: 2.5s;">
+            <span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+            <span id="stat-meetup" class="font-telemetry-code text-xs text-on-surface-variant font-medium">Meetup: Fri
+              5PM, Lab 3</span>
+          </div>
+          <!-- 3D Sky-Blue Interactive Planets -->
+          <div class="absolute top-2 -right-4 sm:right-2 z-30 group cursor-pointer animate-float-planet-1">
+            <div
+              class="w-16 h-16 sm:w-20 sm:h-20 rounded-full globe-3d-deep animate-planet-glow group-hover:scale-110 transition-all duration-300">
+              <div class="globe-atmosphere"></div>
+              <div class="absolute top-2.5 left-3 w-4 h-2.5 rounded-full bg-white/70 blur-[1px] rotate-[-25deg]"></div>
+            </div>
+          </div>
+          <div class="absolute bottom-12 -left-2 sm:left-4 z-30 group cursor-pointer animate-float-planet-2">
+            <div
+              class="w-11 h-11 sm:w-14 sm:h-14 rounded-full globe-3d-pearl group-hover:scale-110 transition-all duration-300 shadow-[0_0_22px_rgba(56,189,248,0.55)]">
+              <div class="globe-atmosphere"></div>
+              <div class="absolute top-1.5 left-2 w-2.5 h-1.5 rounded-full bg-white/80 blur-[0.5px] rotate-[-20deg]">
+              </div>
+            </div>
+          </div>
+          <div class="absolute -top-6 left-1/3 z-20 pointer-events-none animate-float-gentle"
+            style="animation-delay: 1.2s;">
+            <div class="w-7 h-7 rounded-full globe-3d-azure shadow-[0_0_14px_rgba(56,189,248,0.6)]">
+              <div class="globe-atmosphere"></div>
+            </div>
+          </div>
+          <!-- Orbit Ring 1 -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none animate-orbit-slow">
+            <div
+              class="w-[430px] h-[210px] rounded-full border border-dashed border-secondary/40 shadow-[0_0_15px_rgba(17,90,254,0.15)] transform -rotate-[25deg]">
+              <div
+                class="w-5 h-5 rounded-full globe-3d-azure absolute top-1/2 -left-2.5 -translate-y-1/2 shadow-[0_0_16px_rgba(56,189,248,0.85)]">
+              </div>
+            </div>
+          </div>
+          <!-- Orbit Ring 2 -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none animate-orbit-reverse">
+            <div
+              class="w-[410px] h-[240px] rounded-full border border-secondary/30 shadow-[0_0_20px_rgba(17,90,254,0.12)] transform rotate-[35deg]">
+              <div
+                class="w-5 h-5 rounded-full globe-3d-deep absolute -top-2.5 left-1/2 -translate-x-1/2 shadow-[0_0_16px_rgba(14,165,233,0.9)]">
+              </div>
+            </div>
+          </div>
+          <!-- Central Emblem Core -->
+          <div
+            class="relative z-10 w-64 h-64 sm:w-72 sm:h-72 rounded-full p-2 bg-gradient-to-b from-surface-container-lowest via-surface-container-high/60 to-surface-container-lowest animate-emblem-breathing flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-105">
+            <div
+              class="relative w-full h-full rounded-full overflow-hidden bg-[#071A3A] shadow-[0_0_28px_rgba(20,91,255,0.45)] flex items-center justify-center group">
+              <div
+                class="absolute inset-0 bg-gradient-to-tr from-[#115afe]/25 via-transparent to-[#38bdf8]/25 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+              </div>
+              <img alt="Sphere Emblem Core"
+                class="w-full h-full rounded-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                src="assets/images/sphere-logo.png" />
+            </div>
+          </div>
+          <!-- Twinkles -->
+          <div class="absolute top-12 right-6 text-secondary animate-twinkle-fast pointer-events-none">
+            <svg class="w-7 h-7 filter drop-shadow-[0_0_6px_rgba(17,90,254,0.6)]" fill="currentColor"
+              viewbox="0 0 24 24">
+              <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"></path>
+            </svg>
+          </div>
+          <div class="absolute bottom-16 left-6 text-secondary-container animate-twinkle-slow pointer-events-none">
+            <svg class="w-5 h-5 filter drop-shadow-[0_0_6px_rgba(17,90,254,0.6)]" fill="currentColor"
+              viewbox="0 0 24 24">
+              <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"></path>
+            </svg>
+          </div>
+        </div>
+        <!-- Telemetry Impact Metrics Bar -->
+        <div
+          class="w-full max-w-4xl mt-8 bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl shadow-sm border border-surface-container-high/60 p-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div class="flex flex-col items-center group cursor-default">
+            <span
+              class="font-headline-lg text-3xl text-secondary font-bold group-hover:scale-110 transition-transform"><span
+                id="stat-members">500+</span></span>
+            <span
+              class="font-label-caps text-xs text-on-surface-variant uppercase tracking-[0.14em] mt-1 group-hover:text-secondary transition-colors">Active
+              Builders</span>
+          </div>
+          <div class="flex flex-col items-center group cursor-default">
+            <span
+              class="font-headline-lg text-3xl text-on-surface font-bold group-hover:scale-110 group-hover:text-secondary transition-transform"><span
+                id="stat-projects">42+</span></span>
+            <span
+              class="font-label-caps text-xs text-on-surface-variant uppercase tracking-[0.14em] mt-1 group-hover:text-secondary transition-colors">Shipped
+              Systems</span>
+          </div>
+          <div class="flex flex-col items-center group cursor-default">
+            <span
+              class="font-headline-lg text-3xl text-secondary font-bold group-hover:scale-110 transition-transform">18</span>
+            <span
+              class="font-label-caps text-xs text-on-surface-variant uppercase tracking-[0.14em] mt-1 group-hover:text-secondary transition-colors">Hackathons
+              Won</span>
+          </div>
+          <div class="flex flex-col items-center group cursor-default">
+            <span
+              class="font-headline-lg text-3xl text-on-surface font-bold group-hover:scale-110 group-hover:text-secondary transition-transform">10+</span>
+            <span
+              class="font-label-caps text-xs text-on-surface-variant uppercase tracking-[0.14em] mt-1 group-hover:text-secondary transition-colors">Tech
+              Domains</span>
+          </div>
+        </div>
+      </section>
     </div>
-</div>
-<!-- STITCH_THREEJS_START:ANIMATION_7 class="w-full h-full object-cover mix-blend-screen" -->
-<div class="w-full h-full object-cover mix-blend-screen" style="display:block;">
-<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
-<div id="threejs-container-ANIMATION_7" style="width:100%;height:100%"></div>
-<script>
-(function() {
-  const container = document.getElementById('threejs-container-ANIMATION_7');
-  const devicePixelRatio = window.devicePixelRatio || 1;
-  (function() {
-  const container = document.getElementById('threejs-container-ANIMATION_7');
-  const width = container.clientWidth || window.innerWidth;
-  const height = container.clientHeight || window.innerHeight;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  container.appendChild(renderer.domElement);
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  // 1. Core Sphere (Holographic)
-  const coreGeom = new THREE.SphereGeometry(1.2, 32, 32);
-  const coreMat = new THREE.MeshPhongMaterial({
-    color: 0x00cfff,
-    emissive: 0x00cfff,
-    emissiveIntensity: 0.2,
-    transparent: true,
-    opacity: 0.1,
-    wireframe: true
-  });
-  const core = new THREE.Mesh(coreGeom, coreMat);
-  group.add(core);
-
-  // 2. Orbital Rings
-  const createRing = (radius, color, rotationSpeed) => {
-    const geometry = new THREE.TorusGeometry(radius, 0.01, 16, 100);
-    const material = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.4 });
-    const ring = new THREE.Mesh(geometry, material);
-    ring.rotation.x = Math.random() * Math.PI;
-    ring.rotation.y = Math.random() * Math.PI;
-    return { mesh: ring, speed: rotationSpeed };
-  };
-
-  const rings = [
-    createRing(1.8, 0x00cfff, 0.005),
-    createRing(2.2, 0x7cff3a, 0.008),
-    createRing(2.6, 0x00cfff, 0.003)
-  ];
-  rings.forEach(r => group.add(r.mesh));
-
-  // 3. Particle System (Data Points)
-  const particlesCount = 800;
-  const posArray = new Float32Array(particlesCount * 3);
-  for(let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (Math.random() - 0.5) * 8;
-  }
-  const particlesGeom = new THREE.BufferGeometry();
-  particlesGeom.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-  const particlesMat = new THREE.PointsMaterial({
-    size: 0.03,
-    color: 0x00cfff,
-    transparent: true,
-    opacity: 0.8,
-    blending: THREE.AdditiveBlending
-  });
-  const particlesMesh = new THREE.Points(particlesGeom, particlesMat);
-  group.add(particlesMesh);
-
-  // Lights
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-  scene.add(ambientLight);
-  const pointLight = new THREE.PointLight(0x00cfff, 2, 20);
-  pointLight.position.set(5, 5, 5);
-  scene.add(pointLight);
-
-  camera.position.z = 6;
-
-  let mouseX = 0;
-  let mouseY = 0;
-  window.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth) - 0.5;
-    mouseY = (e.clientY / window.innerHeight) - 0.5;
-  });
-
-  const animate = () => {
-    requestAnimationFrame(animate);
-    
-    // Smooth group rotation based on mouse
-    group.rotation.y += (mouseX * 0.5 - group.rotation.y) * 0.05;
-    group.rotation.x += (mouseY * 0.5 - group.rotation.x) * 0.05;
-
-    // Auto rotations
-    core.rotation.y += 0.01;
-    rings.forEach(r => {
-      r.mesh.rotation.z += r.speed;
-      r.mesh.rotation.y += r.speed * 0.5;
-    });
-    
-    particlesMesh.rotation.y -= 0.001;
-
-    renderer.render(scene, camera);
-  };
-  animate();
-
-  window.addEventListener('resize', () => {
-    const w = container.clientWidth || window.innerWidth;
-    const h = container.clientHeight || window.innerHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-  });
-})();
-})();
-</script>
-</div>
-<!-- STITCH_THREEJS_END:ANIMATION_7 -->
-</div>
-</div>
-</section>
-<!-- Stats Section -->
-<section class="py-16 md:py-24 border-y border-white/5 bg-surface-container-lowest/50 backdrop-blur-sm">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 md:divide-x md:divide-white/10">
-<div class="text-center px-4">
-<div class="font-display-lg text-headline-xl md:text-display-lg text-primary font-bold mb-2 text-glow">15+</div>
-<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Active Members</div>
-</div>
-<div class="text-center px-4">
-<div class="font-display-lg text-headline-xl md:text-display-lg text-secondary font-bold mb-2 drop-shadow-[0_0_15px_rgba(116,246,49,0.4)]">10+</div>
-<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Hackathons Participated</div>
-</div>
-<div class="text-center px-4">
-<div class="font-display-lg text-headline-xl md:text-display-lg text-primary font-bold mb-2 text-glow">20+</div>
-<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Projects Built</div>
-</div>
-<div class="text-center px-4">
-<div class="font-display-lg text-headline-xl md:text-display-lg text-secondary font-bold mb-2 drop-shadow-[0_0_15px_rgba(116,246,49,0.4)]">30+</div>
-<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Technical Discussions</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="w-full py-16 bg-surface-container-lowest border-t border-white/5">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<div class="md:col-span-1 space-y-6">
-<div class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-primary-container font-bold tracking-tighter">Sphere Coding Club</div>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">
-                    Engineered for the Future. Building the next generation of digital innovators.
+    <!-- SECTION 2: ABOUT / WHO WE ARE -->
+    <section class="relative w-full max-w-7xl mx-auto px-6 py-16" id="about">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-5 space-y-4">
+          <div
+            class="font-label-caps text-xs text-secondary font-semibold tracking-[0.2em] uppercase flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> WHO WE ARE
+          </div>
+          <h2 class="font-headline-lg text-3xl font-bold uppercase tracking-tight text-on-surface">
+            MORE THAN A COMMUNITY.<br />
+            <span class="text-secondary">A SPACE TO BUILD.</span>
+          </h2>
+          <p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
+            Born from collegiate halls and fueled by obsessive makers, Sphere Community bridges the chasm between
+            textbook theory and mission-grade software engineering.
+          </p>
+          <p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
+            We curate focused teams, ship production-scale software, mentor next-generation pioneers, and connect top
+            student engineers with global research labs and tier-1 venture ecosystems.
+          </p>
+          <div class="pt-2 flex items-center gap-4">
+            <div class="flex flex-col">
+              <span class="font-title-caps text-sm text-on-surface font-bold">Global Constellation</span>
+              <span class="font-telemetry-code text-xs text-on-surface-variant flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 24 Chapters • 1 Mission
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- People Card -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer relative overflow-hidden">
+            <div class="space-y-3">
+              <div
+                class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary group-hover:bg-secondary-container group-hover:text-on-secondary group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span class="material-symbols-outlined text-[26px]">group</span>
+              </div>
+              <div
+                class="font-headline-sm text-lg text-on-surface font-semibold uppercase tracking-wider group-hover:text-secondary transition-colors">
+                People</div>
+              <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                Connecting high-conviction minds from varied engineering disciplines into synchronized build units.
+              </p>
+            </div>
+            <div class="mt-6 font-telemetry-code text-xs text-secondary font-medium flex items-center justify-between">
+              <span>01 // NETWORK</span>
+              <span
+                class="material-symbols-outlined text-[16px] group-hover:translate-x-1.5 transition-all duration-300">arrow_forward</span>
+            </div>
+          </div>
+          <!-- Ideas Card -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer relative overflow-hidden">
+            <div class="space-y-3">
+              <div
+                class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary group-hover:bg-secondary-container group-hover:text-on-secondary group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span class="material-symbols-outlined text-[26px]">lightbulb</span>
+              </div>
+              <div
+                class="font-headline-sm text-lg text-on-surface font-semibold uppercase tracking-wider group-hover:text-secondary transition-colors">
+                Ideas</div>
+              <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                Transforming speculative classroom whiteboard sparks into production-grade systems architecture.
+              </p>
+            </div>
+            <div class="mt-6 font-telemetry-code text-xs text-secondary font-medium flex items-center justify-between">
+              <span>02 // INCUBATE</span>
+              <span
+                class="material-symbols-outlined text-[16px] group-hover:translate-x-1.5 transition-all duration-300">arrow_forward</span>
+            </div>
+          </div>
+          <!-- Impact Card -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer relative overflow-hidden">
+            <div class="space-y-3">
+              <div
+                class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary group-hover:bg-secondary-container group-hover:text-on-secondary group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span class="material-symbols-outlined text-[26px]">public</span>
+              </div>
+              <div
+                class="font-headline-sm text-lg text-on-surface font-semibold uppercase tracking-wider group-hover:text-secondary transition-colors">
+                Impact</div>
+              <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                Deploying open tools and resilient technologies that serve student populations and global communities.
+              </p>
+            </div>
+            <div class="mt-6 font-telemetry-code text-xs text-secondary font-medium flex items-center justify-between">
+              <span>03 // DELIVER</span>
+              <span
+                class="material-symbols-outlined text-[16px] group-hover:translate-x-1.5 transition-all duration-300">arrow_forward</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 3: DOMAINS -->
+    <section class="relative w-full bg-surface-container-low/60 py-16" id="domains">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div>
+            <div
+              class="font-label-caps text-xs text-secondary font-semibold tracking-[0.2em] uppercase flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> CORE FOCUS AREAS
+            </div>
+            <h2 class="font-headline-lg text-3xl font-bold uppercase tracking-tight text-on-surface mt-1">
+              ENGINEERED FOR MASTERY ACROSS EVERY FRONTIER
+            </h2>
+          </div>
+          <div class="font-telemetry-code text-xs text-on-surface-variant flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> NODE COUNT: 06 ACTIVE DOMAINS
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Domain 1 -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="material-symbols-outlined text-secondary text-[28px] group-hover:scale-125 transition-transform duration-300">terminal</span>
+                <span
+                  class="font-label-caps text-xs px-3 py-1 rounded-full bg-surface-container text-on-surface-variant group-hover:bg-surface-container-high transition-colors">140+
+                  BUILDERS</span>
+              </div>
+              <h3 class="font-headline-sm text-lg font-bold mb-2 group-hover:text-secondary transition-colors">Web &amp;
+                Distributed Systems</h3>
+              <p class="font-body-sm text-xs text-on-surface-variant mb-4 leading-relaxed">
+                High-throughput microservices, edge computing, distributed consensus, and zero-latency frontend
+                architectures.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">React</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Next.js</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Rust</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Go</span>
+            </div>
+          </div>
+          <!-- Domain 2 -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="material-symbols-outlined text-secondary text-[28px] group-hover:scale-125 transition-transform duration-300">psychology</span>
+                <span
+                  class="font-label-caps text-xs px-3 py-1 rounded-full bg-surface-container text-on-surface-variant group-hover:bg-surface-container-high transition-colors">190+
+                  BUILDERS</span>
+              </div>
+              <h3 class="font-headline-sm text-lg font-bold mb-2 group-hover:text-secondary transition-colors">AI &amp;
+                Deep Learning</h3>
+              <p class="font-body-sm text-xs text-on-surface-variant mb-4 leading-relaxed">
+                Autonomous agents, transformer architectures, reinforcement learning models, and computer vision
+                pipelines.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">PyTorch</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">LLMs</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">CUDA</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">LangChain</span>
+            </div>
+          </div>
+          <!-- Domain 3 -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="material-symbols-outlined text-secondary text-[28px] group-hover:scale-125 transition-transform duration-300">smartphone</span>
+                <span
+                  class="font-label-caps text-xs px-3 py-1 rounded-full bg-surface-container text-on-surface-variant group-hover:bg-surface-container-high transition-colors">80+
+                  BUILDERS</span>
+              </div>
+              <h3 class="font-headline-sm text-lg font-bold mb-2 group-hover:text-secondary transition-colors">Mobile
+                Engineering</h3>
+              <p class="font-body-sm text-xs text-on-surface-variant mb-4 leading-relaxed">
+                Fluid multi-platform experiences, sensor instrumentation, offline-first sync, and native performance
+                tuning.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Flutter</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Swift</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Kotlin</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">SQLite</span>
+            </div>
+          </div>
+          <!-- Domain 4 -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="material-symbols-outlined text-secondary text-[28px] group-hover:scale-125 transition-transform duration-300">cloud_sync</span>
+                <span
+                  class="font-label-caps text-xs px-3 py-1 rounded-full bg-surface-container text-on-surface-variant group-hover:bg-surface-container-high transition-colors">95+
+                  BUILDERS</span>
+              </div>
+              <h3 class="font-headline-sm text-lg font-bold mb-2 group-hover:text-secondary transition-colors">Cloud
+                &amp; DevOps Infrastructure</h3>
+              <p class="font-body-sm text-xs text-on-surface-variant mb-4 leading-relaxed">
+                Terraform automation, resilient Kubernetes clusters, CI/CD telemetry pipelines, and sovereign server
+                architectures.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">AWS</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Kubernetes</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Docker</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Terraform</span>
+            </div>
+          </div>
+          <!-- Domain 5 -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="material-symbols-outlined text-secondary text-[28px] group-hover:scale-125 transition-transform duration-300">shield</span>
+                <span
+                  class="font-label-caps text-xs px-3 py-1 rounded-full bg-surface-container text-on-surface-variant group-hover:bg-surface-container-high transition-colors">65+
+                  BUILDERS</span>
+              </div>
+              <h3 class="font-headline-sm text-lg font-bold mb-2 group-hover:text-secondary transition-colors">
+                Cybersecurity &amp; Cryptography</h3>
+              <p class="font-body-sm text-xs text-on-surface-variant mb-4 leading-relaxed">
+                Zero-knowledge protocols, smart contract auditing, defensive blue-teaming, and applied cryptography.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Zero-Trust</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">zk-SNARKs</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Pen-Testing</span>
+            </div>
+          </div>
+          <!-- Domain 6 -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span
+                  class="material-symbols-outlined text-secondary text-[28px] group-hover:scale-125 transition-transform duration-300">token</span>
+                <span
+                  class="font-label-caps text-xs px-3 py-1 rounded-full bg-surface-container text-on-surface-variant group-hover:bg-surface-container-high transition-colors">110+
+                  BUILDERS</span>
+              </div>
+              <h3 class="font-headline-sm text-lg font-bold mb-2 group-hover:text-secondary transition-colors">UI/UX
+                &amp; Spatial Systems</h3>
+              <p class="font-body-sm text-xs text-on-surface-variant mb-4 leading-relaxed">
+                Design tokens, high-density telemetry dashboards, accessibility standards, and spatial interface
+                prototypes.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Figma</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Tokens</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Three.js</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Spatial
+                UI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 4: PROJECTS -->
+    <section class="relative w-full max-w-7xl mx-auto px-6 py-16" id="projects">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <div
+          class="font-label-caps text-xs text-secondary font-semibold tracking-[0.2em] uppercase flex items-center justify-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> PROOF OF WORK
+        </div>
+        <h2 class="font-headline-lg text-3xl font-bold uppercase tracking-tight text-on-surface mt-1">
+          PRODUCTION SYSTEMS ENGINEERED BY SPHERE
+        </h2>
+        <p class="font-body-md text-sm text-on-surface-variant mt-2">
+          Codebases deployed to thousands of daily users, engineered end-to-end by student squads.
+        </p>
+      </div>
+      <!-- Flagship Project Card -->
+      <div
+        class="group rounded-3xl bg-surface-container-lowest shadow-md border border-surface-container hover:shadow-xl hover:border-secondary/40 transition-all duration-300 overflow-hidden mb-6 grid grid-cols-1 lg:grid-cols-12 items-center">
+        <div class="lg:col-span-7 p-8 space-y-4">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/10 text-secondary font-label-caps text-xs uppercase tracking-widest font-semibold border border-secondary/20">
+            <span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span> FLAGSHIP SYSTEM RELEASE
+          </div>
+          <h3 class="font-headline-md text-2xl font-bold text-on-surface group-hover:text-secondary transition-colors">
+            OrbitalSync — Distributed Collaborative Workspace
+          </h3>
+          <p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
+            A peer-to-peer real-time whiteboard, canvas, and code editor powered by CRDT algorithms and WebRTC mesh
+            architecture. Deployed across 12 university campuses with sub-15ms sync latency.
+          </p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span
+              class="px-3 py-1 rounded-md bg-surface-container font-telemetry-code text-xs text-on-surface">TypeScript</span>
+            <span class="px-3 py-1 rounded-md bg-surface-container font-telemetry-code text-xs text-on-surface">WebRTC
+              Mesh</span>
+            <span class="px-3 py-1 rounded-md bg-surface-container font-telemetry-code text-xs text-on-surface">Go
+              Daemon</span>
+            <span class="px-3 py-1 rounded-md bg-surface-container font-telemetry-code text-xs text-on-surface">Docker
+              Engine</span>
+          </div>
+          <div class="flex items-center gap-4 pt-4">
+            <a class="shimmer-btn group/btn inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-secondary text-on-secondary font-title-caps text-xs uppercase tracking-wider shadow-sm hover:bg-secondary-container hover:scale-105 transition-all"
+              href="#">
+              <span>LIVE DEMO</span>
+              <span
+                class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-1 transition-transform">open_in_new</span>
+            </a>
+            <a class="group/repo inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-surface-container text-on-surface font-title-caps text-xs uppercase tracking-wider hover:bg-surface-container-high hover:scale-105 transition-all border border-surface-container"
+              href="#">
+              <span>VIEW CODEBASE</span>
+              <span
+                class="material-symbols-outlined text-[16px] group-hover/repo:rotate-45 transition-transform">code</span>
+            </a>
+          </div>
+        </div>
+        <div class="lg:col-span-5 h-72 lg:h-full min-h-[300px] relative overflow-hidden bg-surface-container">
+          <div
+            class="w-full h-full bg-gradient-to-br from-blue-900 via-slate-900 to-sky-950 p-6 flex flex-col justify-between text-white relative">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-400"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                <span class="ml-2 font-telemetry-code text-xs text-slate-300">orbitalsync-mesh-node://v2.4</span>
+              </div>
+              <span class="font-telemetry-code text-xs px-2.5 py-1 rounded bg-secondary-container text-white">LATENCY:
+                12ms</span>
+            </div>
+            <div class="my-auto space-y-3">
+              <div class="p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/15">
+                <div class="flex justify-between items-center text-xs font-telemetry-code text-sky-300 mb-2">
+                  <span>CRDT STATE ENGINE</span>
+                  <span class="text-emerald-400">SYNCED</span>
+                </div>
+                <div class="w-full bg-white/20 rounded-full h-2">
+                  <div class="bg-sky-400 h-2 rounded-full w-4/5 animate-pulse"></div>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-3 text-xs font-telemetry-code">
+                <div class="p-3 rounded-lg bg-white/5 border border-white/10">
+                  <div class="text-slate-400">Active Peers</div>
+                  <div class="text-lg font-bold text-white">1,420 nodes</div>
+                </div>
+                <div class="p-3 rounded-lg bg-white/5 border border-white/10">
+                  <div class="text-slate-400">Packet Loss</div>
+                  <div class="text-lg font-bold text-emerald-400">0.001%</div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md font-telemetry-code text-xs text-sky-200 self-start border border-sky-400/30 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-ping"></span> STATUS: PRODUCTION V2.4
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 2 Sub Projects -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div
+          class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span
+                class="font-label-caps text-xs text-secondary font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> AI ENGINE
+              </span>
+              <span class="font-telemetry-code text-xs text-on-surface-variant">2.1k USERS</span>
+            </div>
+            <h4 class="font-headline-sm text-lg font-bold group-hover:text-secondary transition-colors">AuraAI —
+              Intelligent Campus Assistant</h4>
+            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+              Retrieval-augmented generated student copilot summarizing course syllabi, laboratory schedules, and thesis
+              resources using localized embeddings.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-4">
+            <div class="flex gap-1.5">
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Python</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">FastAPI</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">ChromaDB</span>
+            </div>
+            <a class="text-secondary hover:text-secondary-container transition-colors flex items-center gap-1 text-xs font-semibold"
+              href="#">
+              <span>Repo</span>
+              <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+            </a>
+          </div>
+        </div>
+        <div
+          class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span
+                class="font-label-caps text-xs text-secondary font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> DEV SECURITY
+              </span>
+              <span class="font-telemetry-code text-xs text-on-surface-variant">OPEN SOURCE</span>
+            </div>
+            <h4 class="font-headline-sm text-lg font-bold group-hover:text-secondary transition-colors">Sentinel —
+              Vulnerability Scanner</h4>
+            <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+              Lightweight static code analysis tool catching supply-chain risks, leaked API keys, and insecure
+              configuration files in GitHub pull requests.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-4">
+            <div class="flex gap-1.5">
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">Rust</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">WASM</span>
+              <span
+                class="font-telemetry-code text-[11px] px-2 py-0.5 rounded bg-surface-container text-on-surface">GitHub
+                Actions</span>
+            </div>
+            <a class="text-secondary hover:text-secondary-container transition-colors flex items-center gap-1 text-xs font-semibold"
+              href="#">
+              <span>Repo</span>
+              <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 5: EVENTS -->
+    <section class="relative w-full bg-surface-container-low/50 py-16" id="events">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div>
+            <div
+              class="font-label-caps text-xs text-secondary font-semibold tracking-[0.2em] uppercase flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> GATHERINGS &amp; COMPETITIONS
+            </div>
+            <h2 class="font-headline-lg text-3xl font-bold uppercase tracking-tight text-on-surface mt-1">
+              WHERE BUILDERS CONVERGE
+            </h2>
+          </div>
+          <a class="group inline-flex items-center gap-1 font-label-caps text-xs text-secondary uppercase font-semibold hover:underline"
+            href="#">
+            <span>VIEW FULL CALENDAR</span>
+            <span
+              class="material-symbols-outlined text-[16px] group-hover:translate-x-1.5 transition-transform">arrow_forward</span>
+          </a>
+        </div>
+        <div class="space-y-4">
+          <!-- Event 1 -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col lg:flex-row lg:items-center justify-between gap-6 cursor-pointer">
+            <div class="flex items-start gap-5">
+              <div
+                class="flex flex-col items-center justify-center w-16 h-16 rounded-xl bg-surface-container text-center shrink-0 group-hover:bg-secondary-container group-hover:text-on-secondary transition-all duration-300">
+                <span class="font-title-caps text-xs text-secondary group-hover:text-on-secondary font-bold">OCT</span>
+                <span class="font-headline-sm text-xl text-on-surface group-hover:text-on-secondary font-bold">24</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span
+                    class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary font-label-caps text-[10px] tracking-wider uppercase font-semibold">REGISTRATION
+                    OPEN</span>
+                  <span class="font-telemetry-code text-xs text-on-surface-variant flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> 36-HOUR SPRINT
+                  </span>
+                </div>
+                <h3
+                  class="font-headline-sm text-lg font-bold text-on-surface group-hover:text-secondary transition-colors">
+                  SphereHacks 2026: National Collegiate Hackathon</h3>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-1">
+                  400+ developers, $10,000 in equity-free prize bounties, world-class mentors from leading tech
+                  unicorns, and live demo showcase.
                 </p>
-<div class="flex gap-4">
-<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="index.html"><span class="material-symbols-outlined">code</span></a>
-<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="index.html"><span class="material-symbols-outlined">share</span></a>
-<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="index.html"><span class="material-symbols-outlined">mail</span></a>
-</div>
-</div>
-<div class="space-y-4">
-<h4 class="font-label-md text-label-md text-white uppercase tracking-wider">Platform</h4>
-<div class="flex flex-col gap-3 font-body-md text-body-md">
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="projects.html">Projects</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="events.html">Events</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="domains.html">Domains</a>
-</div>
-</div>
-<div class="space-y-4">
-<h4 class="font-label-md text-label-md text-white uppercase tracking-wider">Legal</h4>
-<div class="flex flex-col gap-3 font-body-md text-body-md">
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="privacy.html">Privacy Policy</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="terms.html">Terms of Service</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="brand.html">Brand Assets</a>
-</div>
-</div>
-<div class="space-y-4">
-<h4 class="font-label-md text-label-md text-white uppercase tracking-wider">Connect</h4>
-<div class="flex flex-col gap-3 font-body-md text-body-md">
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="mailto:spherecclub@gmail.com">Contact Us</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="https://discord.gg/sphere" target="_blank">Join Discord</a>
-<a class="text-on-surface-variant hover:text-secondary transition-all opacity-80 hover:opacity-100" href="https://www.instagram.com/spherecclub/" target="_blank">Instagram</a>
-</div>
-</div>
-<div class="col-span-1 md:col-span-4 mt-8 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="font-body-md text-body-md text-on-surface-variant opacity-60">© 2026 Sphere Coding Club. Engineered for the Future.</p>
-<div class="flex items-center gap-2 text-on-surface-variant opacity-60 text-sm">
-<span>Status:</span>
-<span class="w-2 h-2 rounded-full bg-secondary inline-block animate-pulse"></span>
-<span>Systems Operational</span>
-</div>
-</div>
-</div>
-</footer>
-<script src="js/main.js"></script>
-<script type="module" src="js/index.js"></script>
-</body></html>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 shrink-0">
+              <div class="font-telemetry-code text-xs text-on-surface-variant text-right hidden sm:block">
+                HYBRID / SF BAY &amp; VIRTUAL
+              </div>
+              <button
+                class="shimmer-btn px-6 py-2 rounded-full bg-secondary text-on-secondary font-title-caps text-xs uppercase tracking-wider hover:bg-secondary-container hover:scale-105 transition-all">
+                REGISTER FREE
+              </button>
+            </div>
+          </div>
+          <!-- Event 2 -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col lg:flex-row lg:items-center justify-between gap-6 cursor-pointer">
+            <div class="flex items-start gap-5">
+              <div
+                class="flex flex-col items-center justify-center w-16 h-16 rounded-xl bg-surface-container text-center shrink-0 group-hover:bg-surface-container-high transition-all duration-300">
+                <span class="font-title-caps text-xs text-secondary font-bold">NOV</span>
+                <span class="font-headline-sm text-xl text-on-surface font-bold">08</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span
+                    class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-caps text-[10px] tracking-wider uppercase font-semibold">HANDS-ON
+                    WORKSHOP</span>
+                  <span class="font-telemetry-code text-xs text-on-surface-variant flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> 2.5 HOURS
+                  </span>
+                </div>
+                <h3
+                  class="font-headline-sm text-lg font-bold text-on-surface group-hover:text-secondary transition-colors">
+                  Zero to Production with Kubernetes &amp; Cloud Native</h3>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-1">
+                  Live interactive coding session configuring automated ingress controllers, zero-downtime rolling
+                  deploys, and cluster logging.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 shrink-0">
+              <div class="font-telemetry-code text-xs text-on-surface-variant text-right hidden sm:block">
+                DISCORD STAGE // 6PM EST
+              </div>
+              <button
+                class="px-6 py-2 rounded-full bg-surface-container text-on-surface font-title-caps text-xs uppercase tracking-wider hover:bg-surface-container-high hover:scale-105 transition-all">
+                RESERVE SEAT
+              </button>
+            </div>
+          </div>
+          <!-- Event 3 -->
+          <div
+            class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col lg:flex-row lg:items-center justify-between gap-6 cursor-pointer">
+            <div class="flex items-start gap-5">
+              <div
+                class="flex flex-col items-center justify-center w-16 h-16 rounded-xl bg-surface-container text-center shrink-0 group-hover:bg-surface-container-high transition-all duration-300">
+                <span class="font-title-caps text-xs text-secondary font-bold">DEC</span>
+                <span class="font-headline-sm text-xl text-on-surface font-bold">02</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span
+                    class="px-2 py-0.5 rounded-full bg-secondary-container/10 text-secondary font-label-caps text-[10px] tracking-wider uppercase font-semibold">PITCH
+                    &amp; INCUBATOR</span>
+                  <span class="font-telemetry-code text-xs text-on-surface-variant flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> DEMO DAY
+                  </span>
+                </div>
+                <h3
+                  class="font-headline-sm text-lg font-bold text-on-surface group-hover:text-secondary transition-colors">
+                  Sphere Demo Day &amp; Founder Pitch Showcase</h3>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-1">
+                  Top 8 incubated student squads demonstrate production deployments to invited seed angel investors and
+                  engineering leaders.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 shrink-0">
+              <div class="font-telemetry-code text-xs text-on-surface-variant text-right hidden sm:block">
+                MAIN AMPHITHEATRE &amp; LIVE STREAM
+              </div>
+              <button
+                class="px-6 py-2 rounded-full bg-surface-container text-on-surface font-title-caps text-xs uppercase tracking-wider hover:bg-surface-container-high hover:scale-105 transition-all">
+                ATTEND DEMO
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 6: LEADERSHIP CONSTELLATION -->
+    <section class="relative w-full max-w-7xl mx-auto px-6 py-16" id="leadership">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div
+          class="font-label-caps text-xs text-secondary font-semibold tracking-[0.24em] uppercase flex items-center justify-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> LEADERSHIP CONSTELLATION
+        </div>
+        <h2 class="font-headline-lg text-3xl font-bold uppercase tracking-tight text-on-surface mt-1">THE MINDS BEHIND A
+          BRIGHTER TOMORROW</h2>
+        <p class="font-body-sm text-xs text-on-surface-variant mt-1">Guided by passionate student founders and leads
+          dedicated to creating real impact.</p>
+      </div>
+      <!-- Founders Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+        <!-- Anish Mogam -->
+        <div
+          class="leadership-tilt-card group relative rounded-3xl bg-surface-container-lowest shadow-xl border border-secondary/20 p-6 flex flex-col items-center text-center overflow-hidden cursor-pointer">
+          <div
+            class="absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-64 bg-surface-container-high/50 rounded-full blur-2xl pointer-events-none animate-pulse-ring">
+          </div>
+          <div class="relative w-40 h-40 sm:w-48 sm:h-48 mb-4 flex items-center justify-center">
+            <div
+              class="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none animate-orbit-slow">
+              <div
+                class="w-full h-full rounded-full border-2 border-secondary-container/60 transform -rotate-[30deg] relative">
+                <div
+                  class="w-5 h-5 rounded-full globe-3d-deep absolute -top-2.5 left-1/2 -translate-x-1/2 shadow-[0_0_14px_rgba(56,189,248,0.85)]">
+                </div>
+              </div>
+            </div>
+            <div
+              class="relative z-10 w-full h-full rounded-full p-1 bg-surface-container shadow-[inset_0_0_0_2px_#ffffff,0_0_0_3px_#8EC5FF,0_8px_30px_rgba(59,130,255,0.35)] overflow-hidden group-hover:scale-105 transition-all duration-500">
+              <img alt="Anish Mogam - Founder" class="w-full h-full object-cover rounded-full"
+                src="assets/images/anish.jpg" />
+            </div>
+          </div>
+          <div
+            class="inline-flex items-center px-4 py-1 rounded-full bg-secondary-container text-on-secondary font-title-caps text-[11px] tracking-[0.22em] uppercase font-bold mb-2">
+            FOUNDER</div>
+          <h3
+            class="font-headline-md text-xl font-bold uppercase tracking-[0.16em] mb-1 group-hover:text-secondary transition-colors">
+            ANISH MOGAM</h3>
+          <div class="w-full p-2.5 rounded-xl bg-surface-container-low/70 mb-4 border border-surface-container">
+            <span class="font-body-sm text-xs text-on-surface font-medium italic">“Building a brighter tomorrow,
+              together.”</span>
+          </div>
+          <div
+            class="w-full rounded-xl bg-surface-container-lowest shadow-sm p-3 grid grid-cols-3 gap-1 text-center border border-surface-container">
+            <div class="flex flex-col items-center px-1 py-1 hover:bg-surface-container-low/50 rounded transition-all">
+              <span class="material-symbols-outlined text-secondary text-[18px] mb-1">laptop_chromebook</span>
+              <span class="font-label-caps text-[9px] font-bold uppercase mb-1">INTERESTS</span>
+              <span
+                class="font-body-sm text-[10px] leading-tight text-on-surface-variant">Technology<br />Innovation<br />Communities</span>
+            </div>
+            <div class="flex flex-col items-center px-1 py-1 bg-surface-container-low/40 rounded">
+              <span class="material-symbols-outlined text-secondary text-[18px] mb-1">code</span>
+              <span class="font-label-caps text-[9px] font-bold uppercase mb-1">SKILLS</span>
+              <span class="font-body-sm text-[10px] leading-tight text-on-surface-variant">Leadership<br />Product
+                Thinking<br />Problem Solving</span>
+            </div>
+            <div class="flex flex-col items-center px-1 py-1 hover:bg-surface-container-low/50 rounded transition-all">
+              <span class="material-symbols-outlined text-secondary text-[18px] mb-1">lightbulb</span>
+              <span class="font-label-caps text-[9px] font-bold uppercase mb-1">FUN FACT</span>
+              <span class="font-body-sm text-[10px] leading-tight text-on-surface-variant">Always curious about what's
+                next!</span>
+            </div>
+          </div>
+        </div>
+        <!-- Madhura Lakade -->
+        <div
+          class="leadership-tilt-card group relative rounded-3xl bg-surface-container-lowest shadow-xl border border-secondary/20 p-6 flex flex-col items-center text-center overflow-hidden cursor-pointer">
+          <div
+            class="absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-64 bg-surface-container-high/50 rounded-full blur-2xl pointer-events-none animate-pulse-ring">
+          </div>
+          <div class="relative w-40 h-40 sm:w-48 sm:h-48 mb-4 flex items-center justify-center">
+            <div
+              class="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none animate-orbit-slow">
+              <div
+                class="w-full h-full rounded-full border-2 border-secondary-container/60 transform -rotate-[30deg] relative">
+                <div
+                  class="w-5 h-5 rounded-full globe-3d-pearl absolute -top-2.5 left-1/2 -translate-x-1/2 shadow-[0_0_14px_rgba(56,189,248,0.85)]">
+                </div>
+              </div>
+            </div>
+            <div
+              class="relative z-10 w-full h-full rounded-full p-1 bg-surface-container shadow-[inset_0_0_0_2px_#ffffff,0_0_0_3px_#8EC5FF,0_8px_30px_rgba(59,130,255,0.35)] overflow-hidden group-hover:scale-105 transition-all duration-500">
+              <img alt="Madhura Lakade - Co-Founder" class="w-full h-full object-cover rounded-full"
+                src="assets/images/madhura.jpg" />
+            </div>
+          </div>
+          <div
+            class="inline-flex items-center px-4 py-1 rounded-full bg-secondary text-on-secondary font-title-caps text-[11px] tracking-[0.22em] uppercase font-bold mb-2">
+            CO-FOUNDER</div>
+          <h3
+            class="font-headline-md text-xl font-bold uppercase tracking-[0.16em] mb-1 group-hover:text-secondary transition-colors">
+            MADHURA LAKADE</h3>
+          <div class="w-full p-2.5 rounded-xl bg-surface-container-low/70 mb-4 border border-surface-container">
+            <span class="font-body-sm text-xs text-on-surface font-medium italic">“Turning ideas into impact,
+              together.”</span>
+          </div>
+          <div
+            class="w-full rounded-xl bg-surface-container-lowest shadow-sm p-3 grid grid-cols-3 gap-1 text-center border border-surface-container">
+            <div class="flex flex-col items-center px-1 py-1 hover:bg-surface-container-low/50 rounded transition-all">
+              <span class="material-symbols-outlined text-secondary text-[18px] mb-1">laptop_chromebook</span>
+              <span class="font-label-caps text-[9px] font-bold uppercase mb-1">INTERESTS</span>
+              <span class="font-body-sm text-[10px] leading-tight text-on-surface-variant">Technology<br />Product
+                Design<br />Communities</span>
+            </div>
+            <div class="flex flex-col items-center px-1 py-1 bg-surface-container-low/40 rounded">
+              <span class="material-symbols-outlined text-secondary text-[18px] mb-1">code</span>
+              <span class="font-label-caps text-[9px] font-bold uppercase mb-1">SKILLS</span>
+              <span class="font-body-sm text-[10px] leading-tight text-on-surface-variant">Strategic Thinking<br />Team
+                Building<br />Problem Solving</span>
+            </div>
+            <div class="flex flex-col items-center px-1 py-1 hover:bg-surface-container-low/50 rounded transition-all">
+              <span class="material-symbols-outlined text-secondary text-[18px] mb-1">lightbulb</span>
+              <span class="font-label-caps text-[9px] font-bold uppercase mb-1">FUN FACT</span>
+              <span class="font-body-sm text-[10px] leading-tight text-on-surface-variant">Always excited about real
+                impact!</span>
+            </div>
+          </div>
+        </div>
+        <!-- Shreyash Atre -->
+        <div
+          class="leadership-tilt-card group relative rounded-3xl bg-surface-container-lowest shadow-xl border border-secondary/20 p-6 flex flex-col items-center text-center overflow-hidden cursor-pointer">
+          <div
+            class="absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-64 bg-surface-container-high/50 rounded-full blur-2xl pointer-events-none animate-pulse-ring">
+          </div>
+          <div class="relative w-40 h-40 sm:w-48 sm:h-48 mb-4 flex items-center justify-center">
+            <div
+              class="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] pointer-events-none animate-orbit-slow">
+              <div
+                class="w-full h-full rounded-full border-2 border-secondary-container/60 transform -rotate-[30deg] relative">
+                <div
+                  class="w-5 h-5 rounded-full globe-3d-azure absolute -top-2.5 left-1/2 -translate-x-1/2 shadow-[0_0_14px_rgba(56,189,248,0.85)]">
+                </div>
+              </div>
+            </div>
+            <div
+              class="relative z-10 w-full h-full rounded-full p-1 bg-surface-container shadow-[inset_0_0_0_2px_#ffffff,0_0_0_3px_#8EC5FF,0_8px_30px_rgba(59,130,255,0.35)] overflow-hidden group-hover:scale-105 transition-all duration-500">
+              <img alt="Shreyash Atre - Co-Founder" class="w-full h-full object-cover rounded-full"
+                src="assets/images/shreyash.jpg" />
+            </div>
+          </div>
+          <div
+            class="inline-flex items-center px-4 py-1 rounded-full bg-secondary text-on-secondary font-title-caps text-[11px] tracking-[0.22em] uppercase font-bold mb-2">
+            CO-FOUNDER</div>
+          <h3
+            class="font-headline-md text-xl font-bold uppercase tracking-[0.16em] mb-1 group-hover:text-secondary transition-colors">
+            SHREYASH ATRE</h3>
+          <div class="w-full p-2.5 rounded-xl bg-surface-container-low/70 mb-4 border border-surface-container">
+            <span class="font-body-sm text-xs text-on-surface font-medium italic">“Building ideas into 'impact,
+              together.'”</span>
+          </div>
+          <div
+            class="w-full rounded-xl bg-surface-container-lowest shadow-sm p-3 grid grid-cols-3 gap-1 text-center border border-surface-container">
+            <div class="flex flex-col items-center px-1 py-1 hover:bg-surface-container-low/50 rounded transition-all">
+              <span class="material-symbols-outlined text-secondary text-[18px] mb-1">laptop_chromebook</span>
+              <span class="font-label-caps text-[9px] font-bold uppercase mb-1">INTERESTS</span>
+              <span class="font-body-sm text-[10px] leading-tight text-on-surface-variant">Technology<br />Product
+                Dev<br />Open Source</span>
+            </div>
+            <div class="flex flex-col items-center px-1 py-1 bg-surface-container-low/40 rounded">
+              <span class="material-symbols-outlined text-secondary text-[18px] mb-1">code</span>
+              <span class="font-label-caps text-[9px] font-bold uppercase mb-1">SKILLS</span>
+              <span class="font-body-sm text-[10px] leading-tight text-on-surface-variant">Problem Solving<br />Systems
+                Thinking<br />Collaboration</span>
+            </div>
+            <div class="flex flex-col items-center px-1 py-1 hover:bg-surface-container-low/50 rounded transition-all">
+              <span class="material-symbols-outlined text-secondary text-[18px] mb-1">lightbulb</span>
+              <span class="font-label-caps text-[9px] font-bold uppercase mb-1">FUN FACT</span>
+              <span class="font-body-sm text-[10px] leading-tight text-on-surface-variant">Always curious how things
+                work!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Management Tier (#team) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="team">
+        <!-- Mihir Mendake -->
+        <div
+          class="card-hover-interactive group rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container p-6 flex flex-col items-center text-center cursor-pointer">
+          <div
+            class="w-24 h-24 rounded-full p-1 bg-surface-container shadow-[0_0_0_2px_#3B82FF] overflow-hidden mb-4 group-hover:scale-110 transition-all duration-300">
+            <img alt="Mihir Mendake - Core Team Lead" class="w-full h-full object-cover rounded-full"
+              src="assets/images/mihir.jpg" />
+          </div>
+          <div
+            class="inline-flex items-center px-3 py-0.5 rounded-full bg-surface-container-high font-label-caps text-[10px] text-secondary font-semibold uppercase tracking-widest mb-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1.5"></span> CORE TEAM LEAD
+          </div>
+          <div
+            class="font-headline-sm text-lg font-bold uppercase tracking-wide mb-1 group-hover:text-secondary transition-colors">
+            MIHIR MENDAKE</div>
+          <p class="font-body-sm text-xs text-on-surface-variant mb-3">“Driving ideas forward, together.”</p>
+          <div
+            class="w-full rounded-xl bg-surface-container-low/40 p-3 text-left border border-surface-container space-y-1">
+            <div class="font-telemetry-code text-[11px]"><span class="text-secondary font-semibold">Interests:</span>
+              Tech, Products, Hackathons</div>
+            <div class="font-telemetry-code text-[11px]"><span class="text-secondary font-semibold">Skills:</span>
+              Leadership, Project Mgmt</div>
+            <div class="font-telemetry-code text-[11px] text-on-surface-variant italic"><span
+                class="text-secondary font-semibold not-italic">Fun Fact:</span> Up for new challenges!</div>
+          </div>
+        </div>
+        <!-- Isha Joshi -->
+        <div
+          class="card-hover-interactive group rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container p-6 flex flex-col items-center text-center cursor-pointer">
+          <div
+            class="w-24 h-24 rounded-full p-1 bg-surface-container shadow-[0_0_0_2px_#3B82FF] overflow-hidden mb-4 group-hover:scale-110 transition-all duration-300">
+            <img alt="Isha Joshi - Administrator" class="w-full h-full object-cover rounded-full"
+              src="assets/images/isha.jpg" />
+          </div>
+          <div
+            class="inline-flex items-center px-3 py-0.5 rounded-full bg-surface-container-high font-label-caps text-[10px] text-secondary font-semibold uppercase tracking-widest mb-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1.5"></span> ADMINISTRATOR
+          </div>
+          <div
+            class="font-headline-sm text-lg font-bold uppercase tracking-wide mb-1 group-hover:text-secondary transition-colors">
+            ISHA JOSHI</div>
+          <p class="font-body-sm text-xs text-on-surface-variant mb-3">“Creating a smoother today for a stronger
+            tomorrow.”</p>
+          <div
+            class="w-full rounded-xl bg-surface-container-low/40 p-3 text-left border border-surface-container space-y-1">
+            <div class="font-telemetry-code text-[11px]"><span class="text-secondary font-semibold">Interests:</span>
+              Community, Event Mgmt, Design</div>
+            <div class="font-telemetry-code text-[11px]"><span class="text-secondary font-semibold">Skills:</span>
+              Organization, Communication</div>
+            <div class="font-telemetry-code text-[11px] text-on-surface-variant italic"><span
+                class="text-secondary font-semibold not-italic">Fun Fact:</span> Every detail counts!</div>
+          </div>
+        </div>
+        <!-- Shreyas Gore -->
+        <div
+          class="card-hover-interactive group rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container p-6 flex flex-col items-center text-center cursor-pointer">
+          <div
+            class="w-24 h-24 rounded-full p-1 bg-surface-container shadow-[0_0_0_2px_#3B82FF] overflow-hidden mb-4 group-hover:scale-110 transition-all duration-300">
+            <img alt="Shreyas Gore - Manager" class="w-full h-full object-cover rounded-full"
+              src="assets/images/shreyasgore.jpg" />
+          </div>
+          <div
+            class="inline-flex items-center px-3 py-0.5 rounded-full bg-surface-container-high font-label-caps text-[10px] text-secondary font-semibold uppercase tracking-widest mb-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1.5"></span> MANAGER
+          </div>
+          <div
+            class="font-headline-sm text-lg font-bold uppercase tracking-wide mb-1 group-hover:text-secondary transition-colors">
+            SHREYAS GORE</div>
+          <p class="font-body-sm text-xs text-on-surface-variant mb-3">“Turning plans into progress, together.”</p>
+          <div
+            class="w-full rounded-xl bg-surface-container-low/40 p-3 text-left border border-surface-container space-y-1">
+            <div class="font-telemetry-code text-[11px]"><span class="text-secondary font-semibold">Interests:</span>
+              Strategy, Organization, Building</div>
+            <div class="font-telemetry-code text-[11px]"><span class="text-secondary font-semibold">Skills:</span>
+              Planning, Team Coordination</div>
+            <div class="font-telemetry-code text-[11px] text-on-surface-variant italic"><span
+                class="text-secondary font-semibold not-italic">Fun Fact:</span> Good teams make ideas real!</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 7: INTERACTIVE FAQ -->
+    <section class="relative w-full bg-surface-container-low/60 py-16" id="faq">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-10">
+          <div
+            class="font-label-caps text-xs text-secondary font-semibold tracking-[0.2em] uppercase flex items-center justify-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> CLARITY &amp; TELEMETRY
+          </div>
+          <h2 class="font-headline-lg text-3xl font-bold uppercase tracking-tight text-on-surface mt-1">
+            FREQUENTLY ASKED QUESTIONS
+          </h2>
+        </div>
+        <div class="space-y-3" id="faq-accordion">
+          <div
+            class="rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container overflow-hidden transition-all duration-300 hover:border-secondary/40">
+            <button aria-expanded="false"
+              class="faq-btn w-full px-6 py-4 flex items-center justify-between text-left hover:bg-surface-container-low/50 transition-colors">
+              <span class="font-headline-sm text-base font-semibold">Who can join Sphere Community?</span>
+              <span
+                class="faq-icon material-symbols-outlined text-secondary transition-transform duration-300">expand_more</span>
+            </button>
+            <div class="faq-answer-container">
+              <div
+                class="px-6 pb-4 text-on-surface-variant font-body-sm text-sm border-t border-surface-container/60 pt-3 leading-relaxed">
+                Sphere is open to any ambitious student, self-taught builder, designer, or researcher passionate about
+                crafting real software. Whether you are in your freshman year or completing graduate studies, curiosity
+                and dedication are our primary admission criteria.
+              </div>
+            </div>
+          </div>
+          <div
+            class="rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container overflow-hidden transition-all duration-300 hover:border-secondary/40">
+            <button aria-expanded="false"
+              class="faq-btn w-full px-6 py-4 flex items-center justify-between text-left hover:bg-surface-container-low/50 transition-colors">
+              <span class="font-headline-sm text-base font-semibold">Do I need prior advanced coding experience?</span>
+              <span
+                class="faq-icon material-symbols-outlined text-secondary transition-transform duration-300">expand_more</span>
+            </button>
+            <div class="faq-answer-container">
+              <div
+                class="px-6 pb-4 text-on-surface-variant font-body-sm text-sm border-t border-surface-container/60 pt-3 leading-relaxed">
+                Not necessarily. We host dual-track programs: one for beginners aiming to master foundations rapidly
+                through sprint workshops, and an incubator track for experienced builders shipping production
+                architectures.
+              </div>
+            </div>
+          </div>
+          <div
+            class="rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container overflow-hidden transition-all duration-300 hover:border-secondary/40">
+            <button aria-expanded="false"
+              class="faq-btn w-full px-6 py-4 flex items-center justify-between text-left hover:bg-surface-container-low/50 transition-colors">
+              <span class="font-headline-sm text-base font-semibold">How are projects selected and funded?</span>
+              <span
+                class="faq-icon material-symbols-outlined text-secondary transition-transform duration-300">expand_more</span>
+            </button>
+            <div class="faq-answer-container">
+              <div
+                class="px-6 pb-4 text-on-surface-variant font-body-sm text-sm border-t border-surface-container/60 pt-3 leading-relaxed">
+                Internal squads propose ideas during community Pitch Nights. Accepted projects receive server
+                infrastructure credits (AWS/GCP), API credits, and dedicated architectural mentorship from industry
+                senior engineers.
+              </div>
+            </div>
+          </div>
+          <div
+            class="rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container overflow-hidden transition-all duration-300 hover:border-secondary/40">
+            <button aria-expanded="false"
+              class="faq-btn w-full px-6 py-4 flex items-center justify-between text-left hover:bg-surface-container-low/50 transition-colors">
+              <span class="font-headline-sm text-base font-semibold">How can companies partner with or sponsor
+                Sphere?</span>
+              <span
+                class="faq-icon material-symbols-outlined text-secondary transition-transform duration-300">expand_more</span>
+            </button>
+            <div class="faq-answer-container">
+              <div
+                class="px-6 pb-4 text-on-surface-variant font-body-sm text-sm border-t border-surface-container/60 pt-3 leading-relaxed">
+                Organizations can sponsor hackathons, host technical workshops, post project bounties, or gain
+                recruitment access to our pre-vetted constellation of top engineering talent. Contact us through our
+                partnership portal.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 8: WORKSPACE / PHYSICAL HUB -->
+    <section class="relative w-full bg-surface-container-low/60 py-16" id="workspace">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <div
+            class="font-label-caps text-xs text-secondary font-semibold tracking-[0.24em] uppercase flex items-center justify-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> PHYSICAL INFRASTRUCTURE &amp; HUBS
+          </div>
+          <h2 class="font-headline-lg text-3xl font-bold uppercase tracking-tight text-on-surface mt-1">SPHERE WORKSPACE
+          </h2>
+          <p class="font-body-sm text-xs text-on-surface-variant mt-1">The physical epicenter for deep-tech research,
+            high-throughput hackathons, and hardware-software co-engineering.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div
+            class="lg:col-span-7 rounded-3xl overflow-hidden shadow-xl border border-surface-container group relative">
+            <img alt="Sphere Dream Building HQ"
+              class="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg5EtFqdesM_k9uRXfOJDvg89DQ7nwP9XyRrkjA1bZN4BpZ3kVu91qOrAlaCIgf4D8-MOqjMRSuTEEMJAc2iAfyGHzBKQsVOoNdVNAovX_REjOMMWyhtqTJs79OhwBexym_tfMoNqenmOyOBoLVrj5M9NWxcvJ_7HLe8cLIfjakdJ5HLSSJmSVC4Bskxk1hWhZnubJgN3HqVthEgZx8raZ71z9DOV9fPvPce4rOQtGpE0LlP-LX4RkZI91YAYOeeeveg" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            <div
+              class="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md font-telemetry-code text-xs text-on-surface flex items-center gap-2 shadow">
+              <span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span> LOCATION // SECTOR 04 - TECH CORRIDOR
+            </div>
+            <div
+              class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white font-telemetry-code text-xs">
+              <span class="bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">STATUS: ACTIVE BUILDER HUB // CAPACITY
+                350+ SEATS</span>
+              <span class="bg-secondary px-3 py-1 rounded-full font-title-caps">24/7 BADGE ACCESS</span>
+            </div>
+          </div>
+          <div class="lg:col-span-5 space-y-4">
+            <div
+              class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex items-start gap-4 hover:border-secondary/30 transition-all">
+              <div
+                class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
+                <span class="material-symbols-outlined text-[22px]">precision_manufacturing</span>
+              </div>
+              <div>
+                <h4 class="font-headline-sm text-base font-bold text-on-surface">Rapid Prototyping Lab</h4>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">24/7 access to high-compute
+                  clusters, 3D printers, and edge hardware benches.</p>
+              </div>
+            </div>
+            <div
+              class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex items-start gap-4 hover:border-secondary/30 transition-all">
+              <div
+                class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
+                <span class="material-symbols-outlined text-[22px]">co_present</span>
+              </div>
+              <div>
+                <h4 class="font-headline-sm text-base font-bold text-on-surface">Collaborative Amphitheatre</h4>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">Dedicated space for keynote
+                  livestreams, founder pitch decks, and internal demo days.</p>
+              </div>
+            </div>
+            <div
+              class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex items-start gap-4 hover:border-secondary/30 transition-all">
+              <div
+                class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
+                <span class="material-symbols-outlined text-[22px]">workspaces</span>
+              </div>
+              <div>
+                <h4 class="font-headline-sm text-base font-bold text-on-surface">Open Hacker Commons</h4>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">Zero-distraction quiet
+                  pods, gigabit fiber mesh, and ergonomic pairing stations.</p>
+              </div>
+            </div>
+            <div class="pt-2 flex items-center gap-3">
+              <button
+                class="shimmer-btn px-6 py-2.5 rounded-full bg-secondary text-on-secondary font-title-caps text-xs uppercase tracking-wider hover:bg-secondary-container transition-all">
+                EXPLORE VIRTUAL CAMPUS TOUR
+              </button>
+              <button
+                class="px-6 py-2.5 rounded-full bg-surface-container text-on-surface font-title-caps text-xs uppercase tracking-wider hover:bg-surface-container-high transition-all border border-surface-container">
+                REQUEST DESK PASS
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 9: CALL TO ACTION -->
+    <section class="relative w-full py-20 bg-background text-center" id="join">
+      <div class="max-w-4xl mx-auto px-6">
+        <div
+          class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mx-auto mb-4 text-secondary">
+          <span class="material-symbols-outlined text-[28px]">rocket</span>
+        </div>
+        <h2 class="font-display-hero text-3xl sm:text-5xl font-bold uppercase tracking-tight text-on-surface mb-3">
+          READY TO BUILD THE FUTURE WITH US?
+        </h2>
+        <p class="font-body-lg text-base text-on-surface-variant max-w-xl mx-auto mb-8">
+          Join hundreds of high-caliber engineers and product builders shaping tomorrow's tech horizon. Applications for
+          our next cohort are currently open.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a class="shimmer-btn px-8 py-3.5 rounded-full bg-secondary-container text-on-secondary font-title-caps text-sm uppercase tracking-[0.18em] shadow-lg hover:scale-105 transition-all btn-pulse-glow"
+            href="#">
+            APPLY TO JOIN SPHERE
+          </a>
+          <a class="px-8 py-3.5 rounded-full bg-surface-container-lowest text-on-surface font-title-caps text-sm uppercase tracking-[0.18em] shadow-sm hover:bg-surface-container-high hover:scale-105 transition-all border border-surface-container"
+            href="#">
+            DISCORD NEXUS
+          </a>
+        </div>
+        <div class="mt-8 max-w-md mx-auto w-full">
+          <form
+            class="relative flex items-center rounded-full bg-surface-container-lowest p-1.5 shadow-md border border-surface-container hover:border-secondary/40 transition-all"
+            onsubmit="return false;">
+            <input
+              class="w-full bg-transparent px-5 py-2.5 text-sm text-on-surface focus:outline-none placeholder:text-on-surface-variant/60 font-body-md"
+              placeholder="Enter your student email..." type="email" />
+            <button
+              class="shimmer-btn shrink-0 rounded-full bg-[#081b3b] text-white px-6 py-2.5 font-title-caps text-xs tracking-[0.16em] uppercase font-semibold hover:bg-secondary transition-colors"
+              type="submit">SUBSCRIBE</button>
+          </form>
+          <p class="font-telemetry-code text-xs text-on-surface-variant mt-2 flex items-center justify-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+            <span>Zero spam • Bi-weekly telemetry dispatch &amp; open bounties</span>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="relative z-10 w-full bg-surface-container-lowest mt-space-2xl border-t border-surface-container-high/60">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter-lg mb-space-xl">
+        <div class="lg:col-span-2 flex flex-col gap-space-md">
+          <div class="flex items-center gap-3">
+            <img alt="SPHERE LOGO PFP.png"
+              class="h-8 w-8 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]"
+              src="assets/images/sphere-logo.png">
+            <span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight uppercase">SPHERE COMMUNITY</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+            Building the next generation of innovators. Synthesizing technology, talent, and collaboration for real-world impact.
+          </p>
+          <div
+            class="flex items-center gap-2 font-telemetry-code text-telemetry-code text-[#2563eb] bg-[#eff6ff] px-3 py-1.5 rounded-full w-fit mt-2">
+            <span class="material-symbols-outlined text-[14px]">satellite_alt</span>
+            <span class="tracking-widest font-bold">SYSTEMS: NOMINAL</span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-sm">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Platform</span>
+          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="projects.html">Projects</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="events.html">Events</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="domains.html">Domains</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-sm">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Legal</span>
+          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="privacy.html">Privacy Policy</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="terms.html">Terms of Service</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="brand.html">Brand Assets</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-sm">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Connect</span>
+          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="mailto:spherecclub@gmail.com">Contact Us</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://discord.gg/sphere" target="_blank">Join Discord</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://www.instagram.com/spherecclub/" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex flex-col md:flex-row items-center justify-between gap-space-md bg-[#f0f4ff] rounded-xl px-6 py-5 mt-8">
+        <p class="font-body-sm text-body-sm text-on-surface-variant m-0">&copy; 2026 Sphere Community. Engineered for the Future.</p>
+        <div class="flex items-center gap-2">
+          <span class="font-telemetry-code text-telemetry-code text-on-surface-variant text-[12px] tracking-widest">Sphere Orbital v2.0</span>
+          <span class="w-2 h-2 rounded-full bg-[#3b82f6]"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Floating Back to Top Button -->
+  <div
+    class="fixed bottom-8 right-8 z-50 transition-all duration-300 opacity-0 pointer-events-none transform translate-y-3"
+    id="back-to-top-container">
+    <button aria-label="Back to top"
+      class="relative w-12 h-12 rounded-full flex items-center justify-center bg-[#081b3b]/90 backdrop-blur-md border border-secondary-container/60 shadow-[0_0_18px_rgba(20,91,255,0.45)] hover:shadow-[0_0_24px_rgba(56,189,248,0.85)] hover:scale-110 active:scale-95 transition-all duration-300 group cursor-pointer"
+      id="back-to-top-btn" title="Back to top" type="button">
+      <svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none p-0.5" viewbox="0 0 48 48">
+        <circle cx="24" cy="24" fill="none" r="20" stroke="rgba(17,90,254,0.2)" stroke-width="2.5"></circle>
+        <circle class="transition-all duration-150" cx="24" cy="24" fill="none" id="scroll-progress-circle" r="20"
+          stroke="#38bdf8" stroke-dasharray="125.66" stroke-dashoffset="125.66" stroke-linecap="round"
+          stroke-width="2.5"></circle>
+      </svg>
+      <span
+        class="material-symbols-outlined text-white text-[22px] group-hover:-translate-y-0.5 group-hover:text-[#38bdf8] transition-all duration-300 drop-shadow-[0_0_6px_rgba(17,90,254,0.6)]">arrow_upward</span>
+    </button>
+  </div>
+
+
+  <script src="js/main.js"></script>
+
+  <!-- Firebase integration and UI scripts -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/index.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // FAQ accordion
+      const faqButtons = document.querySelectorAll('.faq-btn');
+      faqButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const container = btn.nextElementSibling;
+          const icon = btn.querySelector('.faq-icon');
+          const isExpanded = container.classList.contains('expanded');
+
+          document.querySelectorAll('.faq-answer-container').forEach(c => c.classList.remove('expanded'));
+          document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+          document.querySelectorAll('.faq-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+          if (!isExpanded) {
+            container.classList.add('expanded');
+            if (icon) icon.style.transform = 'rotate(180deg)';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // Back to top & scroll progress
+      const container = document.getElementById('back-to-top-container');
+      const btn = document.getElementById('back-to-top-btn');
+      const circle = document.getElementById('scroll-progress-circle');
+      const radius = 20;
+      const circumference = 2 * Math.PI * radius;
+
+      if (circle) {
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+      }
+
+      function handleScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+
+        if (circle) {
+          const offset = circumference - (progress * circumference);
+          circle.style.strokeDashoffset = offset;
+        }
+
+        if (container) {
+          if (scrollTop > 250) {
+            container.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+            container.classList.add('opacity-100', 'translate-y-0');
+          } else {
+            container.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+            container.classList.remove('opacity-100', 'translate-y-0');
+          }
+        }
+      }
+
+      if (btn) {
+        btn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+    });
+  </script>
+
+</body>
+
+</html>
