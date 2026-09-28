@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Sphere Community</title>
 
-  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/design-system.css?v=restore">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="js/tailwind-config.js"></script>
 
@@ -868,7 +868,7 @@
         </p>
       </div>
       <!-- Flagship Project Card -->
-      <div
+      <div id="home-flagship-container"
         class="group rounded-3xl bg-surface-container-lowest shadow-md border border-surface-container hover:shadow-xl hover:border-secondary/40 transition-all duration-300 overflow-hidden mb-6 grid grid-cols-1 lg:grid-cols-12 items-center">
         <div class="lg:col-span-7 p-8 space-y-4">
           <div
@@ -949,7 +949,7 @@
         </div>
       </div>
       <!-- 2 Sub Projects -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div id="home-subprojects-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
           class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col justify-between cursor-pointer">
           <div class="space-y-2">
@@ -1039,7 +1039,7 @@
               class="material-symbols-outlined text-[16px] group-hover:translate-x-1.5 transition-transform">arrow_forward</span>
           </a>
         </div>
-        <div class="space-y-4">
+        <div id="home-events-container" class="space-y-4">
           <!-- Event 1 -->
           <div
             class="card-hover-interactive group p-6 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex flex-col lg:flex-row lg:items-center justify-between gap-6 cursor-pointer">
@@ -1167,7 +1167,7 @@
           dedicated to creating real impact.</p>
       </div>
       <!-- Founders Row -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+      <div id="home-founders-container" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
         <!-- Anish Mogam -->
         <div
           class="leadership-tilt-card group relative rounded-3xl bg-surface-container-lowest shadow-xl border border-secondary/20 p-6 flex flex-col items-center text-center overflow-hidden cursor-pointer">
@@ -1332,7 +1332,7 @@
         </div>
       </div>
       <!-- Management Tier (#team) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="team">
+      <div id="home-leads-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Mihir Mendake -->
         <div
           class="card-hover-interactive group rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container p-6 flex flex-col items-center text-center cursor-pointer">
@@ -1414,7 +1414,89 @@
         </div>
       </div>
     </section>
-    <!-- SECTION 7: INTERACTIVE FAQ -->
+    <!-- SECTION 7: SPHERE WORKSPACE & HUBS -->
+    <section class="relative w-full bg-surface-container-low/60 py-16" id="workspace">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <div id="home-ws-category"
+            class="font-label-caps text-xs text-secondary font-semibold tracking-[0.24em] uppercase flex items-center justify-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> <span>DIGITAL ECOSYSTEM &amp; PLATFORMS</span>
+          </div>
+          <h2 id="home-ws-title" class="font-headline-lg text-3xl font-bold uppercase tracking-tight text-on-surface mt-1">
+            SPHERE DIGITAL WORKSPACE
+          </h2>
+          <p id="home-ws-desc" class="font-body-sm text-xs text-on-surface-variant mt-1">
+            The 24/7 virtual engineering campus for distributed pair programming, open-source sprints, and asynchronous collaboration.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div
+            class="lg:col-span-7 rounded-3xl overflow-hidden shadow-xl border border-surface-container group relative">
+            <img id="home-ws-img" alt="Sphere Building Hub"
+              class="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg5EtFqdesM_k9uRXfOJDvg89DQ7nwP9XyRrkjA1bZN4BpZ3kVu91qOrAlaCIgf4D8-MOqjMRSuTEEMJAc2iAfyGHzBKQsVOoNdVNAovX_REjOMMWyhtqTJs79OhwBexym_tfMoNqenmOyOBoLVrj5M9NWxcvJ_7HLe8cLIfjakdJ5HLSSJmSVC4Bskxk1hWhZnubJgN3HqVthEgZx8raZ71z9DOV9fPvPce4rOQtGpE0LlP-LX4RkZI91YAYOeeeveg" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            <div
+              class="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md font-telemetry-code text-xs text-on-surface flex items-center gap-2 shadow">
+              <span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span> <span id="home-ws-badge-top">PLATFORMS // DISCORD &amp; GITHUB MONOREPO</span>
+            </div>
+            <div
+              class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white font-telemetry-code text-xs">
+              <span id="home-ws-badge-bottom-left" class="bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">STATUS: ONLINE BUILDER MESH // 24/7 CHANNELS</span>
+              <span id="home-ws-badge-bottom-right" class="bg-secondary px-3 py-1 rounded-full font-title-caps">OPEN ACCESS</span>
+            </div>
+          </div>
+          <div class="lg:col-span-5 space-y-4">
+            <div id="home-ws-cards-container" class="space-y-4">
+              <div
+                class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex items-start gap-4 hover:border-secondary/30 transition-all">
+                <div
+                  class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
+                  <span class="material-symbols-outlined text-[22px]">forum</span>
+                </div>
+                <div>
+                  <h4 class="font-headline-sm text-base font-bold text-on-surface">Discord Virtual Campus &amp; Voice Lounges</h4>
+                  <p class="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">24/7 lofi coding channels, pair-programming rooms, and live bug-triage sessions with peer engineers.</p>
+                </div>
+              </div>
+              <div
+                class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex items-start gap-4 hover:border-secondary/30 transition-all">
+                <div
+                  class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
+                  <span class="material-symbols-outlined text-[22px]">terminal</span>
+                </div>
+                <div>
+                  <h4 class="font-headline-sm text-base font-bold text-on-surface">GitHub Monorepo &amp; Open Source Pipelines</h4>
+                  <p class="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">Shared organizational repositories, automated CI/CD checks, issue sprints, and public project showcases.</p>
+                </div>
+              </div>
+              <div
+                class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex items-start gap-4 hover:border-secondary/30 transition-all">
+                <div
+                  class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
+                  <span class="material-symbols-outlined text-[22px]">auto_stories</span>
+                </div>
+                <div>
+                  <h4 class="font-headline-sm text-base font-bold text-on-surface">Resource Vault &amp; Knowledge Base</h4>
+                  <p class="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">Curated system design guides, interview cheat-sheets, roadmap trackers, and collegiate project templates.</p>
+                </div>
+              </div>
+            </div>
+            <div id="home-ws-buttons-container" class="pt-2 flex flex-wrap items-center gap-3">
+              <a href="#discord" data-discord-soon="true"
+                class="shimmer-btn discord-soon-btn px-6 py-2.5 rounded-full bg-secondary text-on-secondary font-title-caps text-xs uppercase tracking-wider hover:bg-secondary-container transition-all">
+                JOIN DISCORD WORKSPACE
+              </a>
+              <a href="https://github.com/Sphere-Club/Sphere-Coding-Club" target="_blank" rel="noopener noreferrer"
+                class="px-6 py-2.5 rounded-full bg-surface-container text-on-surface font-title-caps text-xs uppercase tracking-wider hover:bg-surface-container-high transition-all border border-surface-container">
+                EXPLORE GITHUB ORG
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECTION 8: INTERACTIVE FAQ -->
     <section class="relative w-full bg-surface-container-low/60 py-16" id="faq">
       <div class="max-w-4xl mx-auto px-6">
         <div class="text-center mb-10">
@@ -1499,88 +1581,6 @@
         </div>
       </div>
     </section>
-    <!-- SECTION 8: WORKSPACE / PHYSICAL HUB -->
-    <section class="relative w-full bg-surface-container-low/60 py-16" id="workspace">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-2xl mx-auto mb-10">
-          <div
-            class="font-label-caps text-xs text-secondary font-semibold tracking-[0.24em] uppercase flex items-center justify-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span> PHYSICAL INFRASTRUCTURE &amp; HUBS
-          </div>
-          <h2 class="font-headline-lg text-3xl font-bold uppercase tracking-tight text-on-surface mt-1">SPHERE WORKSPACE
-          </h2>
-          <p class="font-body-sm text-xs text-on-surface-variant mt-1">The physical epicenter for deep-tech research,
-            high-throughput hackathons, and hardware-software co-engineering.</p>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div
-            class="lg:col-span-7 rounded-3xl overflow-hidden shadow-xl border border-surface-container group relative">
-            <img alt="Sphere Dream Building HQ"
-              class="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg5EtFqdesM_k9uRXfOJDvg89DQ7nwP9XyRrkjA1bZN4BpZ3kVu91qOrAlaCIgf4D8-MOqjMRSuTEEMJAc2iAfyGHzBKQsVOoNdVNAovX_REjOMMWyhtqTJs79OhwBexym_tfMoNqenmOyOBoLVrj5M9NWxcvJ_7HLe8cLIfjakdJ5HLSSJmSVC4Bskxk1hWhZnubJgN3HqVthEgZx8raZ71z9DOV9fPvPce4rOQtGpE0LlP-LX4RkZI91YAYOeeeveg" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div
-              class="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md font-telemetry-code text-xs text-on-surface flex items-center gap-2 shadow">
-              <span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span> LOCATION // SECTOR 04 - TECH CORRIDOR
-            </div>
-            <div
-              class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white font-telemetry-code text-xs">
-              <span class="bg-black/50 px-3 py-1 rounded-full backdrop-blur-sm">STATUS: ACTIVE BUILDER HUB // CAPACITY
-                350+ SEATS</span>
-              <span class="bg-secondary px-3 py-1 rounded-full font-title-caps">24/7 BADGE ACCESS</span>
-            </div>
-          </div>
-          <div class="lg:col-span-5 space-y-4">
-            <div
-              class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex items-start gap-4 hover:border-secondary/30 transition-all">
-              <div
-                class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
-                <span class="material-symbols-outlined text-[22px]">precision_manufacturing</span>
-              </div>
-              <div>
-                <h4 class="font-headline-sm text-base font-bold text-on-surface">Rapid Prototyping Lab</h4>
-                <p class="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">24/7 access to high-compute
-                  clusters, 3D printers, and edge hardware benches.</p>
-              </div>
-            </div>
-            <div
-              class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex items-start gap-4 hover:border-secondary/30 transition-all">
-              <div
-                class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
-                <span class="material-symbols-outlined text-[22px]">co_present</span>
-              </div>
-              <div>
-                <h4 class="font-headline-sm text-base font-bold text-on-surface">Collaborative Amphitheatre</h4>
-                <p class="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">Dedicated space for keynote
-                  livestreams, founder pitch decks, and internal demo days.</p>
-              </div>
-            </div>
-            <div
-              class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-surface-container flex items-start gap-4 hover:border-secondary/30 transition-all">
-              <div
-                class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0">
-                <span class="material-symbols-outlined text-[22px]">workspaces</span>
-              </div>
-              <div>
-                <h4 class="font-headline-sm text-base font-bold text-on-surface">Open Hacker Commons</h4>
-                <p class="font-body-sm text-xs text-on-surface-variant mt-1 leading-relaxed">Zero-distraction quiet
-                  pods, gigabit fiber mesh, and ergonomic pairing stations.</p>
-              </div>
-            </div>
-            <div class="pt-2 flex items-center gap-3">
-              <button
-                class="shimmer-btn px-6 py-2.5 rounded-full bg-secondary text-on-secondary font-title-caps text-xs uppercase tracking-wider hover:bg-secondary-container transition-all">
-                EXPLORE VIRTUAL CAMPUS TOUR
-              </button>
-              <button
-                class="px-6 py-2.5 rounded-full bg-surface-container text-on-surface font-title-caps text-xs uppercase tracking-wider hover:bg-surface-container-high transition-all border border-surface-container">
-                REQUEST DESK PASS
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
     <!-- SECTION 9: CALL TO ACTION -->
     <section class="relative w-full py-20 bg-background text-center" id="join">
       <div class="max-w-4xl mx-auto px-6">
@@ -1597,11 +1597,11 @@
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a class="shimmer-btn px-8 py-3.5 rounded-full bg-secondary-container text-on-secondary font-title-caps text-sm uppercase tracking-[0.18em] shadow-lg hover:scale-105 transition-all btn-pulse-glow"
-            href="#">
+            href="#join" data-form="google-join">
             APPLY TO JOIN SPHERE
           </a>
-          <a class="px-8 py-3.5 rounded-full bg-surface-container-lowest text-on-surface font-title-caps text-sm uppercase tracking-[0.18em] shadow-sm hover:bg-surface-container-high hover:scale-105 transition-all border border-surface-container"
-            href="#">
+          <a class="discord-soon-btn px-8 py-3.5 rounded-full bg-surface-container-lowest text-on-surface font-title-caps text-sm uppercase tracking-[0.18em] shadow-sm hover:bg-surface-container-high hover:scale-105 transition-all border border-surface-container cursor-pointer"
+            href="#discord" data-discord-soon="true">
             DISCORD NEXUS
           </a>
         </div>
@@ -1702,8 +1702,7 @@
 
   <!-- Firebase integration and UI scripts -->
   <script type="module" src="js/firebase-config.js"></script>
-  <script type="module" src="js/index.js"></script>
-  <script src="js/main.js"></script>
+  <script type="module" src="js/index.js?v=2"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       // FAQ accordion

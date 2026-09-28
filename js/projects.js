@@ -14,6 +14,18 @@ const escapeHTML = (str) => {
     );
 };
 
+function normalizeProjCategory(cat) {
+    if (!cat) return 'all';
+    const c = cat.toLowerCase().trim();
+    if (c === 'all') return 'all';
+    if (c.includes('distribut') || c.includes('web')) return 'distributed';
+    if (c.includes('ai') || c.includes('deep') || c.includes('learn') || c.includes('ml')) return 'ai';
+    if (c.includes('secur') || c.includes('cyber')) return 'cybersecurity';
+    if (c.includes('cloud') || c.includes('devops')) return 'cloud';
+    if (c.includes('spatial') || c.includes('ui') || c.includes('design') || c.includes('ux')) return 'spatial';
+    return c;
+}
+
 // Global filter function required by Stitch Events UI
 window.filterProjects = function(category, buttonEl) {
     // Update active tab buttons styling
@@ -25,14 +37,16 @@ window.filterProjects = function(category, buttonEl) {
     buttonEl.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
     buttonEl.classList.add('bg-primary', 'text-on-primary');
 
+    const target = normalizeProjCategory(category);
+
     // Filter cards
     const cards = document.querySelectorAll('.project-card');
     cards.forEach(card => {
-        if (category === 'all') {
+        if (target === 'all') {
             card.style.display = 'flex';
         } else {
-            const cardCategory = card.getAttribute('data-category');
-            if (cardCategory === category) {
+            const cardCategory = normalizeProjCategory(card.getAttribute('data-category'));
+            if (cardCategory === target) {
                 card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
@@ -67,37 +81,74 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         grid.innerHTML = '';
         
-        let isFirst = true;
-
+        const allProjects = [];
         snapshot.forEach(docSnap => {
-            const data = docSnap.data();
+            allProjects.push({ id: docSnap.id, ...docSnap.data() });
+        });
+
+        // Determine designated Flagship project (or default to the first one)
+        const flagshipIndex = allProjects.findIndex(p => p.isFlagship === true);
+        const flagship = flagshipIndex !== -1 ? allProjects.splice(flagshipIndex, 1)[0] : allProjects.shift();
+
+        if (flagship && flagshipContainer) {
+            const category = flagship.category ? flagship.category.toLowerCase() : 'all';
+            const techStackArray = flagship.techStack ? flagship.techStack.split(',').map(t => t.trim()) : [];
             
-            // Extract common logic
+            flagshipContainer.innerHTML = `
+                <div class="relative bg-surface-container-lowest rounded-2xl p-6 lg:p-10 shadow-xl overflow-hidden mb-space-2xl">
+                <div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <!-- Spotlight Details -->
+                <div class="lg:col-span-5 flex flex-col gap-space-md order-2 lg:order-1">
+                <div class="flex items-center gap-3">
+                <span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary font-label-caps text-label-caps tracking-widest uppercase shadow-sm">FLAGSHIP SPOTLIGHT</span>
+                <span class="font-telemetry-code text-telemetry-code text-on-surface-variant">NODE // ${category.toUpperCase()}</span>
+                </div>
+                <div class="flex flex-col gap-2">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">
+                    ${escapeHTML(flagship.title)}
+                </h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                    ${flagship.description || ''}
+                </p>
+                </div>
+                <!-- Architecture Spec Pills -->
+                <div class="flex flex-wrap items-center gap-2">
+                    ${techStackArray.map(tech => `<span class="font-label-caps text-label-caps px-2.5 py-1 rounded bg-surface-container text-on-surface-variant">${escapeHTML(tech)}</span>`).join('')}
+                </div>
+                <!-- Actions -->
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                ${flagship.demo ? `
+                <a class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-secondary-container text-on-secondary hover:bg-secondary font-headline-sm text-headline-sm transition-all shadow-md hover:shadow-lg" href="${flagship.demo}" target="_blank">
+                <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+                <span>Launch Live System</span>
+                </a>` : ''}
+                ${flagship.github ? `
+                <a class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container font-headline-sm text-headline-sm transition-colors" href="${flagship.github}" target="_blank">
+                <span class="material-symbols-outlined text-[18px]">terminal</span>
+                <span>Audit Repo</span>
+                </a>` : ''}
+                </div>
+                </div>
+                <!-- Spotlight Graphic -->
+                <div class="lg:col-span-7 flex flex-col gap-4 order-1 lg:order-2">
+                <div class="relative rounded-xl overflow-hidden bg-surface-container-highest shadow-xl aspect-video group flex items-center justify-center">
+                    ${flagship.image ? `<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" src="${flagship.image}" alt="${escapeHTML(flagship.title)}">` : `<span class="material-symbols-outlined text-[64px] text-on-surface-variant/20">code</span>`}
+                <div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-md px-3 py-2 rounded-lg shadow-md flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                <span class="font-telemetry-code text-telemetry-code text-on-surface">SYSTEM STATUS: OPTIMAL</span>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+            `;
+        }
+
+        // Render remaining projects into standard grid
+        allProjects.forEach(data => {
             const category = data.category ? data.category.toLowerCase() : 'all';
             const techStackArray = data.techStack ? data.techStack.split(',').map(t => t.trim()) : [];
-            
-            if (isFirst && flagshipContainer) {
-                isFirst = false;
-                
-                // Render Flagship Project
-                flagshipContainer.innerHTML = `
-                    <div class="relative bg-surface-container-lowest rounded-2xl p-6 lg:p-10 shadow-xl overflow-hidden mb-space-2xl">
-                    <div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                    <!-- Spotlight Details -->
-                    <div class="lg:col-span-5 flex flex-col gap-space-md order-2 lg:order-1">
-                    <div class="flex items-center gap-3">
-                    <span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary font-label-caps text-label-caps tracking-widest uppercase shadow-sm">FLAGSHIP SPOTLIGHT</span>
-                    <span class="font-telemetry-code text-telemetry-code text-on-surface-variant">NODE // ${category.toUpperCase()}</span>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                    <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">
-                        ${escapeHTML(data.title)}
-                    </h2>
-                    <p class="font-body-md text-body-md text-on-surface-variant">
-                        ${data.description || ''}
-                    </p>
-                    </div>
                     <!-- Architecture Spec Pills -->
                     <div class="flex flex-wrap items-center gap-2">
                         ${techStackArray.map(tech => `<span class="font-label-caps text-label-caps px-2.5 py-1 rounded bg-surface-container text-on-surface-variant">${tech}</span>`).join('')}

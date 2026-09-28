@@ -1,627 +1,1923 @@
 <!DOCTYPE html>
-
-<html class="dark scroll-smooth" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sphere Community</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Geist:wght@300..700&amp;family=JetBrains+Mono:wght@100..800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "error": "#ffb4ab",
-                      "primary-container": "#00cfff",
-                      "surface-tint": "#54d5ff",
-                      "secondary-fixed": "#7eff3e",
-                      "surface-variant": "#323539",
-                      "on-surface": "#e1e2e7",
-                      "on-error-container": "#ffdad6",
-                      "tertiary-fixed": "#e2e2e2",
-                      "inverse-on-surface": "#2e3134",
-                      "tertiary-container": "#bebfbf",
-                      "surface-dim": "#111417",
-                      "primary-fixed-dim": "#54d5ff",
-                      "on-primary-container": "#00546a",
-                      "secondary-container": "#58d900",
-                      "inverse-primary": "#006780",
-                      "on-secondary-fixed-variant": "#1d5200",
-                      "surface-bright": "#37393d",
-                      "surface-container": "#1d2023",
-                      "on-error": "#690005",
-                      "outline": "#869399",
-                      "surface-container-low": "#191c1f",
-                      "on-secondary": "#113800",
-                      "on-secondary-container": "#205900",
-                      "secondary": "#74f631",
-                      "primary-fixed": "#b8eaff",
-                      "background": "#111417",
-                      "primary": "#a1e4ff",
-                      "tertiary": "#dbdbdb",
-                      "surface-container-lowest": "#0c0e12",
-                      "on-tertiary-fixed": "#1a1c1c",
-                      "surface": "#111417",
-                      "on-primary": "#003544",
-                      "error-container": "#93000a",
-                      "on-tertiary": "#2f3131",
-                      "tertiary-fixed-dim": "#c6c6c6",
-                      "outline-variant": "#3c494e",
-                      "on-background": "#e1e2e7",
-                      "on-tertiary-container": "#4c4e4e",
-                      "surface-container-highest": "#323539",
-                      "on-primary-fixed": "#001f28",
-                      "on-surface-variant": "#bbc9cf",
-                      "secondary-fixed-dim": "#60e215",
-                      "on-secondary-fixed": "#072100",
-                      "surface-container-high": "#282a2e",
-                      "inverse-surface": "#e1e2e7",
-                      "on-tertiary-fixed-variant": "#454747",
-                      "on-primary-fixed-variant": "#004d61"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.25rem",
-                      "lg": "0.5rem",
-                      "xl": "0.75rem",
-                      "full": "9999px"
-              },
-              "spacing": {
-                      "gutter": "24px",
-                      "unit": "4px",
-                      "margin-mobile": "16px",
-                      "container-max": "1440px",
-                      "margin-desktop": "64px"
-              },
-              "fontFamily": {
-                      "body-md": [
-                              "Geist"
-                      ],
-                      "label-sm": [
-                              "JetBrains Mono"
-                      ],
-                      "label-md": [
-                              "JetBrains Mono"
-                      ],
-                      "body-lg": [
-                              "Geist"
-                      ],
-                      "headline-lg-mobile": [
-                              "Space Grotesk"
-                      ],
-                      "display-lg": [
-                              "Space Grotesk"
-                      ],
-                      "headline-lg": [
-                              "Space Grotesk"
-                      ],
-                      "headline-xl": [
-                              "Space Grotesk"
-                      ]
-              },
-              "fontSize": {
-                      "body-md": [
-                              "16px",
-                              {
-                                      "lineHeight": "1.6",
-                                      "fontWeight": "400"
-                              }
-                      ],
-                      "label-sm": [
-                              "12px",
-                              {
-                                      "lineHeight": "1.0",
-                                      "fontWeight": "500"
-                              }
-                      ],
-                      "label-md": [
-                              "14px",
-                              {
-                                      "lineHeight": "1.0",
-                                      "letterSpacing": "0.05em",
-                                      "fontWeight": "500"
-                              }
-                      ],
-                      "body-lg": [
-                              "18px",
-                              {
-                                      "lineHeight": "1.6",
-                                      "fontWeight": "400"
-                              }
-                      ],
-                      "headline-lg-mobile": [
-                              "28px",
-                              {
-                                      "lineHeight": "1.3",
-                                      "fontWeight": "600"
-                              }
-                      ],
-                      "display-lg": [
-                              "72px",
-                              {
-                                      "lineHeight": "1.1",
-                                      "letterSpacing": "-0.04em",
-                                      "fontWeight": "700"
-                              }
-                      ],
-                      "headline-lg": [
-                              "32px",
-                              {
-                                      "lineHeight": "1.3",
-                                      "fontWeight": "600"
-                              }
-                      ],
-                      "headline-xl": [
-                              "48px",
-                              {
-                                      "lineHeight": "1.2",
-                                      "letterSpacing": "-0.02em",
-                                      "fontWeight": "600"
-                              }
-                      ]
-              }
-            },
-          },
-        }
-    </script>
-<style>
-        body {
-            background-color: #000000;
-            color: #e1e2e7;
-            overflow-x: hidden;
-        }
-        
-        /* Glassmorphism Utilities */
-        .glass-panel {
-            background: rgba(5, 7, 10, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            border-right: 1px solid rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-        }
-
-        .glow-hover:hover {
-            box-shadow: 0 0 25px rgba(0, 207, 255, 0.2);
-            border-color: rgba(0, 207, 255, 0.5);
-        }
-
-        .text-glow {
-            text-shadow: 0 0 20px rgba(0, 207, 255, 0.4);
-        }
-
-        /* Forms */
-        .input-glass {
-            background: rgba(17, 20, 23, 0.6);
-            border-bottom: 1px solid #869399;
-            transition: all 0.3s ease;
-        }
-        .input-glass:focus {
-            border-bottom-color: #00cfff;
-            box-shadow: 0 4px 15px -3px rgba(0, 207, 255, 0.2);
-            outline: none;
-        }
-
-        /* Marquee */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 30s linear infinite;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Background Particle Noise */
-        .bg-noise {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-        /* Mobile Menu Overlay */
-        .mobile-menu-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 60;
-            background: rgba(5, 7, 10, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            padding: 100px 32px 40px;
-            transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .mobile-menu-overlay.active {
-            transform: translateX(0);
-        }
-        .mobile-menu-overlay a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 0;
-            font-size: 18px;
-            font-weight: 500;
-            color: #bbc9cf;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: color 0.2s, padding-left 0.2s;
-        }
-        .mobile-menu-overlay a:hover,
-        .mobile-menu-overlay a:active {
-            color: #00cfff;
-            padding-left: 8px;
-        }
-    </style>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Mission Control — Sphere Community Admin</title>
+  <link rel="stylesheet" href="css/design-system.css"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-config.js"></script>
 </head>
-<body class="font-body-md text-body-md antialiased relative selection:bg-primary-container selection:text-black">
-<!-- Global Background Shader -->
-<div class="fixed inset-0 z-[-2] w-full h-full pointer-events-none">
-<canvas id="bg-shader-canvas" style="display:block;width:100%;height:100%"></canvas>
-<script>
-(function() {
-  const canvas = document.getElementById('bg-shader-canvas');
+<body class="font-body-md text-body-md antialiased text-on-surface bg-background min-h-screen flex flex-col">
+  <!-- Page Atmosphere Blobs (Stitch Design) -->
+  <div class="page-atmosphere pointer-events-none">
+    <div class="atmosphere-blob atmosphere-blob-1"></div>
+    <div class="atmosphere-blob atmosphere-blob-2"></div>
+    <div class="atmosphere-blob atmosphere-blob-3"></div>
+  </div>
 
-  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
-  function syncSize() {
-    const w = canvas.clientWidth  || 1280;
-    const h = canvas.clientHeight || 720;
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width  = w;
-      canvas.height = h;
-    }
-  }
-  if (typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(syncSize).observe(canvas);
-  }
-  syncSize();
+  <!-- Header / Navigation -->
+  <header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(7,26,58,0.04)] border-b border-surface-container">
+    <div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a class="flex items-center gap-4" href="index.html">
+          <img alt="SPHERE LOGO" class="h-10 w-10 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]" src="assets/images/sphere-logo.png"/>
+          <div class="flex flex-col">
+            <span class="font-title-caps text-title-caps text-on-surface tracking-wider">SPHERE</span>
+            <span class="font-telemetry-code text-[10px] text-secondary tracking-widest uppercase font-semibold">Mission Control</span>
+          </div>
+        </a>
+      </div>
 
-  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-  if (!gl) return;
-  const vs = `attribute vec2 a_position;
-varying vec2 v_texCoord;
-void main() {
-  v_texCoord = a_position * 0.5 + 0.5;
-  gl_Position = vec4(a_position, 0.0, 1.0);
-}`;
-  const fs = `precision highp float;
-uniform float u_time;
-uniform vec2 u_resolution;
+      <!-- Desktop Nav Links -->
+      <nav class="hidden xl:flex items-center gap-space-md">
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="index.html">HOME</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="events.html">EVENTS</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="projects.html">PROJECTS</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="team.html">TEAM</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="leadership.html">LEADERSHIP</a>
+      </nav>
 
-float network(vec2 uv, float t) {
-    vec2 p = fract(uv * 10.0) - 0.5;
-    vec2 id = floor(uv * 10.0);
-    float n = fract(sin(dot(id, vec2(12.9898, 78.233))) * 43758.5453);
-    float d = length(p);
-    float m = smoothstep(0.3, 0.0, d) * smoothstep(0.0, 1.0, n);
-    return m * (0.5 + 0.5 * sin(t + n * 6.28));
-}
+      <!-- Right Header Actions (Auth pill or Back link) -->
+      <div class="flex items-center gap-3">
+        <div id="auth-status-pill" class="hidden items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container text-xs font-telemetry-code text-on-surface">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="admin-user-display" class="max-w-[140px] truncate font-medium">Admin</span>
+          <button id="logout-btn" class="ml-2 text-error hover:underline font-bold text-xs uppercase tracking-wider">Log Out</button>
+        </div>
+        <a class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-container-high hover:bg-surface-container text-on-surface font-label-caps text-xs transition-colors" href="index.html">
+          <span class="material-symbols-outlined text-[16px]">visibility</span>
+          <span>View Site</span>
+        </a>
+        <button id="mobile-menu-toggle" class="xl:hidden text-on-surface p-2" aria-label="Toggle mobile menu">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-void main() {
-    vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.y, u_resolution.x);
-    float t = u_time * 0.5;
-    
-    vec3 color = vec3(0.02, 0.03, 0.05); // Deep navy background
-    
-    float n = network(uv + t * 0.05, t);
-    vec3 cyan = vec3(0.0, 0.81, 1.0) * n * 0.4;
-    vec3 green = vec3(0.48, 1.0, 0.22) * network(uv * 1.5 - t * 0.03, t * 1.2) * 0.3;
-    
-    color += cyan + green;
-    
-    // Vignette
-    color *= 1.0 - length(uv) * 0.5;
-    
-    gl_FragColor = vec4(color, 1.0);
-}`;
-  function cs(type, src) {
-    const s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    return s;
-  }
-  const prog = gl.createProgram();
-  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
-  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
-  gl.linkProgram(prog);
-  gl.useProgram(prog);
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-  const pos = gl.getAttribLocation(prog, 'a_position');
-  gl.enableVertexAttribArray(pos);
-  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
-  const uTime = gl.getUniformLocation(prog, 'u_time');
-  const uRes = gl.getUniformLocation(prog, 'u_resolution');
-  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-60 bg-surface/95 backdrop-blur-xl flex flex-col p-8 transform translate-x-full transition-transform duration-300 xl:hidden">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface p-2" aria-label="Close menu">
+      <span class="material-symbols-outlined text-[32px]">close</span>
+    </button>
+    <nav class="flex flex-col gap-6 mt-16">
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="index.html">Home</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="events.html">Events</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="projects.html">Projects</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="team.html">Team</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="leadership.html">Leadership</a>
+    </nav>
+  </div>
 
-  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
-  window.addEventListener('mousemove', (event) => {
-    const rect = canvas.getBoundingClientRect();
-    if (rect.width && rect.height) {
-      const nx = (event.clientX - rect.left) / rect.width;
-      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
-      mouse.x = nx * canvas.width;
-      mouse.y = ny * canvas.height;
-    }
-  });
+  <!-- Main Content Area -->
+  <main class="relative z-10 w-full pt-28 pb-20 flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-  function render(t) {
-    if (typeof ResizeObserver === 'undefined') syncSize();
-    gl.viewport(0, 0, canvas.width, canvas.height);
-    if (uTime) gl.uniform1f(uTime, t * 0.001);
-    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
-    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(render);
-  }
-  render(0);
-})();
-</script>
-</div>
-<div class="fixed inset-0 z-[-1] bg-noise"></div>
-<!-- Top Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(0,207,255,0.15)] transition-all duration-300 ease-in-out">
-<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
-<!-- Brand -->
-<a class="flex items-center gap-3 group" href="index.html">
-<img alt="Sphere Community Logo" class="w-10 h-10 object-cover rounded-full shadow-[0_0_15px_rgba(0,207,255,0.3)] group-hover:shadow-[0_0_25px_rgba(0,207,255,0.6)] transition-all" src="assets/images/sphere-logo.png"/>
-<span class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary tracking-tighter">Sphere Community</span>
-</a>
-<!-- Desktop Nav Links -->
-<div class="hidden md:flex items-center gap-8 font-label-md text-label-md">
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="about.html">About</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="domains.html">Domains</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="projects.html">Projects</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="events.html">Events</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="leadership.html">Leadership</a>
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="team.html">Team</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="faq.html">FAQ</a>
-</div>
-<!-- Trailing Action -->
-<div class="hidden md:block">
-<a class="inline-flex items-center justify-center px-6 py-2 bg-primary-container text-black font-label-md text-label-md rounded hover:bg-primary transition-all duration-300 shadow-[0_0_15px_rgba(0,207,255,0.4)] hover:shadow-[0_0_25px_rgba(0,207,255,0.6)]" href="#join">
-                    Join Club
-                </a>
-</div>
-<!-- Mobile Menu Toggle -->
-<button id="mobile-menu-toggle" class="md:hidden text-primary p-2 -mr-2" aria-label="Toggle mobile menu">
-<span class="material-symbols-outlined text-3xl">menu</span>
-</button>
-</div>
-</nav>
-<!-- Mobile Menu Overlay -->
-<div id="mobile-menu-overlay" class="mobile-menu-overlay md:hidden">
-<button id="mobile-menu-close" class="absolute top-5 right-5 text-white/70 hover:text-primary transition-colors p-2" aria-label="Close menu">
-<span class="material-symbols-outlined text-3xl">close</span>
-</button>
-<nav class="flex flex-col gap-0 mt-4">
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="domains.html">Domains</a>
-<a href="projects.html">Projects</a>
-<a href="events.html">Events</a>
-<a href="leadership.html">Leadership</a>
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="team.html">Team</a>
-<a href="faq.html">FAQ</a>
-</nav>
-<div class="mt-auto pt-8">
-<a href="#join" class="inline-flex items-center justify-center w-full px-8 py-4 bg-primary-container text-black font-label-md text-label-md rounded hover:bg-primary transition-all duration-300 shadow-[0_0_20px_rgba(0,207,255,0.5)] font-bold text-base">Join Sphere</a>
-</div>
-</div>
-<main class="pt-24 md:pt-32 flex-1 flex flex-col min-h-[80vh] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-20 space-y-16">
-
-    <div class="text-center w-full max-w-4xl mx-auto space-y-6">
-        <h1 class="font-display-lg text-[40px] leading-[1.1] sm:text-[56px] md:text-display-lg text-white font-bold tracking-tighter text-glow">
-            Admin <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container to-secondary">Dashboard</span>
+    <!-- Page Header Banner -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/10 border border-secondary/20 text-secondary font-label-caps text-xs tracking-widest uppercase mb-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          <span>ADMINISTRATION PORTAL</span>
+        </div>
+        <h1 class="font-headline-lg text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+          Sphere Mission Control
         </h1>
-        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
-            Manage your events and content.
+        <p class="font-body-md text-sm text-on-surface-variant mt-1 max-w-2xl">
+          Create, update, and manage events, projects, community members, and homepage telemetry in real time via Firebase Firestore.
         </p>
+      </div>
+
+      <!-- Quick Telemetry Pills -->
+      <div id="quick-metrics-bar" class="hidden flex-wrap items-center gap-2">
+        <div class="px-3 py-1.5 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[18px]">event</span>
+          <span class="font-telemetry-code text-xs font-semibold text-on-surface"><span id="metric-events-count">0</span> Events</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[18px]">rocket_launch</span>
+          <span class="font-telemetry-code text-xs font-semibold text-on-surface"><span id="metric-projects-count">0</span> Projects</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[18px]">group</span>
+          <span class="font-telemetry-code text-xs font-semibold text-on-surface"><span id="metric-team-count">0</span> Roster</span>
+        </div>
+      </div>
     </div>
-    
-    <!-- Login Section -->
-    <div id="login-section" class="w-full max-w-md mx-auto space-y-8 glass-panel p-8 md:p-12 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-        <form id="login-form" class="space-y-6">
-            <div>
-                <label class="block text-white font-bold mb-2">Email</label>
-                <input type="email" id="admin-email" required class="w-full bg-black/50 border border-white/20 rounded p-3 text-white focus:border-primary focus:outline-none transition-colors" />
+
+    <!-- ========================================================
+         LOGIN SECTION (Shown when unauthenticated)
+         ======================================================== -->
+    <div id="login-section" class="w-full max-w-md mx-auto my-12">
+      <div class="bg-surface-container-lowest/90 backdrop-blur-xl border border-surface-container rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-secondary/10 blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-12 -left-12 w-36 h-36 rounded-full bg-sky-400/10 blur-2xl pointer-events-none"></div>
+
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 rounded-2xl bg-secondary-container/10 border border-secondary/20 flex items-center justify-center mx-auto mb-4 text-secondary shadow-sm">
+            <span class="material-symbols-outlined text-[32px]">lock</span>
+          </div>
+          <h2 class="font-headline-md text-2xl font-bold text-on-surface tracking-tight">Admin Authentication</h2>
+          <p class="font-body-sm text-xs text-on-surface-variant mt-1">Sign in with your authorized Sphere credentials.</p>
+        </div>
+
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase tracking-wider font-bold mb-1.5" for="admin-email">Admin Email</label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">mail</span>
+              <input id="admin-email" type="email" required placeholder="admin@sphere.club"
+                class="w-full pl-11 pr-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all" />
             </div>
-            <div>
-                <label class="block text-white font-bold mb-2">Password</label>
-                <input type="password" id="admin-password" required class="w-full bg-black/50 border border-white/20 rounded p-3 text-white focus:border-primary focus:outline-none transition-colors" />
+          </div>
+
+          <div>
+            <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase tracking-wider font-bold mb-1.5" for="admin-password">Password</label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">key</span>
+              <input id="admin-password" type="password" required placeholder="••••••••••••"
+                class="w-full pl-11 pr-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all" />
             </div>
-            <button type="submit" class="w-full py-3 bg-primary text-black font-bold rounded hover:bg-primary/90 transition-colors">Login</button>
-            <p id="login-error" class="text-error text-sm text-center hidden"></p>
+          </div>
+
+          <div id="login-error" class="hidden p-3 rounded-xl bg-error/10 border border-error/20 text-error font-body-sm text-xs leading-relaxed"></div>
+
+          <button id="login-submit-btn" type="submit"
+            class="w-full mt-2 py-3 px-6 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold transition-all shadow-[0_0_20px_rgba(17,90,254,0.25)] hover:shadow-[0_0_25px_rgba(17,90,254,0.45)] flex items-center justify-center gap-2">
+            <span>SIGN IN TO DASHBOARD</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </button>
         </form>
+      </div>
     </div>
 
-    <!-- Dashboard Section -->
-    
-    <!-- Dashboard Section -->
-    <div id="dashboard-section" class="w-full max-w-6xl mx-auto space-y-8 hidden">
-        <div class="flex justify-between items-center glass-panel p-6 rounded-xl shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-            <h2 class="text-2xl font-bold text-white text-glow">Admin Dashboard</h2>
-            <button id="logout-btn" class="px-4 py-2 bg-white/10 text-white rounded hover:bg-white/20 transition-colors">Logout</button>
+    <!-- ========================================================
+         DASHBOARD SECTION (Shown when authenticated)
+         ======================================================== -->
+    <div id="dashboard-section" class="w-full hidden space-y-6">
+
+      <!-- Navigation Tabs Bar -->
+      <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-2 shadow-sm flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <button class="tab-btn active px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all bg-secondary-container text-on-secondary-container shadow-sm" data-target="tab-events">
+            <span class="material-symbols-outlined text-[18px]">event</span>
+            <span>Events</span>
+          </button>
+          <button class="tab-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-target="tab-projects">
+            <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+            <span>Projects</span>
+          </button>
+          <button class="tab-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-target="tab-team">
+            <span class="material-symbols-outlined text-[18px]">group</span>
+            <span>Team Roster</span>
+          </button>
+          <button class="tab-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-target="tab-showcase">
+            <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+            <span>Home Showcase</span>
+          </button>
+          <button class="tab-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-target="tab-home">
+            <span class="material-symbols-outlined text-[18px]">speed</span>
+            <span>Home Telemetry</span>
+          </button>
         </div>
 
-        <!-- Tabs -->
-        <div class="flex flex-wrap gap-2 glass-panel p-2 rounded-xl" id="admin-tabs">
-            <button class="tab-btn active px-6 py-3 rounded-lg text-sm font-bold transition-all bg-primary/20 text-primary border border-primary/50" data-target="tab-events">Events</button>
-            <button class="tab-btn px-6 py-3 rounded-lg text-sm font-bold transition-all bg-white/5 text-white/70 border border-transparent hover:bg-white/10 hover:text-white" data-target="tab-projects">Projects</button>
-            <button class="tab-btn px-6 py-3 rounded-lg text-sm font-bold transition-all bg-white/5 text-white/70 border border-transparent hover:bg-white/10 hover:text-white" data-target="tab-team">Team</button>
-            <button class="tab-btn px-6 py-3 rounded-lg text-sm font-bold transition-all bg-white/5 text-white/70 border border-transparent hover:bg-white/10 hover:text-white" data-target="tab-home">Home Settings</button>
+        <div class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-telemetry-code text-[11px] flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>SYNCED TO FIRESTORE</span>
         </div>
+      </div>
 
-        <!-- TAB: Events -->
-        <div id="tab-events" class="tab-content grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-1 glass-panel p-6 rounded-xl h-fit">
-                <h3 class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-4">Add Event</h3>
-                <form id="add-event-form" class="space-y-4">
-                    <div><input type="text" id="ev-title" required placeholder="Title" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div><input type="text" id="ev-date" required placeholder="Date (e.g. Oct 15, 2026)" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div><input type="text" id="ev-location" placeholder="Location" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div>
-                        <label class="block text-white text-sm mb-1">Event Image</label>
-                        <input type="file" id="ev-image-file" accept="image/*" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:font-bold file:bg-primary/20 file:text-primary hover:file:bg-primary/30 cursor-pointer" />
-                        <div id="ev-image-preview" class="mt-2 hidden"><img id="ev-preview-img" class="w-full h-24 object-cover rounded border border-white/10" /></div>
-                        <p class="text-white/30 text-xs mt-1">Or paste a URL:</p>
-                        <input type="url" id="ev-image" placeholder="Image URL (optional if file uploaded)" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm mt-1" />
+      <!-- ====================================================
+           TAB 1: EVENTS MANAGEMENT
+           ==================================================== -->
+      <div id="tab-events" class="tab-content">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Event Form (Add / Edit) -->
+          <div class="lg:col-span-5 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4 pb-3 border-b border-surface-container">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[22px]">calendar_month</span>
+                  <h3 id="event-form-title" class="font-headline-sm text-lg font-bold text-on-surface">Add New Event</h3>
+                </div>
+                <button id="ev-cancel-edit-btn" type="button" class="hidden text-xs text-on-surface-variant hover:text-error font-medium underline">
+                  Cancel Edit
+                </button>
+              </div>
+
+              <form id="add-event-form" class="space-y-4">
+                <input type="hidden" id="ev-edit-id" value=""/>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="ev-title">Event Title *</label>
+                  <input type="text" id="ev-title" required placeholder="e.g. SphereHacks 2026: National Hackathon"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="ev-date">Date / Schedule *</label>
+                    <input type="text" id="ev-date" required placeholder="e.g. Oct 24, 2026"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="ev-duration">Duration</label>
+                    <input type="text" id="ev-duration" placeholder="e.g. 36-Hour Sprint"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="ev-location">Location / Venue</label>
+                    <input type="text" id="ev-location" placeholder="e.g. Hybrid / Discord Stage"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="ev-category">Category</label>
+                    <select id="ev-category"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none">
+                      <option value="hackathons">Hackathon</option>
+                      <option value="workshops">Workshop</option>
+                      <option value="meetups">Community Meetup</option>
+                      <option value="demodays">Demo Day / Pitch</option>
+                      <option value="all">General Event</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="ev-status">Status</label>
+                    <select id="ev-status"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none">
+                      <option value="upcoming">Upcoming (Registration Open)</option>
+                      <option value="done">Completed / Archived</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="ev-link">Registration / Link</label>
+                    <input type="text" id="ev-link" placeholder="https://... or #join"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="ev-desc">Description</label>
+                  <textarea id="ev-desc" rows="3" placeholder="Overview of speakers, bounties, and topics covered..."
+                    class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none"></textarea>
+                </div>
+
+                <!-- Image Upload & Preview -->
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Banner Image</label>
+                  <div class="space-y-2">
+                    <input type="file" id="ev-image-file" accept="image/*"
+                      class="w-full text-xs text-on-surface-variant file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-secondary-container/15 file:text-secondary hover:file:bg-secondary-container/25 cursor-pointer" />
+                    <input type="url" id="ev-image" placeholder="Or paste image URL (https://...)"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary outline-none" />
+                    <div id="ev-image-preview" class="hidden relative w-full h-32 rounded-xl overflow-hidden border border-surface-container mt-2">
+                      <img id="ev-preview-img" src="" alt="Preview" class="w-full h-full object-cover"/>
                     </div>
-                    <div><input type="url" id="ev-link" placeholder="Registration Link" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div><select id="ev-status" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm"><option value="upcoming">Upcoming</option><option value="done">Done</option></select></div>
-                    <button type="submit" class="w-full py-2 bg-secondary text-black font-bold rounded mt-4 text-sm hover:bg-secondary/90 transition-colors">Add Event</button>
-                </form>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 pt-2">
+                  <input type="checkbox" id="ev-featured-home" class="rounded text-secondary focus:ring-secondary border-outline-variant" checked/>
+                  <label for="ev-featured-home" class="text-xs font-body-sm text-on-surface font-medium cursor-pointer">
+                    Feature on Homepage Events section
+                  </label>
+                </div>
+
+                <button id="ev-submit-btn" type="submit"
+                  class="w-full mt-4 py-3 px-6 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold transition-all shadow-[0_0_15px_rgba(17,90,254,0.25)] flex items-center justify-center gap-2">
+                  <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                  <span>Save Event</span>
+                </button>
+              </form>
             </div>
-            <div class="lg:col-span-2 glass-panel p-6 rounded-xl">
-                <h3 class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-4">Manage Events</h3>
-                <div id="events-list" class="space-y-4 text-white/50">Loading...</div>
+          </div>
+
+          <!-- Events Live List -->
+          <div class="lg:col-span-7 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-surface-container">
+              <div>
+                <h3 class="font-headline-sm text-lg font-bold text-on-surface">Published Events</h3>
+                <p class="font-body-sm text-xs text-on-surface-variant">Live in Firestore, dynamically rendered on Home & Events pages.</p>
+              </div>
+              <div class="relative min-w-[200px]">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">search</span>
+                <input type="text" id="events-search" placeholder="Search events..."
+                  class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-xs text-on-surface outline-none focus:border-secondary"/>
+              </div>
             </div>
+
+            <div id="events-list" class="space-y-3 flex-1 overflow-y-auto max-h-[650px] pr-1">
+              <p class="text-on-surface-variant/60 text-center py-12">Loading events from Firestore...</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ====================================================
+           TAB 2: PROJECTS MANAGEMENT
+           ==================================================== -->
+      <div id="tab-projects" class="tab-content hidden space-y-6">
+
+        <!-- Top Controls & No Projects Toggle Banner -->
+        <div class="p-5 rounded-2xl bg-surface-container-low border border-surface-container flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h4 class="font-headline-sm text-sm font-bold text-on-surface uppercase tracking-wider flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary text-[18px]">rocket_launch</span>
+              Homepage Proof of Work Showcase (Top 3 Projects)
+            </h4>
+            <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">The home page displays the top 3 projects from the list below (Hero Flagship + 2 Sub-Projects), or the clean empty state if toggled.</p>
+          </div>
+
+          <!-- "No Projects Right Now" Toggle Switch -->
+          <div class="flex items-center gap-3 bg-surface-container-lowest px-4 py-2.5 rounded-2xl border border-surface-container shadow-sm shrink-0">
+            <label class="relative inline-flex items-center cursor-pointer select-none">
+              <input type="checkbox" id="proj-no-projects" class="sr-only peer" />
+              <div class="w-10 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-surface-container after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+              <span class="ml-3 text-xs font-title-caps uppercase tracking-wider font-bold text-on-surface">No Projects Right Now</span>
+            </label>
+          </div>
         </div>
 
-        <!-- TAB: Projects -->
-        <div id="tab-projects" class="tab-content grid grid-cols-1 lg:grid-cols-3 gap-8 hidden">
-            <div class="lg:col-span-1 glass-panel p-6 rounded-xl h-fit">
-                <h3 class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-4">Add Project</h3>
-                <form id="add-project-form" class="space-y-4">
-                    <div><input type="text" id="proj-title" required placeholder="Title" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div><textarea id="proj-desc" required placeholder="Description" rows="3" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm"></textarea></div>
-                    <div><input type="text" id="proj-tech" required placeholder="Tech Stack (comma separated)" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div>
-                        <label class="block text-white text-sm mb-1">Project Image</label>
-                        <input type="file" id="proj-image-file" accept="image/*" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:font-bold file:bg-primary/20 file:text-primary hover:file:bg-primary/30 cursor-pointer" />
-                        <div id="proj-image-preview" class="mt-2 hidden"><img id="proj-preview-img" class="w-full h-24 object-cover rounded border border-white/10" /></div>
-                        <p class="text-white/30 text-xs mt-1">Or paste a URL:</p>
-                        <input type="url" id="proj-image" placeholder="Image URL (optional if file uploaded)" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm mt-1" />
+        <!-- Clean Empty State Configuration Panel (Collapsible) -->
+        <div id="proj-empty-panel" class="hidden p-6 rounded-2xl bg-surface-container-lowest border-2 border-secondary/30 shadow-sm space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+              <h5 class="font-headline-sm text-sm font-bold text-on-surface">Clean Homepage "No Projects" State Settings</h5>
+            </div>
+            <span class="text-xs font-telemetry-code text-secondary font-semibold">Active when "No Projects Right Now" is enabled</span>
+          </div>
+          <p class="font-body-sm text-xs text-on-surface-variant">When enabled or when no projects are listed, the homepage will render this neat and tidy aerospace card instead of blank space, maintaining the exact visual balance and elegance of the homepage.</p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Headline Title</label>
+              <input type="text" id="proj-empty-title" value="Production Systems Under Active Architecture"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-semibold outline-none focus:border-secondary" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Action Button Text</label>
+                <input type="text" id="proj-empty-btn-text" value="EXPLORE GITHUB"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+              </div>
+              <div>
+                <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Link URL</label>
+                <input type="text" id="proj-empty-btn-link" value="https://github.com/Sphere-Club/Sphere-Coding-Club"
+                  class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+              </div>
+            </div>
+          </div>
+          <div>
+            <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Announcement Description</label>
+            <textarea id="proj-empty-desc" rows="2"
+              class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary">Our student engineering squads are currently building the next generation of open-source systems, AI copilots, and distributed infrastructure. Check back soon or view our community repositories.</textarea>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <span id="proj-save-status-text" class="text-xs font-telemetry-code text-on-surface-variant">Changes saved to Firestore settings/homepage_showcase</span>
+            <button id="proj-save-settings-btn" type="button"
+              class="px-5 py-2 rounded-full bg-secondary text-on-secondary font-title-caps text-xs uppercase tracking-wider font-bold hover:bg-secondary-container transition-all flex items-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-[16px]">save</span>
+              <span>Save Projects Homepage State</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+          <!-- Project Form (Add / Edit) -->
+          <div class="lg:col-span-5 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4 pb-3 border-b border-surface-container">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[22px]">rocket_launch</span>
+                  <h3 id="project-form-title" class="font-headline-sm text-lg font-bold text-on-surface">Add New Project</h3>
+                </div>
+                <button id="proj-cancel-edit-btn" type="button" class="hidden text-xs text-on-surface-variant hover:text-error font-medium underline">
+                  Cancel Edit
+                </button>
+              </div>
+
+              <form id="add-project-form" class="space-y-4">
+                <input type="hidden" id="proj-edit-id" value=""/>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="proj-title">Project Title *</label>
+                  <input type="text" id="proj-title" required placeholder="e.g. OrbitalSync — Distributed Workspace"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="proj-category">Domain / Category</label>
+                    <select id="proj-category"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none">
+                      <option value="distributed">Distributed Systems</option>
+                      <option value="ai">AI & Deep Learning</option>
+                      <option value="cybersecurity">Cybersecurity</option>
+                      <option value="cloud">Cloud Infrastructure</option>
+                      <option value="spatial">UI/UX & Spatial</option>
+                      <option value="all">General Domain</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="proj-status">Deployment Status</label>
+                    <select id="proj-status"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none">
+                      <option value="ACTIVE">ACTIVE // PRODUCTION</option>
+                      <option value="FLAGSHIP">FLAGSHIP SPOTLIGHT</option>
+                      <option value="BETA">BETA TESTING</option>
+                      <option value="INCUBATING">INCUBATING</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="proj-tech">Tech Stack (comma separated)</label>
+                  <input type="text" id="proj-tech" placeholder="e.g. TypeScript, WebRTC, Go, Docker, React"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="proj-github">GitHub Repository</label>
+                    <input type="url" id="proj-github" placeholder="https://github.com/..."
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="proj-demo">Live Demo URL</label>
+                    <input type="url" id="proj-demo" placeholder="https://..."
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="proj-desc">Description</label>
+                  <textarea id="proj-desc" rows="3" placeholder="Architecture, features, throughput, and target audience..."
+                    class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none"></textarea>
+                </div>
+
+                <!-- Image Upload & Preview -->
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Architecture Preview / Screenshot</label>
+                  <div class="space-y-2">
+                    <input type="file" id="proj-image-file" accept="image/*"
+                      class="w-full text-xs text-on-surface-variant file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-secondary-container/15 file:text-secondary hover:file:bg-secondary-container/25 cursor-pointer" />
+                    <input type="url" id="proj-image" placeholder="Or paste image URL (https://...)"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary outline-none" />
+                    <div id="proj-image-preview" class="hidden relative w-full h-32 rounded-xl overflow-hidden border border-surface-container mt-2">
+                      <img id="proj-preview-img" src="" alt="Preview" class="w-full h-full object-cover"/>
                     </div>
-                    <div><input type="url" id="proj-github" placeholder="GitHub URL" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div><input type="url" id="proj-demo" placeholder="Live Demo URL" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <button type="submit" class="w-full py-2 bg-primary text-black font-bold rounded mt-4 text-sm hover:bg-primary/90 transition-colors">Add Project</button>
-                </form>
-            </div>
-            <div class="lg:col-span-2 glass-panel p-6 rounded-xl">
-                <h3 class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-4">Manage Projects</h3>
-                <div id="projects-list" class="space-y-4 text-white/50">Loading...</div>
-            </div>
-        </div>
+                  </div>
+                </div>
 
-        <!-- TAB: Team -->
-        <div id="tab-team" class="tab-content grid grid-cols-1 lg:grid-cols-3 gap-8 hidden">
-            <div class="lg:col-span-1 glass-panel p-6 rounded-xl h-fit">
-                <h3 id="team-form-title" class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-4">Add Team Member</h3>
-                <form id="add-team-form" class="space-y-4">
-                    <input type="hidden" id="tm-edit-id" value="" />
-                    <div><input type="text" id="tm-name" required placeholder="Name" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div><input type="text" id="tm-role" required placeholder="Role (e.g. Founder, Developer)" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div>
-                        <label class="block text-white text-sm mb-1">Profile Photo</label>
-                        <div class="relative">
-                            <input type="file" id="tm-image-file" accept="image/*" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-sm file:font-bold file:bg-primary/20 file:text-primary hover:file:bg-primary/30 cursor-pointer" />
-                        </div>
-                        <div id="tm-image-preview" class="mt-2 hidden">
-                            <img id="tm-preview-img" class="w-16 h-16 rounded-full object-cover border-2 border-primary/30" />
-                        </div>
-                        <p class="text-white/30 text-xs mt-1">Or paste a URL below:</p>
-                        <input type="text" id="tm-image" placeholder="Image URL (optional if file uploaded)" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm mt-1" />
+                <div class="flex flex-col gap-2 pt-2">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="proj-is-flagship" class="rounded text-secondary focus:ring-secondary border-outline-variant"/>
+                    <span class="text-xs font-body-sm text-on-surface font-semibold text-secondary">Set as Flagship Spotlight (Hero Project)</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="proj-featured-home" class="rounded text-secondary focus:ring-secondary border-outline-variant" checked/>
+                    <span class="text-xs font-body-sm text-on-surface font-medium">Show in Homepage Proof of Work section</span>
+                  </label>
+                </div>
+
+                <button id="proj-submit-btn" type="submit"
+                  class="w-full mt-4 py-3 px-6 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold transition-all shadow-[0_0_15px_rgba(17,90,254,0.25)] flex items-center justify-center gap-2">
+                  <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                  <span>Save Project</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Projects Live List -->
+          <div class="lg:col-span-7 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-surface-container">
+              <div>
+                <h3 class="font-headline-sm text-lg font-bold text-on-surface">Registered Systems</h3>
+                <p class="font-body-sm text-xs text-on-surface-variant">Live in Firestore, dynamically rendered on Home & Projects pages.</p>
+              </div>
+              <div class="relative min-w-[200px]">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">search</span>
+                <input type="text" id="projects-search" placeholder="Search projects..."
+                  class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-xs text-on-surface outline-none focus:border-secondary"/>
+              </div>
+            </div>
+
+            <div id="projects-list" class="space-y-3 flex-1 overflow-y-auto max-h-[650px] pr-1">
+              <p class="text-on-surface-variant/60 text-center py-12">Loading projects from Firestore...</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ====================================================
+           TAB 3: TEAM & LEADERSHIP ROSTER MANAGEMENT
+           ==================================================== -->
+      <div id="tab-team" class="tab-content hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+          <!-- Member Form (Add / Edit) -->
+          <div class="lg:col-span-5 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4 pb-3 border-b border-surface-container">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[22px]">badge</span>
+                  <h3 id="team-form-title" class="font-headline-sm text-lg font-bold text-on-surface">Add Team Member</h3>
+                </div>
+                <button id="tm-cancel-edit-btn" type="button" class="hidden text-xs text-on-surface-variant hover:text-error font-medium underline">
+                  Cancel Edit
+                </button>
+              </div>
+
+              <form id="add-team-form" class="space-y-4">
+                <input type="hidden" id="tm-edit-id" value=""/>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="tm-name">Full Name *</label>
+                    <input type="text" id="tm-name" required placeholder="e.g. Anish Mogam"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="tm-role">Role / Designation *</label>
+                    <input type="text" id="tm-role" required placeholder="e.g. Founder, Core Lead, AI Engineer"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="tm-category">Roster Category</label>
+                    <select id="tm-category"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none">
+                      <option value="leadership">Leadership Constellation (Founders / Core)</option>
+                      <option value="core">Core Management Tier</option>
+                      <option value="lead">Domain Lead / Technical Specialist</option>
+                      <option value="builder">Community Builder</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="tm-order">
+                      Display Priority / Order <span class="text-[10px] lowercase text-secondary font-normal font-telemetry-code">(#1 appears first)</span>
+                    </label>
+                    <input type="number" id="tm-order" min="1" placeholder="1, 2, 3..." value="10"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none font-telemetry-code font-semibold" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="tm-linkedin">LinkedIn Profile URL</label>
+                    <input type="url" id="tm-linkedin" placeholder="https://linkedin.com/in/..."
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="tm-github">GitHub Profile URL</label>
+                    <input type="url" id="tm-github" placeholder="https://github.com/..."
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="tm-skills">Technical Skills (comma separated)</label>
+                  <input type="text" id="tm-skills" placeholder="e.g. Distributed Systems, Rust, Next.js, Cloud"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="tm-quote">Quote / Personal Bio</label>
+                  <input type="text" id="tm-quote" placeholder="e.g. Building a brighter tomorrow, one line at a time."
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                </div>
+
+                <!-- Photo Upload & Preview -->
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Profile Photo</label>
+                  <div class="space-y-2">
+                    <input type="file" id="tm-image-file" accept="image/*"
+                      class="w-full text-xs text-on-surface-variant file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-secondary-container/15 file:text-secondary hover:file:bg-secondary-container/25 cursor-pointer" />
+                    <input type="text" id="tm-image" placeholder="Or image filename / URL (e.g. anish.jpg or https://...)"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary outline-none" />
+                    <div id="tm-image-preview" class="hidden relative w-24 h-24 rounded-full overflow-hidden border-2 border-secondary shadow-md mt-2 mx-auto">
+                      <img id="tm-preview-img" src="" alt="Preview" class="w-full h-full object-cover"/>
                     </div>
-                    <div><input type="url" id="tm-linkedin" placeholder="LinkedIn URL" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <div><input type="url" id="tm-github" placeholder="GitHub URL" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" /></div>
-                    <button type="submit" id="tm-submit-btn" class="w-full py-2 bg-secondary text-black font-bold rounded mt-4 text-sm hover:bg-secondary/90 transition-colors">Add Member</button>
-                    <button type="button" id="tm-cancel-edit-btn" class="w-full py-2 bg-white/10 text-white font-bold rounded text-sm hover:bg-white/20 transition-colors hidden">Cancel Edit</button>
-                </form>
-            </div>
-            <div class="lg:col-span-2 glass-panel p-6 rounded-xl">
-                <h3 class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-4">Manage Team</h3>
-                <div id="team-list" class="space-y-4 text-white/50">Loading...</div>
-            </div>
-        </div>
+                  </div>
+                </div>
 
-        <!-- TAB: Home Settings -->
-        <div id="tab-home" class="tab-content glass-panel p-6 rounded-xl hidden">
-            <h3 class="text-lg font-bold text-white mb-6 border-b border-white/10 pb-4">Update Home Page Scanner Details</h3>
-            <form id="home-settings-form" class="max-w-xl mx-auto space-y-4">
-                <div>
-                    <label class="block text-white text-sm mb-1">Hackathon Status Line</label>
-                    <input type="text" id="hs-hackathon" required class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" />
+                <div class="flex items-center gap-2 pt-2">
+                  <input type="checkbox" id="tm-featured-home" class="rounded text-secondary focus:ring-secondary border-outline-variant" checked/>
+                  <label for="tm-featured-home" class="text-xs font-body-sm text-on-surface font-medium cursor-pointer">
+                    Show in Leadership Constellation on Home & Leadership pages
+                  </label>
                 </div>
-                <div>
-                    <label class="block text-white text-sm mb-1">Active Projects Count</label>
-                    <input type="number" id="hs-projects" required class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" />
+
+                <button id="tm-submit-btn" type="submit"
+                  class="w-full mt-4 py-3 px-6 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold transition-all shadow-[0_0_15px_rgba(17,90,254,0.25)] flex items-center justify-center gap-2">
+                  <span class="material-symbols-outlined text-[18px]">person_add</span>
+                  <span>Save Member</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Members Live List -->
+          <div class="lg:col-span-7 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-surface-container">
+              <div>
+                <h3 class="font-headline-sm text-lg font-bold text-on-surface">Community Roster</h3>
+                <p class="font-body-sm text-xs text-on-surface-variant">Active members across Team, Leadership, and Home pages.</p>
+              </div>
+              <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                <button id="repair-roster-btn" type="button" class="px-3 py-1.5 rounded-lg bg-secondary-container/15 hover:bg-secondary-container/25 text-secondary text-xs font-title-caps font-semibold flex items-center gap-1.5 transition-all border border-secondary/30 shrink-0" title="Synchronize all 10 members into Firestore with clean 1..10 sequential priorities">
+                  <span class="material-symbols-outlined text-[16px]">auto_fix_high</span>
+                  <span>Sync 1..10 Defaults</span>
+                </button>
+                <div class="relative min-w-[160px] w-full">
+                  <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">search</span>
+                  <input type="text" id="team-search" placeholder="Search members..."
+                    class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-xs text-on-surface outline-none focus:border-secondary"/>
                 </div>
-                <div>
-                    <label class="block text-white text-sm mb-1">Members Online Count</label>
-                    <input type="number" id="hs-members" required class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" />
-                </div>
-                <div>
-                    <label class="block text-white text-sm mb-1">Meetup Info (e.g. "Meetup: Fri 5PM, Lab 3")</label>
-                    <input type="text" id="hs-meetup" class="w-full bg-black/30 border border-white/10 rounded p-2 text-white text-sm" />
-                </div>
-                <button type="submit" class="w-full py-3 bg-primary text-black font-bold rounded mt-6 hover:bg-primary/90 transition-colors">Save Settings</button>
-                <p id="hs-success" class="text-secondary text-center text-sm hidden mt-2">Saved successfully!</p>
-            </form>
+              </div>
+            </div>
+
+            <div id="team-list" class="space-y-3 flex-1 overflow-y-auto max-h-[650px] pr-1">
+              <p class="text-on-surface-variant/60 text-center py-12">Loading roster from Firestore...</p>
+            </div>
+          </div>
+
         </div>
+      </div>
+
+      <!-- ====================================================
+           TAB 4: HOMEPAGE SHOWCASE MANAGEMENT (Featured Events & Constellation)
+           ==================================================== -->
+      <div id="tab-showcase" class="tab-content hidden">
+        <div class="space-y-6">
+
+          <!-- Header & Action Bar -->
+          <div class="bg-surface-container-lowest border border-surface-container rounded-3xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-secondary-container/10 flex items-center justify-center text-secondary shrink-0">
+                <span class="material-symbols-outlined text-[28px]">auto_awesome</span>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-headline-sm text-xl font-bold text-on-surface">Homepage Showcase Manager</h3>
+                  <span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary font-label-caps text-[10px] tracking-wider uppercase font-semibold">LANDING PAGE</span>
+                </div>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Customize the 3 featured events and 6 leadership constellation cards directly rendered on the main homepage.</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <a href="index.html#events" target="_blank"
+                class="px-3.5 py-2.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface font-title-caps text-xs uppercase font-semibold flex items-center gap-1.5 transition-all">
+                <span class="material-symbols-outlined text-[16px]">visibility</span>
+                <span>View Home</span>
+              </a>
+              <button id="sc-reset-defaults-btn" type="button"
+                class="px-3.5 py-2.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface font-title-caps text-xs uppercase font-semibold flex items-center gap-1.5 transition-all">
+                <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+                <span>Reset Defaults</span>
+              </button>
+              <button id="sc-save-btn" type="button"
+                class="px-6 py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(17,90,254,0.25)]">
+                <span class="material-symbols-outlined text-[18px]">save</span>
+                <span>Save Showcase</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Section Switcher Sub-tabs -->
+          <div class="flex items-center gap-2 border-b border-surface-container pb-2 flex-wrap">
+            <button type="button" class="sc-subtab-btn active px-4 py-2.5 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all bg-secondary-container text-on-secondary-container shadow-sm" data-sc-target="sc-section-events">
+              <span class="material-symbols-outlined text-[17px]">calendar_month</span>
+              <span>1. Featured Events (3 Cards)</span>
+            </button>
+            <button type="button" class="sc-subtab-btn px-4 py-2.5 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-sc-target="sc-section-founders">
+              <span class="material-symbols-outlined text-[17px]">stars</span>
+              <span>2. Founders Constellation (3 Cards)</span>
+            </button>
+            <button type="button" class="sc-subtab-btn px-4 py-2.5 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-sc-target="sc-section-leads">
+              <span class="material-symbols-outlined text-[17px]">groups</span>
+              <span>3. Core Management Leads (3 Cards)</span>
+            </button>
+            <button type="button" class="sc-subtab-btn px-4 py-2.5 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-sc-target="sc-section-projects">
+              <span class="material-symbols-outlined text-[17px]">rocket_launch</span>
+              <span>4. Featured Projects (Top 3 on Home)</span>
+            </button>
+            <button type="button" class="sc-subtab-btn px-4 py-2.5 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high" data-sc-target="sc-section-workspace">
+              <span class="material-symbols-outlined text-[17px]">hub</span>
+              <span>5. Workspace Mode (4 Presets)</span>
+            </button>
+          </div>
+
+          <!-- ==============================================
+               SUBSECTION 1: FEATURED EVENTS ("WHERE BUILDERS CONVERGE")
+               ============================================== -->
+          <div id="sc-section-events" class="sc-section space-y-6">
+            
+            <!-- Top Controls & No Events Toggle Banner -->
+            <div class="p-5 rounded-2xl bg-surface-container-low border border-surface-container flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h4 class="font-headline-sm text-sm font-bold text-on-surface uppercase tracking-wider flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">event_note</span>
+                  Homepage Events Showcase ("Where Builders Converge")
+                </h4>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Customize any mix of Hackathons, Workshops, and Demo Days across all 3 cards, or enable the clean empty state.</p>
+              </div>
+
+              <!-- "No Events Right Now" Toggle Switch -->
+              <div class="flex items-center gap-3 bg-surface-container-lowest px-4 py-2.5 rounded-2xl border border-surface-container shadow-sm shrink-0">
+                <label class="relative inline-flex items-center cursor-pointer select-none">
+                  <input type="checkbox" id="sc-ev-no-events" class="sr-only peer" />
+                  <div class="w-10 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-surface-container after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+                  <span class="ml-3 text-xs font-title-caps uppercase tracking-wider font-bold text-on-surface">No Events Right Now</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Clean Empty State Configuration Panel (Collapsible) -->
+            <div id="sc-ev-empty-panel" class="hidden p-6 rounded-2xl bg-surface-container-lowest border-2 border-secondary/30 shadow-sm space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+                  <h5 class="font-headline-sm text-sm font-bold text-on-surface">Clean Homepage "No Events" State Settings</h5>
+                </div>
+                <span class="text-xs font-telemetry-code text-secondary font-semibold">Active when "No Events Right Now" is enabled</span>
+              </div>
+              <p class="font-body-sm text-xs text-on-surface-variant">When enabled, the homepage will render this neat and tidy aerospace announcement card instead of blank space, maintaining the exact visual balance and cleanliness of the homepage.</p>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Headline Title</label>
+                  <input type="text" id="sc-ev-empty-title" value="No Live Gatherings Scheduled Right Now"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-semibold outline-none focus:border-secondary" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Action Button Text</label>
+                    <input type="text" id="sc-ev-empty-btn-text" value="JOIN DISCORD"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Link URL</label>
+                    <input type="text" id="sc-ev-empty-btn-link" value="#join"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Announcement Description</label>
+                <textarea id="sc-ev-empty-desc" rows="2"
+                  class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary">Our core leads are architecting the next cycle of collegiate hackathons, production workshops, and founder pitch sessions. Join our community Discord to be the first to receive invitations!</textarea>
+              </div>
+            </div>
+
+            <!-- Cards Container -->
+            <div id="sc-ev-cards-list" class="grid grid-cols-1 gap-6">
+
+              <!-- ================= EVENT CARD 1 ================= -->
+              <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-surface-container gap-2">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary font-telemetry-code text-[11px] font-bold">CARD 1</span>
+                    <span id="sc-ev-header-badge-0" class="px-2.5 py-0.5 rounded-full text-[10px] font-telemetry-code uppercase font-bold bg-secondary-container text-on-secondary">HACKATHON</span>
+                    <h5 id="sc-ev-header-title-0" class="font-headline-sm text-sm font-bold text-on-surface truncate max-w-xs sm:max-w-md">SphereHacks 2026: National Collegiate Hackathon</h5>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <button type="button" class="sc-ev-preset-btn text-[11px] text-secondary hover:underline font-semibold font-title-caps" data-index="0">
+                      ⚡ Apply Preset
+                    </button>
+                    <label class="inline-flex items-center cursor-pointer text-xs font-title-caps font-semibold text-on-surface-variant gap-1.5">
+                      <input type="checkbox" id="sc-ev-enabled-0" checked class="rounded border-outline-variant text-secondary focus:ring-secondary" />
+                      <span>Show on Home</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Event Type / Theme</label>
+                    <select id="sc-ev-category-0"
+                      class="sc-ev-category-select w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs font-semibold outline-none focus:border-secondary" data-index="0">
+                      <option value="hackathon">⚡ Hackathon (Electric Blue / Shimmer)</option>
+                      <option value="workshop">🛠️ Hands-on Workshop (Surface Contrast)</option>
+                      <option value="demoday">🚀 Pitch & Demo Day (Cyan Accent)</option>
+                      <option value="meetup">🌐 Community Meetup (Emerald Accent)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Month Badge</label>
+                    <input type="text" id="sc-ev-month-0" placeholder="OCT" maxlength="4"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm uppercase font-telemetry-code font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Day Badge</label>
+                    <input type="text" id="sc-ev-day-0" placeholder="24" maxlength="4"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-telemetry-code font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Style</label>
+                    <select id="sc-ev-btn-style-0"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary">
+                      <option value="shimmer">Electric Blue Shimmer (Primary)</option>
+                      <option value="surface">Aerospace Slate (Secondary)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Status Pill Text</label>
+                    <input type="text" id="sc-ev-badge-0" placeholder="REGISTRATION OPEN"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Duration / Tag</label>
+                    <input type="text" id="sc-ev-duration-0" placeholder="36-HOUR SPRINT"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Location / Venue</label>
+                    <input type="text" id="sc-ev-venue-0" placeholder="HYBRID / SF BAY & VIRTUAL"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Event Title</label>
+                  <input type="text" id="sc-ev-title-0" placeholder="SphereHacks 2026: National Collegiate Hackathon"
+                    class="sc-ev-title-input w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-semibold outline-none focus:border-secondary" data-index="0" />
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Description</label>
+                  <textarea id="sc-ev-desc-0" rows="2" placeholder="400+ developers, $10,000 in equity-free prize bounties..."
+                    class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Label</label>
+                    <input type="text" id="sc-ev-btn-text-0" placeholder="REGISTER FREE"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Link URL</label>
+                    <input type="text" id="sc-ev-btn-link-0" placeholder="#join or https://..."
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- ================= EVENT CARD 2 ================= -->
+              <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-surface-container gap-2">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface font-telemetry-code text-[11px] font-bold">CARD 2</span>
+                    <span id="sc-ev-header-badge-1" class="px-2.5 py-0.5 rounded-full text-[10px] font-telemetry-code uppercase font-bold bg-surface-container-high text-on-surface">WORKSHOP</span>
+                    <h5 id="sc-ev-header-title-1" class="font-headline-sm text-sm font-bold text-on-surface truncate max-w-xs sm:max-w-md">Zero to Production with Kubernetes & Cloud Native</h5>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <button type="button" class="sc-ev-preset-btn text-[11px] text-secondary hover:underline font-semibold font-title-caps" data-index="1">
+                      ⚡ Apply Preset
+                    </button>
+                    <label class="inline-flex items-center cursor-pointer text-xs font-title-caps font-semibold text-on-surface-variant gap-1.5">
+                      <input type="checkbox" id="sc-ev-enabled-1" checked class="rounded border-outline-variant text-secondary focus:ring-secondary" />
+                      <span>Show on Home</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Event Type / Theme</label>
+                    <select id="sc-ev-category-1"
+                      class="sc-ev-category-select w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs font-semibold outline-none focus:border-secondary" data-index="1">
+                      <option value="workshop">🛠️ Hands-on Workshop (Surface Contrast)</option>
+                      <option value="hackathon">⚡ Hackathon (Electric Blue / Shimmer)</option>
+                      <option value="demoday">🚀 Pitch & Demo Day (Cyan Accent)</option>
+                      <option value="meetup">🌐 Community Meetup (Emerald Accent)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Month Badge</label>
+                    <input type="text" id="sc-ev-month-1" placeholder="NOV" maxlength="4"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm uppercase font-telemetry-code font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Day Badge</label>
+                    <input type="text" id="sc-ev-day-1" placeholder="08" maxlength="4"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-telemetry-code font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Style</label>
+                    <select id="sc-ev-btn-style-1"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary">
+                      <option value="surface">Aerospace Slate (Secondary)</option>
+                      <option value="shimmer">Electric Blue Shimmer (Primary)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Status Pill Text</label>
+                    <input type="text" id="sc-ev-badge-1" placeholder="HANDS-ON WORKSHOP"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Duration / Tag</label>
+                    <input type="text" id="sc-ev-duration-1" placeholder="2.5 HOURS"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Location / Venue</label>
+                    <input type="text" id="sc-ev-venue-1" placeholder="DISCORD STAGE // 6PM EST"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Event Title</label>
+                  <input type="text" id="sc-ev-title-1" placeholder="Zero to Production with Kubernetes & Cloud Native"
+                    class="sc-ev-title-input w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-semibold outline-none focus:border-secondary" data-index="1" />
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Description</label>
+                  <textarea id="sc-ev-desc-1" rows="2" placeholder="Live interactive coding session configuring automated ingress controllers..."
+                    class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Label</label>
+                    <input type="text" id="sc-ev-btn-text-1" placeholder="RESERVE SEAT"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Link URL</label>
+                    <input type="text" id="sc-ev-btn-link-1" placeholder="#join or https://..."
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- ================= EVENT CARD 3 ================= -->
+              <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-surface-container gap-2">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="px-2.5 py-0.5 rounded-full bg-secondary-container/15 text-secondary font-telemetry-code text-[11px] font-bold">CARD 3</span>
+                    <span id="sc-ev-header-badge-2" class="px-2.5 py-0.5 rounded-full text-[10px] font-telemetry-code uppercase font-bold bg-secondary-container/15 text-secondary">DEMO DAY</span>
+                    <h5 id="sc-ev-header-title-2" class="font-headline-sm text-sm font-bold text-on-surface truncate max-w-xs sm:max-w-md">Sphere Demo Day & Founder Pitch Showcase</h5>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <button type="button" class="sc-ev-preset-btn text-[11px] text-secondary hover:underline font-semibold font-title-caps" data-index="2">
+                      ⚡ Apply Preset
+                    </button>
+                    <label class="inline-flex items-center cursor-pointer text-xs font-title-caps font-semibold text-on-surface-variant gap-1.5">
+                      <input type="checkbox" id="sc-ev-enabled-2" checked class="rounded border-outline-variant text-secondary focus:ring-secondary" />
+                      <span>Show on Home</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Event Type / Theme</label>
+                    <select id="sc-ev-category-2"
+                      class="sc-ev-category-select w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs font-semibold outline-none focus:border-secondary" data-index="2">
+                      <option value="demoday">🚀 Pitch & Demo Day (Cyan Accent)</option>
+                      <option value="hackathon">⚡ Hackathon (Electric Blue / Shimmer)</option>
+                      <option value="workshop">🛠️ Hands-on Workshop (Surface Contrast)</option>
+                      <option value="meetup">🌐 Community Meetup (Emerald Accent)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Month Badge</label>
+                    <input type="text" id="sc-ev-month-2" placeholder="DEC" maxlength="4"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm uppercase font-telemetry-code font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Day Badge</label>
+                    <input type="text" id="sc-ev-day-2" placeholder="02" maxlength="4"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-telemetry-code font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Style</label>
+                    <select id="sc-ev-btn-style-2"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary">
+                      <option value="surface">Aerospace Slate (Secondary)</option>
+                      <option value="shimmer">Electric Blue Shimmer (Primary)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Status Pill Text</label>
+                    <input type="text" id="sc-ev-badge-2" placeholder="PITCH & INCUBATOR"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Duration / Tag</label>
+                    <input type="text" id="sc-ev-duration-2" placeholder="DEMO DAY"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Location / Venue</label>
+                    <input type="text" id="sc-ev-venue-2" placeholder="MAIN AMPHITHEATRE & LIVE STREAM"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Event Title</label>
+                  <input type="text" id="sc-ev-title-2" placeholder="Sphere Demo Day & Founder Pitch Showcase"
+                    class="sc-ev-title-input w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-semibold outline-none focus:border-secondary" data-index="2" />
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Description</label>
+                  <textarea id="sc-ev-desc-2" rows="2" placeholder="Top 8 incubated student squads demonstrate production deployments..."
+                    class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Label</label>
+                    <input type="text" id="sc-ev-btn-text-2" placeholder="ATTEND DEMO"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Link URL</label>
+                    <input type="text" id="sc-ev-btn-link-2" placeholder="#join or https://..."
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ==============================================
+               SUBSECTION 2: FOUNDERS CONSTELLATION (TOP 3 ORBITING CARDS)
+               ============================================== -->
+          <div id="sc-section-founders" class="sc-section hidden space-y-6">
+            <div class="p-4 rounded-2xl bg-surface-container-low border border-surface-container flex items-center justify-between">
+              <div>
+                <h4 class="font-headline-sm text-sm font-bold text-on-surface uppercase tracking-wider flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">orbit</span>
+                  Founders Constellation Tier (Top 3 3D-Orbit Cards)
+                </h4>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Top row cards with rotating planetary orbital rings, quote box, and 3-column metric grids (Interests, Skills, Fun Fact).</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <!-- Founder 1 -->
+              <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+                    <span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary font-telemetry-code text-[11px] font-bold">FOUNDER #1</span>
+                    <span class="text-xs text-on-surface-variant font-telemetry-code">Left Orbit</span>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Full Name *</label>
+                    <input type="text" id="sc-f-name-0" placeholder="ANISH MOGAM"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Role Badge *</label>
+                      <input type="text" id="sc-f-role-0" placeholder="FOUNDER"
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                    </div>
+                    <div>
+                      <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">3D Orbit Sphere</label>
+                      <select id="sc-f-orb-0"
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary">
+                        <option value="globe-3d-deep">Deep Blue</option>
+                        <option value="globe-3d-pearl">Pearl Cyan</option>
+                        <option value="globe-3d-azure">Azure Glow</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Photo Image</label>
+                    <div class="flex items-center gap-3">
+                      <div class="w-12 h-12 rounded-full overflow-hidden border border-secondary shrink-0 bg-surface-container flex items-center justify-center">
+                        <img id="sc-f-preview-img-0" src="assets/images/anish.jpg" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='assets/images/sphere-logo.png'"/>
+                      </div>
+                      <div class="flex-1 space-y-1">
+                        <input type="file" id="sc-f-file-0" accept="image/*" class="text-xs text-on-surface-variant file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-surface-container file:text-on-surface hover:file:bg-surface-container-high cursor-pointer w-full" />
+                        <input type="text" id="sc-f-url-0" placeholder="or enter Image URL"
+                          class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Personal Quote</label>
+                    <input type="text" id="sc-f-quote-0" placeholder="Building a brighter tomorrow, together."
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs italic outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">
+                      Interests <span class="text-[10px] text-secondary font-normal">(separate lines for breaks)</span>
+                    </label>
+                    <textarea id="sc-f-interests-0" rows="2" placeholder="Technology&#10;Innovation&#10;Communities"
+                      class="w-full px-3 py-1.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code"></textarea>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">
+                      Skills <span class="text-[10px] text-secondary font-normal">(separate lines for breaks)</span>
+                    </label>
+                    <textarea id="sc-f-skills-0" rows="2" placeholder="Leadership&#10;Product Thinking&#10;Problem Solving"
+                      class="w-full px-3 py-1.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code"></textarea>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Fun Fact</label>
+                    <input type="text" id="sc-f-funfact-0" placeholder="Always curious about what's next!"
+                      class="w-full px-3 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Founder 2 -->
+              <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+                    <span class="px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary font-telemetry-code text-[11px] font-bold">FOUNDER #2</span>
+                    <span class="text-xs text-on-surface-variant font-telemetry-code">Center Orbit</span>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Full Name *</label>
+                    <input type="text" id="sc-f-name-1" placeholder="MADHURA LAKADE"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Role Badge *</label>
+                      <input type="text" id="sc-f-role-1" placeholder="CO-FOUNDER"
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                    </div>
+                    <div>
+                      <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">3D Orbit Sphere</label>
+                      <select id="sc-f-orb-1"
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary">
+                        <option value="globe-3d-pearl">Pearl Cyan</option>
+                        <option value="globe-3d-deep">Deep Blue</option>
+                        <option value="globe-3d-azure">Azure Glow</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Photo Image</label>
+                    <div class="flex items-center gap-3">
+                      <div class="w-12 h-12 rounded-full overflow-hidden border border-secondary shrink-0 bg-surface-container flex items-center justify-center">
+                        <img id="sc-f-preview-img-1" src="assets/images/madhura.jpg" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='assets/images/sphere-logo.png'"/>
+                      </div>
+                      <div class="flex-1 space-y-1">
+                        <input type="file" id="sc-f-file-1" accept="image/*" class="text-xs text-on-surface-variant file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-surface-container file:text-on-surface hover:file:bg-surface-container-high cursor-pointer w-full" />
+                        <input type="text" id="sc-f-url-1" placeholder="or enter Image URL"
+                          class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Personal Quote</label>
+                    <input type="text" id="sc-f-quote-1" placeholder="Turning ideas into impact, together."
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs italic outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">
+                      Interests <span class="text-[10px] text-secondary font-normal">(separate lines for breaks)</span>
+                    </label>
+                    <textarea id="sc-f-interests-1" rows="2" placeholder="Technology&#10;Product Design&#10;Communities"
+                      class="w-full px-3 py-1.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code"></textarea>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">
+                      Skills <span class="text-[10px] text-secondary font-normal">(separate lines for breaks)</span>
+                    </label>
+                    <textarea id="sc-f-skills-1" rows="2" placeholder="Strategic Thinking&#10;Team Building&#10;Problem Solving"
+                      class="w-full px-3 py-1.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code"></textarea>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Fun Fact</label>
+                    <input type="text" id="sc-f-funfact-1" placeholder="Always excited about real impact!"
+                      class="w-full px-3 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Founder 3 -->
+              <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+                    <span class="px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary font-telemetry-code text-[11px] font-bold">FOUNDER #3</span>
+                    <span class="text-xs text-on-surface-variant font-telemetry-code">Right Orbit</span>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Full Name *</label>
+                    <input type="text" id="sc-f-name-2" placeholder="SHREYASH ATRE"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Role Badge *</label>
+                      <input type="text" id="sc-f-role-2" placeholder="CO-FOUNDER"
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                    </div>
+                    <div>
+                      <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">3D Orbit Sphere</label>
+                      <select id="sc-f-orb-2"
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary">
+                        <option value="globe-3d-azure">Azure Glow</option>
+                        <option value="globe-3d-deep">Deep Blue</option>
+                        <option value="globe-3d-pearl">Pearl Cyan</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Photo Image</label>
+                    <div class="flex items-center gap-3">
+                      <div class="w-12 h-12 rounded-full overflow-hidden border border-secondary shrink-0 bg-surface-container flex items-center justify-center">
+                        <img id="sc-f-preview-img-2" src="assets/images/shreyash.jpg" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='assets/images/sphere-logo.png'"/>
+                      </div>
+                      <div class="flex-1 space-y-1">
+                        <input type="file" id="sc-f-file-2" accept="image/*" class="text-xs text-on-surface-variant file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-surface-container file:text-on-surface hover:file:bg-surface-container-high cursor-pointer w-full" />
+                        <input type="text" id="sc-f-url-2" placeholder="or enter Image URL"
+                          class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Personal Quote</label>
+                    <input type="text" id="sc-f-quote-2" placeholder="Building ideas into 'impact, together.'"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs italic outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">
+                      Interests <span class="text-[10px] text-secondary font-normal">(separate lines for breaks)</span>
+                    </label>
+                    <textarea id="sc-f-interests-2" rows="2" placeholder="Technology&#10;Product Dev&#10;Open Source"
+                      class="w-full px-3 py-1.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code"></textarea>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">
+                      Skills <span class="text-[10px] text-secondary font-normal">(separate lines for breaks)</span>
+                    </label>
+                    <textarea id="sc-f-skills-2" rows="2" placeholder="Problem Solving&#10;Systems Thinking&#10;Collaboration"
+                      class="w-full px-3 py-1.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code"></textarea>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Fun Fact</label>
+                    <input type="text" id="sc-f-funfact-2" placeholder="Always curious how things work!"
+                      class="w-full px-3 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==============================================
+               SUBSECTION 3: CORE MANAGEMENT LEADS (BOTTOM 3 CARDS)
+               ============================================== -->
+          <div id="sc-section-leads" class="sc-section hidden space-y-6">
+            <div class="p-4 rounded-2xl bg-surface-container-low border border-surface-container flex items-center justify-between">
+              <div>
+                <h4 class="font-headline-sm text-sm font-bold text-on-surface uppercase tracking-wider flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">manage_accounts</span>
+                  Core Management Leads Tier (Bottom 3 Cards)
+                </h4>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Bottom row cards with clean avatar badges, quote, and structured telemetry info boxes.</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- Lead 1 -->
+              <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+                    <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-secondary font-telemetry-code text-[11px] font-bold">LEAD #1</span>
+                    <span class="text-xs text-on-surface-variant font-telemetry-code">Left Column</span>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Full Name *</label>
+                    <input type="text" id="sc-l-name-0" placeholder="MIHIR MENDAKE"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Role / Designation *</label>
+                    <input type="text" id="sc-l-role-0" placeholder="CORE TEAM LEAD"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Photo Image</label>
+                    <div class="flex items-center gap-3">
+                      <div class="w-12 h-12 rounded-full overflow-hidden border border-secondary shrink-0 bg-surface-container flex items-center justify-center">
+                        <img id="sc-l-preview-img-0" src="assets/images/mihir.jpg" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='assets/images/sphere-logo.png'"/>
+                      </div>
+                      <div class="flex-1 space-y-1">
+                        <input type="file" id="sc-l-file-0" accept="image/*" class="text-xs text-on-surface-variant file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-surface-container file:text-on-surface hover:file:bg-surface-container-high cursor-pointer w-full" />
+                        <input type="text" id="sc-l-url-0" placeholder="or enter Image URL"
+                          class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Quote</label>
+                    <input type="text" id="sc-l-quote-0" placeholder="Driving ideas forward, together."
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs italic outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Interests</label>
+                    <input type="text" id="sc-l-interests-0" placeholder="Tech, Products, Hackathons"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Skills</label>
+                    <input type="text" id="sc-l-skills-0" placeholder="Leadership, Project Mgmt"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Fun Fact</label>
+                    <input type="text" id="sc-l-funfact-0" placeholder="Up for new challenges!"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lead 2 -->
+              <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+                    <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-secondary font-telemetry-code text-[11px] font-bold">LEAD #2</span>
+                    <span class="text-xs text-on-surface-variant font-telemetry-code">Center Column</span>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Full Name *</label>
+                    <input type="text" id="sc-l-name-1" placeholder="ISHA JOSHI"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Role / Designation *</label>
+                    <input type="text" id="sc-l-role-1" placeholder="ADMINISTRATOR"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Photo Image</label>
+                    <div class="flex items-center gap-3">
+                      <div class="w-12 h-12 rounded-full overflow-hidden border border-secondary shrink-0 bg-surface-container flex items-center justify-center">
+                        <img id="sc-l-preview-img-1" src="assets/images/isha.jpg" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='assets/images/sphere-logo.png'"/>
+                      </div>
+                      <div class="flex-1 space-y-1">
+                        <input type="file" id="sc-l-file-1" accept="image/*" class="text-xs text-on-surface-variant file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-surface-container file:text-on-surface hover:file:bg-surface-container-high cursor-pointer w-full" />
+                        <input type="text" id="sc-l-url-1" placeholder="or enter Image URL"
+                          class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Quote</label>
+                    <input type="text" id="sc-l-quote-1" placeholder="Creating a smoother today for a stronger tomorrow."
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs italic outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Interests</label>
+                    <input type="text" id="sc-l-interests-1" placeholder="Community, Event Mgmt, Design"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Skills</label>
+                    <input type="text" id="sc-l-skills-1" placeholder="Organization, Communication"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Fun Fact</label>
+                    <input type="text" id="sc-l-funfact-1" placeholder="Every detail counts!"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lead 3 -->
+              <div class="bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+                    <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-secondary font-telemetry-code text-[11px] font-bold">LEAD #3</span>
+                    <span class="text-xs text-on-surface-variant font-telemetry-code">Right Column</span>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Full Name *</label>
+                    <input type="text" id="sc-l-name-2" placeholder="SHREYAS GORE"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Role / Designation *</label>
+                    <input type="text" id="sc-l-role-2" placeholder="MANAGER"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Photo Image</label>
+                    <div class="flex items-center gap-3">
+                      <div class="w-12 h-12 rounded-full overflow-hidden border border-secondary shrink-0 bg-surface-container flex items-center justify-center">
+                        <img id="sc-l-preview-img-2" src="assets/images/shreyasgore.jpg" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='assets/images/sphere-logo.png'"/>
+                      </div>
+                      <div class="flex-1 space-y-1">
+                        <input type="file" id="sc-l-file-2" accept="image/*" class="text-xs text-on-surface-variant file:mr-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-surface-container file:text-on-surface hover:file:bg-surface-container-high cursor-pointer w-full" />
+                        <input type="text" id="sc-l-url-2" placeholder="or enter Image URL"
+                          class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Quote</label>
+                    <input type="text" id="sc-l-quote-2" placeholder="Turning plans into progress, together."
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs italic outline-none focus:border-secondary" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Interests</label>
+                    <input type="text" id="sc-l-interests-2" placeholder="Strategy, Organization, Building"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Skills</label>
+                    <input type="text" id="sc-l-skills-2" placeholder="Planning, Team Coordination"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary font-telemetry-code" />
+                  </div>
+
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Fun Fact</label>
+                    <input type="text" id="sc-l-funfact-2" placeholder="Good teams make ideas real!"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==============================================
+               SUBSECTION 4: FEATURED PROJECTS ("PROOF OF WORK")
+               ============================================== -->
+          <div id="sc-section-projects" class="sc-section hidden space-y-6">
+            <div class="p-5 rounded-2xl bg-surface-container-low border border-surface-container flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h4 class="font-headline-sm text-sm font-bold text-on-surface uppercase tracking-wider flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">rocket_launch</span>
+                  Homepage Proof of Work Showcase (Top 3 Projects)
+                </h4>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">The home page displays the top 3 projects from the Projects tab (Hero Flagship + 2 Sub-Projects), or the clean empty state if toggled.</p>
+              </div>
+
+              <!-- "No Projects Right Now" Toggle Switch -->
+              <div class="flex items-center gap-3 bg-surface-container-lowest px-4 py-2.5 rounded-2xl border border-surface-container shadow-sm shrink-0">
+                <label class="relative inline-flex items-center cursor-pointer select-none">
+                  <input type="checkbox" id="sc-proj-no-projects" class="sr-only peer" />
+                  <div class="w-10 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-surface-container after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+                  <span class="ml-3 text-xs font-title-caps uppercase tracking-wider font-bold text-on-surface">No Projects Right Now</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Clean Empty State Configuration Panel (Collapsible) -->
+            <div id="sc-proj-empty-panel" class="hidden p-6 rounded-2xl bg-surface-container-lowest border-2 border-secondary/30 shadow-sm space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+                  <h5 class="font-headline-sm text-sm font-bold text-on-surface">Clean Homepage "No Projects" State Settings</h5>
+                </div>
+                <span class="text-xs font-telemetry-code text-secondary font-semibold">Active when "No Projects Right Now" is enabled</span>
+              </div>
+              <p class="font-body-sm text-xs text-on-surface-variant">When enabled or when no projects are listed, the homepage will render this neat and tidy aerospace card instead of blank space, maintaining the exact visual balance and elegance of the homepage.</p>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Headline Title</label>
+                  <input type="text" id="sc-proj-empty-title" value="Production Systems Under Active Architecture"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-semibold outline-none focus:border-secondary" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Action Button Text</label>
+                    <input type="text" id="sc-proj-empty-btn-text" value="EXPLORE GITHUB"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Button Link URL</label>
+                    <input type="text" id="sc-proj-empty-btn-link" value="https://github.com/Sphere-Club/Sphere-Coding-Club"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Announcement Description</label>
+                <textarea id="sc-proj-empty-desc" rows="2"
+                  class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary">Our student engineering squads are currently building the next generation of open-source systems, AI copilots, and distributed infrastructure. Check back soon or view our community repositories.</textarea>
+              </div>
+            </div>
+
+            <!-- Helpful Navigation to Projects Tab -->
+            <div class="p-6 rounded-2xl bg-surface-container-lowest border border-surface-container flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h5 class="font-headline-sm text-sm font-bold text-on-surface">Manage Registered Projects</h5>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Add new projects, audit codebases, edit live links, or set the ★ FLAGSHIP spotlight project directly in the dedicated Projects tab.</p>
+              </div>
+              <button type="button" id="sc-goto-projects-btn"
+                class="px-5 py-2.5 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high font-title-caps text-xs uppercase tracking-wider font-bold transition-all shrink-0 flex items-center gap-2 border border-surface-container">
+                <span class="material-symbols-outlined text-[17px]">rocket_launch</span>
+                <span>Open Projects Tab</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ==============================================
+               SUBSECTION 5: WORKSPACE & HUBS MODE (4 PRESETS)
+               ============================================== -->
+          <div id="sc-section-workspace" class="sc-section hidden space-y-6">
+            
+            <!-- Top Controls & Mode Preset Selector Banner -->
+            <div class="p-5 rounded-2xl bg-surface-container-low border border-surface-container flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div>
+                <h4 class="font-headline-sm text-sm font-bold text-on-surface uppercase tracking-wider flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
+                  Workspace &amp; Hubs Showcase Mode
+                </h4>
+                <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Switch between 4 realistic community modes from the dropdown below. The same building showcase visual is preserved across all 4 modes.</p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-3 shrink-0">
+                <!-- Dropdown Preset Selector -->
+                <div class="flex items-center gap-2 bg-surface-container-lowest px-3.5 py-2 rounded-2xl border-2 border-secondary/40 shadow-sm">
+                  <label for="sc-ws-preset" class="text-xs font-title-caps uppercase tracking-wider font-bold text-secondary">Active Mode:</label>
+                  <select id="sc-ws-preset" class="bg-surface-container-low border border-outline-variant text-on-surface text-xs font-bold rounded-xl px-3 py-1.5 outline-none focus:border-secondary cursor-pointer">
+                    <option value="digital">1. Digital Workspace (Discord &amp; GitHub Hub)</option>
+                    <option value="campus">2. Campus Labs &amp; Hackathon Meetups</option>
+                    <option value="perks">3. Builder Perks &amp; Member Support</option>
+                    <option value="physical">4. Physical Workspace (Original Building &amp; Labs)</option>
+                  </select>
+                </div>
+
+                <!-- Show/Hide Section on Home Toggle -->
+                <div class="flex items-center gap-2 bg-surface-container-lowest px-3.5 py-2.5 rounded-2xl border border-surface-container shadow-sm">
+                  <label class="relative inline-flex items-center cursor-pointer select-none">
+                    <input type="checkbox" id="sc-ws-enabled" class="sr-only peer" checked />
+                    <div class="w-10 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-surface-container after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+                    <span class="ml-2.5 text-xs font-title-caps uppercase tracking-wider font-bold text-on-surface">Show on Home</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Pill Buttons -->
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <span class="text-xs font-telemetry-code text-on-surface-variant font-semibold">Quick Switch:</span>
+              <button type="button" class="sc-ws-pill-btn px-3 py-1 rounded-full bg-surface-container hover:bg-secondary-container hover:text-on-secondary text-on-surface font-label-caps text-[11px] font-semibold transition-all border border-surface-container" data-preset="digital">
+                1. Digital Workspace (Discord/GitHub)
+              </button>
+              <button type="button" class="sc-ws-pill-btn px-3 py-1 rounded-full bg-surface-container hover:bg-secondary-container hover:text-on-secondary text-on-surface font-label-caps text-[11px] font-semibold transition-all border border-surface-container" data-preset="campus">
+                2. Campus Labs &amp; Meetups
+              </button>
+              <button type="button" class="sc-ws-pill-btn px-3 py-1 rounded-full bg-surface-container hover:bg-secondary-container hover:text-on-secondary text-on-surface font-label-caps text-[11px] font-semibold transition-all border border-surface-container" data-preset="perks">
+                3. Builder Perks &amp; Support
+              </button>
+              <button type="button" class="sc-ws-pill-btn px-3 py-1 rounded-full bg-surface-container hover:bg-secondary-container hover:text-on-secondary text-on-surface font-label-caps text-[11px] font-semibold transition-all border border-surface-container" data-preset="physical">
+                4. Physical Building (Original)
+              </button>
+            </div>
+
+            <!-- Form Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              
+              <!-- Left Column: Header & Image Info -->
+              <div class="lg:col-span-6 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4">
+                <div class="pb-3 border-b border-surface-container">
+                  <h5 class="font-headline-sm text-sm font-bold text-on-surface flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary text-[18px]">title</span>
+                    Section Header &amp; Showcase Visual
+                  </h5>
+                  <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Section titles and image badge overlays.</p>
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Small Category Tag</label>
+                  <input type="text" id="sc-ws-category" value="DIGITAL ECOSYSTEM &amp; PLATFORMS"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-semibold outline-none focus:border-secondary" />
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Main Headline Title</label>
+                  <input type="text" id="sc-ws-title" value="SPHERE DIGITAL WORKSPACE"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm font-bold outline-none focus:border-secondary" />
+                </div>
+
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Subtitle Description</label>
+                  <textarea id="sc-ws-desc" rows="2"
+                    class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm outline-none focus:border-secondary">The 24/7 virtual engineering campus for distributed pair programming, open-source sprints, and asynchronous collaboration.</textarea>
+                </div>
+
+                <div class="pt-2 border-t border-surface-container space-y-3">
+                  <div class="flex items-center justify-between">
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold">Building Showcase Image URL</label>
+                    <span class="text-[10px] font-telemetry-code text-secondary font-medium">Shared across all 4 modes</span>
+                  </div>
+                  <input type="url" id="sc-ws-img-url" value="https://lh3.googleusercontent.com/aida-public/AB6AXuCg5EtFqdesM_k9uRXfOJDvg89DQ7nwP9XyRrkjA1bZN4BpZ3kVu91qOrAlaCIgf4D8-MOqjMRSuTEEMJAc2iAfyGHzBKQsVOoNdVNAovX_REjOMMWyhtqTJs79OhwBexym_tfMoNqenmOyOBoLVrj5M9NWxcvJ_7HLe8cLIfjakdJ5HLSSJmSVC4Bskxk1hWhZnubJgN3HqVthEgZx8raZ71z9DOV9fPvPce4rOQtGpE0LlP-LX4RkZI91YAYOeeeveg"
+                    class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-1">Top Badge</label>
+                      <input type="text" id="sc-ws-badge-top" value="PLATFORMS // DISCORD &amp; GITHUB MONOREPO"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                    </div>
+                    <div>
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-1">Bottom Left Badge</label>
+                      <input type="text" id="sc-ws-badge-bl" value="STATUS: ONLINE BUILDER MESH // 24/7 CHANNELS"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                    </div>
+                    <div>
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-1">Bottom Right Badge</label>
+                      <input type="text" id="sc-ws-badge-br" value="OPEN ACCESS"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: 3 Cards & 2 Action Buttons -->
+              <div class="lg:col-span-6 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm space-y-4">
+                <div class="pb-3 border-b border-surface-container">
+                  <h5 class="font-headline-sm text-sm font-bold text-on-surface flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary text-[18px]">view_agenda</span>
+                    3 Showcase Feature Cards
+                  </h5>
+                  <p class="font-body-sm text-xs text-on-surface-variant mt-0.5">Icon, title, and description for each card.</p>
+                </div>
+
+                <!-- Card 1 -->
+                <div class="p-3.5 rounded-xl bg-surface-container-low border border-surface-container space-y-2">
+                  <div class="flex items-center gap-2">
+                    <div class="w-20">
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-0.5">Icon Symbol</label>
+                      <input type="text" id="sc-ws-c1-icon" value="forum"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-xs font-telemetry-code outline-none focus:border-secondary" />
+                    </div>
+                    <div class="flex-1">
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-0.5">Card 1 Title</label>
+                      <input type="text" id="sc-ws-c1-title" value="Discord Virtual Campus &amp; Voice Lounges"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-xs font-bold outline-none focus:border-secondary" />
+                    </div>
+                  </div>
+                  <div>
+                    <input type="text" id="sc-ws-c1-desc" value="24/7 lofi coding channels, pair-programming rooms, and live bug-triage sessions with peer engineers."
+                      class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-3.5 rounded-xl bg-surface-container-low border border-surface-container space-y-2">
+                  <div class="flex items-center gap-2">
+                    <div class="w-20">
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-0.5">Icon Symbol</label>
+                      <input type="text" id="sc-ws-c2-icon" value="terminal"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-xs font-telemetry-code outline-none focus:border-secondary" />
+                    </div>
+                    <div class="flex-1">
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-0.5">Card 2 Title</label>
+                      <input type="text" id="sc-ws-c2-title" value="GitHub Monorepo &amp; Open Source Pipelines"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-xs font-bold outline-none focus:border-secondary" />
+                    </div>
+                  </div>
+                  <div>
+                    <input type="text" id="sc-ws-c2-desc" value="Shared organizational repositories, automated CI/CD checks, issue sprints, and public project showcases."
+                      class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-3.5 rounded-xl bg-surface-container-low border border-surface-container space-y-2">
+                  <div class="flex items-center gap-2">
+                    <div class="w-20">
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-0.5">Icon Symbol</label>
+                      <input type="text" id="sc-ws-c3-icon" value="auto_stories"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-xs font-telemetry-code outline-none focus:border-secondary" />
+                    </div>
+                    <div class="flex-1">
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-0.5">Card 3 Title</label>
+                      <input type="text" id="sc-ws-c3-title" value="Resource Vault &amp; Knowledge Base"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-xs font-bold outline-none focus:border-secondary" />
+                    </div>
+                  </div>
+                  <div>
+                    <input type="text" id="sc-ws-c3-desc" value="Curated system design guides, interview cheat-sheets, roadmap trackers, and collegiate project templates."
+                      class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-lowest border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                  </div>
+                </div>
+
+                <!-- 2 Action Buttons -->
+                <div class="pt-2 border-t border-surface-container space-y-3">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-1">Button 1 (Primary)</label>
+                      <input type="text" id="sc-ws-b1-text" value="JOIN DISCORD WORKSPACE" placeholder="Button Text"
+                        class="w-full mb-1.5 px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs font-bold outline-none focus:border-secondary" />
+                      <input type="text" id="sc-ws-b1-link" value="#join" placeholder="Link URL"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                    </div>
+                    <div>
+                      <label class="block font-title-caps text-[10px] text-on-surface-variant uppercase font-semibold mb-1">Button 2 (Secondary)</label>
+                      <input type="text" id="sc-ws-b2-text" value="EXPLORE GITHUB ORG" placeholder="Button Text"
+                        class="w-full mb-1.5 px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs font-bold outline-none focus:border-secondary" />
+                      <input type="text" id="sc-ws-b2-link" value="https://github.com/Sphere-Club/Sphere-Coding-Club" placeholder="Link URL"
+                        class="w-full px-2.5 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-on-surface text-xs outline-none focus:border-secondary" />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Bottom Save Bar -->
+          <div class="sticky bottom-4 z-20 bg-surface-container-lowest/90 backdrop-blur-md border border-surface-container rounded-2xl p-4 shadow-lg flex items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+              <span id="sc-save-status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="sc-save-status-text" class="text-xs font-telemetry-code text-on-surface-variant">Changes saved to Firestore settings/homepage_showcase</span>
+            </div>
+            <button id="sc-bottom-save-btn" type="button"
+              class="px-6 py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(17,90,254,0.25)]">
+              <span class="material-symbols-outlined text-[18px]">save</span>
+              <span>Save Showcase</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ====================================================
+           TAB 5: HOMEPAGE TELEMETRY SETTINGS
+           ==================================================== -->
+      <div id="tab-home" class="tab-content hidden">
+        <div class="max-w-2xl mx-auto bg-surface-container-lowest border border-surface-container rounded-3xl p-8 shadow-sm">
+          <div class="flex items-center gap-3 mb-6 pb-4 border-b border-surface-container">
+            <div class="w-12 h-12 rounded-xl bg-secondary-container/10 flex items-center justify-center text-secondary">
+              <span class="material-symbols-outlined text-[26px]">speed</span>
+            </div>
+            <div>
+              <h3 class="font-headline-sm text-xl font-bold text-on-surface">Homepage Telemetry & Stats</h3>
+              <p class="font-body-sm text-xs text-on-surface-variant">Update the 4 prominent impact counters showcased on the homepage.</p>
+            </div>
+          </div>
+
+          <form id="home-settings-form" class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="hs-hackathon">Hackathon Bounties / Prize Pool</label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">trophy</span>
+                  <input type="text" id="hs-hackathon" placeholder="e.g. $10,000+"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="hs-projects">Projects Shipped</label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">terminal</span>
+                  <input type="text" id="hs-projects" placeholder="e.g. 24+"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="hs-members">Active Builders / Members</label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">group</span>
+                  <input type="text" id="hs-members" placeholder="e.g. 1,200+"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="hs-meetup">Meetups & Technical Sprints</label>
+                <div class="relative">
+                  <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">calendar_today</span>
+                  <input type="text" id="hs-meetup" placeholder="e.g. 18+"
+                    class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary outline-none" />
+                </div>
+              </div>
+            </div>
+
+            <div id="hs-success" class="hidden p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 font-body-sm text-xs flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">check_circle</span>
+              <span>Telemetry metrics updated successfully in Firestore!</span>
+            </div>
+
+            <button type="submit"
+              class="w-full mt-4 py-3 px-6 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold transition-all shadow-[0_0_15px_rgba(17,90,254,0.25)] flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">save</span>
+              <span>Save Telemetry Metrics</span>
+            </button>
+          </form>
+        </div>
+      </div>
 
     </div>
 
-</main>
-<footer class="relative z-10 w-full bg-surface-container-lowest mt-space-2xl border-t border-surface-container-high/60">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-2xl">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter-lg mb-space-xl">
-        <div class="lg:col-span-2 flex flex-col gap-space-md">
-          <div class="flex items-center gap-3">
-            <img alt="SPHERE LOGO PFP.png"
-              class="h-8 w-8 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]"
-              src="assets/images/sphere-logo.png">
-            <span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight uppercase">SPHERE COMMUNITY</span>
-          </div>
-          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
-            Building the next generation of innovators. Synthesizing technology, talent, and collaboration for real-world impact.
-          </p>
-          <div
-            class="flex items-center gap-2 font-telemetry-code text-telemetry-code text-[#2563eb] bg-[#eff6ff] px-3 py-1.5 rounded-full w-fit mt-2">
-            <span class="material-symbols-outlined text-[14px]">satellite_alt</span>
-            <span class="tracking-widest font-bold">SYSTEMS: NOMINAL</span>
-          </div>
-        </div>
-        <div class="flex flex-col gap-space-sm">
-          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Platform</span>
-          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
-            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="projects.html">Projects</a>
-            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="events.html">Events</a>
-            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="domains.html">Domains</a>
-          </div>
-        </div>
-        <div class="flex flex-col gap-space-sm">
-          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Legal</span>
-          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
-            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="privacy.html">Privacy Policy</a>
-            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="terms.html">Terms of Service</a>
-            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="brand.html">Brand Assets</a>
-          </div>
-        </div>
-        <div class="flex flex-col gap-space-sm">
-          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Connect</span>
-          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
-            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="mailto:spherecclub@gmail.com">Contact Us</a>
-            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://discord.gg/sphere" target="_blank">Join Discord</a>
-            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://www.instagram.com/spherecclub/" target="_blank">Instagram</a>
-          </div>
-        </div>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 p-4">
+    <div class="bg-surface-container-lowest border border-outline-variant/60 rounded-2xl max-w-sm w-full p-6 shadow-2xl scale-95 transition-transform duration-200">
+      <div class="w-12 h-12 rounded-full bg-error/10 text-error flex items-center justify-center mx-auto mb-4">
+        <span class="material-symbols-outlined text-[24px]">delete</span>
       </div>
-      <div
-        class="flex flex-col md:flex-row items-center justify-between gap-space-md bg-[#f0f4ff] rounded-xl px-6 py-5 mt-8">
-        <p class="font-body-sm text-body-sm text-on-surface-variant m-0">&copy; 2026 Sphere Community. Engineered for the Future.</p>
-        <div class="flex items-center gap-2">
-          <span class="font-telemetry-code text-telemetry-code text-on-surface-variant text-[12px] tracking-widest">Sphere Orbital v2.0</span>
-          <span class="w-2 h-2 rounded-full bg-[#3b82f6]"></span>
-        </div>
+      <h3 class="font-headline-sm text-lg font-bold text-on-surface text-center mb-1">Delete Item?</h3>
+      <p class="font-body-sm text-xs text-on-surface-variant text-center mb-6">This action cannot be undone and will remove the item from Firestore permanently.</p>
+      <div class="flex gap-3">
+        <button id="delete-modal-cancel" class="flex-1 py-2.5 rounded-full bg-surface-container text-on-surface font-title-caps text-xs uppercase font-semibold hover:bg-surface-container-high transition-colors">
+          Cancel
+        </button>
+        <button id="delete-modal-confirm" class="flex-1 py-2.5 rounded-full bg-error text-white font-title-caps text-xs uppercase font-semibold hover:bg-error/90 transition-colors">
+          Delete
+        </button>
       </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w-full bg-surface border-t border-surface-container py-6 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <img src="assets/images/sphere-logo.png" alt="Sphere Logo" class="w-6 h-6 rounded-full"/>
+        <span class="font-title-caps text-xs text-on-surface">Sphere Mission Control</span>
+      </div>
+      <p class="font-body-sm text-xs text-on-surface-variant m-0">&copy; 2026 Sphere Community. Engineered for the Future.</p>
     </div>
   </footer>
-<script src="js/main.js"></script>
-<script type="module" src="js/admin.js"></script>
-</body></html>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

@@ -801,3 +801,20 @@ body {
   background-color: var(--color-secondary-fixed);
   color: var(--color-on-secondary-fixed);
 }
+
+/* ---------------------------------------------------------------
+   DEFAULT BROWSER CURSORS
+   --------------------------------------------------------------- */
+html, body {
+  cursor: auto !important;
+}
+
+a, button, [role="button"], .cursor-pointer, summary, input[type="submit"], input[type="button"] {
+  cursor: pointer !important;
+}
+
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+textarea,
+[contenteditable="true"] {
+  cursor: text !important;
+}

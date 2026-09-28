@@ -1,6 +1,16 @@
 import { db } from './firebase-config.js';
 import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+function normalizeCategory(cat) {
+    if (!cat) return 'all';
+    const c = cat.toLowerCase().trim();
+    if (c.startsWith('hackathon')) return 'hackathons';
+    if (c.startsWith('workshop')) return 'workshops';
+    if (c.startsWith('meetup')) return 'meetups';
+    if (c.startsWith('demo') || c === 'pitch') return 'demodays';
+    return c;
+}
+
 // Global filter function required by Stitch Events UI
 window.filterEvents = function(category, buttonEl) {
     // Update active tab buttons styling
@@ -12,14 +22,16 @@ window.filterEvents = function(category, buttonEl) {
     buttonEl.classList.remove('text-on-surface-variant');
     buttonEl.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
 
+    const target = normalizeCategory(category);
+
     // Filter cards
     const cards = document.querySelectorAll('.event-card');
     cards.forEach(card => {
-        if (category === 'all') {
+        if (target === 'all') {
             card.style.display = 'flex';
         } else {
-            const cardCategory = card.getAttribute('data-category');
-            if (cardCategory === category) {
+            const cardCategory = normalizeCategory(card.getAttribute('data-category'));
+            if (cardCategory === target) {
                 card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
@@ -83,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <span class="px-3 py-1 rounded-full ${isDone ? 'bg-surface-container-high' : 'bg-surface-container'} ${isDone ? 'text-on-surface' : 'text-secondary'} font-label-caps text-label-caps">
                           ${escapeHTML(data.status ? data.status.toUpperCase() : 'EVENT')}
                         </span>
-                        <span class="font-telemetry-code text-telemetry-code text-on-surface-variant">DURATION N/A</span>
+                        <span class="font-telemetry-code text-telemetry-code text-on-surface-variant">${escapeHTML(data.duration || 'SPRINT')}</span>
                     </div>
                     <div class="flex flex-col gap-2">
                         <span class="font-telemetry-code text-telemetry-code text-on-surface-variant">${escapeHTML(data.date || 'TBA')}</span>

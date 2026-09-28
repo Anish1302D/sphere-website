@@ -154,7 +154,7 @@ const escapeHTML = (str) => {
         snapshot.forEach(docSnap => {
             const data = docSnap.data();
             const nameLower = (data.name || '').trim().toLowerCase();
-            if (targetMembers.includes(nameLower)) {
+            if (targetMembers.includes(nameLower) && !renderedMembers.has(nameLower)) {
                 foundMembers.push(data);
                 renderedMembers.add(nameLower);
             }

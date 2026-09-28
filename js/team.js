@@ -87,18 +87,21 @@ const escapeHTML = (str) => {
             { 
                 name: "Anish Mogam", 
                 role: "Founder",
+                order: 1,
                 github: "https://github.com/Anish1302D",
                 linkedin: "https://www.linkedin.com/in/anish-mogam/"
             },
             { 
                 name: "Shreyash Atre", 
                 role: "Co-Founder",
+                order: 3,
                 github: "https://github.com/shreyash0216",
                 linkedin: "https://www.linkedin.com/in/shreyash-atre-901340317/"
             },
             { 
                 name: "Isha Joshi", 
                 role: "Administrator",
+                order: 5,
                 github: "https://github.com/ishaj306",
                 linkedin: "https://www.linkedin.com/in/isha-joshi-4b1074319/"
             }
@@ -114,15 +117,38 @@ const escapeHTML = (str) => {
             }
         });
 
-        // Sort based on exactOrder
+        // Deduplicate members by name to guarantee zero double entries
+        const uniqueMembers = [];
+        const seenNames = new Set();
+        foundMembers.forEach(item => {
+            if (!seenNames.has(item.resolvedNameLower)) {
+                seenNames.add(item.resolvedNameLower);
+                uniqueMembers.push(item);
+            }
+        });
+        foundMembers = uniqueMembers;
+
+        // Sort based on order field from admin panel or fallback to exactOrder
         foundMembers.sort((a, b) => {
-            let indexA = exactOrder.indexOf(a.resolvedNameLower);
-            let indexB = exactOrder.indexOf(b.resolvedNameLower);
-            
-            if (indexA === -1) indexA = 999;
-            if (indexB === -1) indexB = 999;
-            
-            return indexA - indexB;
+            const hasOrderA = a.data && a.data.order !== undefined && a.data.order !== null && !isNaN(Number(a.data.order));
+            const hasOrderB = b.data && b.data.order !== undefined && b.data.order !== null && !isNaN(Number(b.data.order));
+
+            let valA = hasOrderA ? Number(a.data.order) : null;
+            let valB = hasOrderB ? Number(b.data.order) : null;
+
+            if (valA === null) {
+                const idx = exactOrder.indexOf(a.resolvedNameLower);
+                valA = idx !== -1 ? (idx + 1) : 999;
+            }
+            if (valB === null) {
+                const idx = exactOrder.indexOf(b.resolvedNameLower);
+                valB = idx !== -1 ? (idx + 1) : 999;
+            }
+
+            if (valA !== valB) {
+                return valA - valB;
+            }
+            return (a.data.name || '').localeCompare(b.data.name || '');
         });
 
         foundMembers.forEach(item => {
@@ -136,8 +162,9 @@ const escapeHTML = (str) => {
                 role = "Core Team Lead";
             }
             
-            const imgFile = localImages[nameLower] || 'sphere-logo.png';
-            const localImgSrc = `assets/images/${imgFile}`;
+            const localImgSrc = data.image && data.image.trim() 
+                ? data.image.trim() 
+                : (localImages[nameLower] ? `assets/images/${localImages[nameLower]}` : 'assets/images/sphere-logo.png');
             
             const githubUrl = (data.github || '').trim();
             const githubLink = githubUrl ? `<a href="${githubUrl}" target="_blank" class="w-8 h-8 rounded-md bg-surface-container-low border border-outline-variant flex items-center justify-center text-on-surface-variant hover:bg-secondary hover:text-on-secondary transition-colors" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>` : '';
