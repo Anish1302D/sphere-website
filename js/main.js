@@ -13,11 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuClose = document.getElementById('mobile-menu-close');
     const mobileMenuLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
     const menuIcon = menuToggle ? menuToggle.querySelector('.material-symbols-outlined') : null;
+    if (mobileMenu && !mobileMenu.classList.contains('active') && !mobileMenu.classList.contains('translate-x-0')) {
+        mobileMenu.classList.add('pointer-events-none', 'opacity-0', 'invisible');
+    }
 
     function openMobileMenu() {
         if (!mobileMenu) return;
         mobileMenu.classList.add('active');
-        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.remove('translate-x-full', 'pointer-events-none', 'opacity-0', 'invisible');
         mobileMenu.classList.add('translate-x-0');
         document.body.style.overflow = 'hidden';
         if (menuIcon) menuIcon.textContent = 'close';
@@ -25,10 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeMobileMenu() {
         if (!mobileMenu) return;
-        mobileMenu.classList.remove('active');
-        mobileMenu.classList.remove('translate-x-0');
-        mobileMenu.classList.add('translate-x-full');
+        mobileMenu.classList.remove('active', 'translate-x-0');
+        mobileMenu.classList.add('translate-x-full', 'pointer-events-none', 'opacity-0', 'invisible');
         document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
         if (menuIcon) menuIcon.textContent = 'menu';
     }
 
