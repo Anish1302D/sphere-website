@@ -177,17 +177,17 @@ const escapeHTML = (str) => {
             
             el.innerHTML = `
             <div class="relative flex flex-col items-center text-center">
-                <div class="relative w-44 h-44 mb-6 flex items-center justify-center">
+                <div class="relative w-36 h-36 sm:w-44 sm:h-44 mb-6 flex items-center justify-center">
                     <div class="absolute inset-0 rounded-full border border-secondary/50 animate-[spin_30s_linear_infinite]"></div>
                     <div class="absolute -inset-1.5 rounded-full bg-secondary-container/10 blur-sm"></div>
-                    <div class="w-40 h-40 rounded-full overflow-hidden p-1 bg-surface-container-lowest border border-secondary shadow-md relative z-10">
+                    <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden p-1 bg-surface-container-lowest border border-secondary shadow-md relative z-10">
                         <img class="w-full h-full object-cover rounded-full" src="${localImgSrc}" alt="${escapeHTML(data.name)}" onerror="this.onerror=null; this.src='assets/images/sphere-logo.png'">
                     </div>
                 </div>
                 <span class="inline-block px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant text-secondary font-label-caps text-[11px] font-bold uppercase mb-2">
                     ${role}
                 </span>
-                <h3 class="font-headline-sm text-xl font-extrabold text-on-surface uppercase tracking-tight">${escapeHTML(data.name)}</h3>
+                <h3 class="font-headline-sm text-lg sm:text-xl font-extrabold text-on-surface uppercase tracking-tight">${escapeHTML(data.name)}</h3>
             </div>
             `;
             

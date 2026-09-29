@@ -80,13 +80,13 @@ const escapeHTML = (str) => {
                     <span class="material-symbols-outlined text-secondary text-[14px]">token</span>
                 </div>
             </div>
-            <div class="relative w-52 h-52 mx-auto my-4 flex items-center justify-center">
+            <div class="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto my-4 flex items-center justify-center">
                 <svg class="absolute inset-0 w-full h-full pointer-events-none -rotate-12 animate-pulse" fill="none" viewBox="0 0 200 200">
                     <ellipse class="text-secondary/40" cx="100" cy="100" rx="94" ry="42" stroke="currentColor" stroke-dasharray="4 4" stroke-width="1.5"></ellipse>
                 </svg>
                 <div class="absolute -right-1 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-secondary-container shadow-md"></div>
-                <div class="absolute w-44 h-44 rounded-full bg-surface-container-highest/50 blur-sm"></div>
-                <div class="relative w-40 h-40 rounded-full p-1 bg-surface-container-lowest shadow-[0_0_0_2px_#ffffff,0_0_0_4px_#3B82FF,0_12px_28px_rgba(20,91,255,0.25)] overflow-hidden flex items-center justify-center">
+                <div class="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-surface-container-highest/50 blur-sm"></div>
+                <div class="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full p-1 bg-surface-container-lowest shadow-[0_0_0_2px_#ffffff,0_0_0_4px_#3B82FF,0_12px_28px_rgba(20,91,255,0.25)] overflow-hidden flex items-center justify-center">
                     <img class="w-full h-full rounded-full object-cover object-top" src="${imgSrc}" alt="${escapeHTML(data.name)}">
                 </div>
             </div>
@@ -96,7 +96,7 @@ const escapeHTML = (str) => {
                 </span>
             </div>
             <div class="text-center mb-4 relative z-10">
-                <h3 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-wider">
+                <h3 class="font-headline-lg text-xl sm:text-2xl lg:text-headline-lg text-on-surface uppercase tracking-wider">
                     ${escapeHTML(data.name)}
                 </h3>
             </div>
@@ -134,11 +134,11 @@ const escapeHTML = (str) => {
             <span class="font-label-caps text-label-caps uppercase tracking-wider bg-surface-container text-secondary px-4 py-1 rounded-full mb-6 z-10">
                 ${data.role || 'Member'}
             </span>
-            <div class="relative w-44 h-56 rounded-xl overflow-hidden shadow-md mb-6 bg-surface-container-low flex items-center justify-center">
+            <div class="relative w-36 h-48 sm:w-44 sm:h-56 rounded-xl overflow-hidden shadow-md mb-6 bg-surface-container-low flex items-center justify-center">
                 <img alt="${escapeHTML(data.name)}" class="w-full h-full object-cover object-top" src="${imgSrc}">
                 <div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
             </div>
-            <h3 class="font-headline-sm text-headline-sm text-on-surface uppercase mb-1 z-10">
+            <h3 class="font-headline-sm text-base sm:text-headline-sm text-on-surface uppercase mb-1 z-10">
                 ${escapeHTML(data.name)}
             </h3>
             <div class="flex justify-center gap-3 mt-1 relative z-10">

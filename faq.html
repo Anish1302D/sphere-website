@@ -37,17 +37,17 @@
 <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="faq" href="faq.html">FAQ</a>
 </nav>
 <div class="flex items-center gap-space-md">
-<a class="inline-flex items-center justify-center px-space-lg py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-caps text-label-caps transition-all shadow-[0_0_20px_rgba(17,90,254,0.25)] hover:shadow-[0_0_25px_rgba(17,90,254,0.45)]" href="#join">JOIN COMMUNITY</a>
+<a class="hidden sm:inline-flex items-center justify-center px-space-lg py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-caps text-label-caps transition-all shadow-[0_0_20px_rgba(17,90,254,0.25)] hover:shadow-[0_0_25px_rgba(17,90,254,0.45)]" href="#join">JOIN COMMUNITY</a>
 <!-- Mobile menu toggle -->
-<button aria-label="Toggle mobile menu" class="xl:hidden text-on-surface p-2" id="mobile-menu-toggle">
+<button aria-label="Toggle mobile menu" class="xl:hidden text-on-surface min-w-[44px] min-h-[44px] flex items-center justify-center p-2" id="mobile-menu-toggle">
 <span class="material-symbols-outlined text-[24px]">menu</span>
 </button>
 </div>
 </div>
 </header>
 <!-- Light Mobile Menu Overlay -->
-<div class="fixed inset-0 z-60 bg-surface/95 backdrop-blur-xl flex flex-col p-8 transform translate-x-full transition-transform duration-300 xl:hidden" id="mobile-menu-overlay">
-<button aria-label="Close menu" class="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface p-2" id="mobile-menu-close">
+<div class="fixed inset-0 z-60 bg-surface/95 backdrop-blur-xl flex flex-col p-8 overflow-y-auto transform translate-x-full transition-transform duration-300 xl:hidden" id="mobile-menu-overlay">
+<button aria-label="Close menu" class="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface min-w-[44px] min-h-[44px] flex items-center justify-center p-2" id="mobile-menu-close">
 <span class="material-symbols-outlined text-[32px]">close</span>
 </button>
 <nav class="flex flex-col gap-6 mt-16">

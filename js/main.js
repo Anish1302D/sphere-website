@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function openMobileMenu() {
         if (!mobileMenu) return;
         mobileMenu.classList.add('active');
+        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.add('translate-x-0');
         document.body.style.overflow = 'hidden';
         if (menuIcon) menuIcon.textContent = 'close';
     }
@@ -24,13 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeMobileMenu() {
         if (!mobileMenu) return;
         mobileMenu.classList.remove('active');
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
         document.body.style.overflow = '';
         if (menuIcon) menuIcon.textContent = 'menu';
     }
 
     if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            if (mobileMenu && mobileMenu.classList.contains('active')) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (mobileMenu && (mobileMenu.classList.contains('active') || mobileMenu.classList.contains('translate-x-0'))) {
                 closeMobileMenu();
             } else {
                 openMobileMenu();
@@ -39,7 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (mobileMenuClose) {
-        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenuClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeMobileMenu();
+        });
+    }
+
+    // Close menu when clicking outside or directly on the overlay background
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) closeMobileMenu();
+        });
     }
 
     // Close menu when any link is clicked
@@ -58,13 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     const modalOverlay = document.createElement('div');
     modalOverlay.id = 'sphere-google-form-modal';
-    modalOverlay.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4 md:p-8';
+    modalOverlay.className = 'fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-2 sm:p-4 md:p-8';
     modalOverlay.innerHTML = `
-        <div class="relative w-full max-w-4xl h-[90vh] bg-surface-container-lowest border border-outline-variant rounded-2xl overflow-hidden shadow-lg transform scale-95 transition-transform duration-300 flex flex-col">
-            <div class="flex items-center justify-between p-4 border-b border-outline-variant bg-surface-container-low">
-                <h3 class="font-headline-md text-xl text-on-surface font-bold tracking-tight">Join Sphere Community</h3>
-                <button class="modal-close text-on-surface-variant hover:text-on-surface transition-colors p-2 rounded-full hover:bg-surface-container-highest">
-                    <span class="material-symbols-outlined">close</span>
+        <div class="relative w-full max-w-4xl h-[92dvh] sm:h-[88vh] bg-surface-container-lowest border border-outline-variant rounded-2xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col">
+            <div class="flex items-center justify-between px-4 py-3 sm:p-4 border-b border-outline-variant bg-surface-container-low shrink-0">
+                <h3 class="font-headline-md text-lg sm:text-xl text-on-surface font-bold tracking-tight">Join Sphere Community</h3>
+                <button class="modal-close text-on-surface-variant hover:text-on-surface transition-colors p-2 rounded-full hover:bg-surface-container-highest min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Close dialog">
+                    <span class="material-symbols-outlined text-[24px]">close</span>
                 </button>
             </div>
             <div class="flex-1 w-full relative bg-white">
