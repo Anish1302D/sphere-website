@@ -1,207 +1,544 @@
 <!DOCTYPE html>
-
-<html class="scroll-smooth" lang="en"><head class="">
-<meta charset="utf-8" class=""/>
-<meta class="" content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title class="">Sphere Community</title>
-<link class="" href="css/design-system.css" rel="stylesheet"/>
-<script class="" src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script class="" src="js/tailwind-config.js"></script>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>About Sphere — Sphere Community</title>
+  <meta name="description" content="Sphere Community is a student-driven technology community founded to build, learn, innovate, and lead beyond the classroom."/>
+  <link href="css/design-system.css" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-config.js"></script>
 </head>
 <body class="font-body-md text-body-md antialiased text-on-surface bg-background">
-<!-- Page Atmosphere (Stitch Design) -->
-<div class="page-atmosphere">
-<div class="atmosphere-blob atmosphere-blob-1"></div>
-<div class="atmosphere-blob atmosphere-blob-2"></div>
-<div class="atmosphere-blob atmosphere-blob-3"></div>
-</div>
-<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(7,26,58,0.04)]">
-<div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
-<div class="flex items-center gap-4">
-<a class="flex items-center gap-4" href="index.html">
-<img alt="SPHERE LOGO" class="h-10 w-10 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]" src="assets/images/sphere-logo.png"/>
-<div class="flex flex-col">
-<span class="font-title-caps text-title-caps text-on-surface">SPHERE</span>
-<span class="font-telemetry-code text-[10px] text-secondary tracking-widest uppercase">Community</span>
-</div>
-</a>
-</div>
-<nav class="hidden xl:flex items-center gap-space-md" data-active-classes="text-secondary font-semibold">
-<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="home" href="index.html">HOME</a>
-<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="leadership" href="leadership.html">LEADERSHIP</a>
-<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="about" href="about.html">ABOUT</a>
-<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="domains" href="domains.html">DOMAINS</a>
-<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="events" href="events.html">EVENTS</a>
-<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="projects" href="projects.html">PROJECTS</a>
-<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="team" href="team.html">TEAM</a>
-<a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="faq" href="faq.html">FAQ</a>
-</nav>
-<div class="flex items-center gap-space-md">
-<a class="hidden sm:inline-flex items-center justify-center px-space-lg py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-caps text-label-caps transition-all shadow-[0_0_20px_rgba(17,90,254,0.25)] hover:shadow-[0_0_25px_rgba(17,90,254,0.45)]" href="#join">JOIN COMMUNITY</a>
-<!-- Mobile menu toggle -->
-<button aria-label="Toggle mobile menu" class="xl:hidden text-on-surface min-w-[44px] min-h-[44px] flex items-center justify-center p-2" id="mobile-menu-toggle">
-<span class="material-symbols-outlined text-[24px]">menu</span>
-</button>
-</div>
-</div>
-</header>
-<!-- Light Mobile Menu Overlay -->
-<div class="fixed inset-0 z-60 bg-surface/95 backdrop-blur-xl flex flex-col p-8 overflow-y-auto transform translate-x-full transition-transform duration-300 xl:hidden pointer-events-none opacity-0 invisible" id="mobile-menu-overlay">
-<button aria-label="Close menu" class="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface min-w-[44px] min-h-[44px] flex items-center justify-center p-2" id="mobile-menu-close">
-<span class="material-symbols-outlined text-[32px]">close</span>
-</button>
-<nav class="flex flex-col gap-6 mt-16">
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="index.html">Home</a>
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="leadership.html">Leadership</a>
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="about.html">About</a>
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="domains.html">Domains</a>
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="events.html">Events</a>
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="projects.html">Projects</a>
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="team.html">Team</a>
-<a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="faq.html">FAQ</a>
-</nav>
-<div class="mt-auto pt-8">
-<a class="inline-flex items-center justify-center w-full px-8 py-4 bg-secondary text-on-secondary font-label-caps text-label-caps rounded-full shadow-[0_0_20px_rgba(17,90,254,0.3)]" href="#join">Join Sphere</a>
-</div>
-</div>
-<main class="pt-24 md:pt-32 flex-1 flex flex-col min-h-[80vh] px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-16 space-y-16">
-<!-- Header Section -->
-<div class="text-center w-full max-w-4xl mx-auto space-y-6">
-<h1 class="font-display-lg text-[40px] leading-[1.1] sm:text-[56px] md:text-display-lg text-on-surface font-bold tracking-tighter">
-            About <span class="text-secondary">Sphere</span>
-</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
-            Building the Next Generation of Innovators
+  <!-- Page Atmosphere Blobs (Stitch Design) -->
+  <div class="page-atmosphere pointer-events-none">
+    <div class="atmosphere-blob atmosphere-blob-1"></div>
+    <div class="atmosphere-blob atmosphere-blob-2"></div>
+    <div class="atmosphere-blob atmosphere-blob-3"></div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(7,26,58,0.04)] border-b border-surface-container">
+    <div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a class="flex items-center gap-4" href="index.html">
+          <img alt="SPHERE LOGO" class="h-10 w-10 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]" src="assets/images/sphere-logo.png"/>
+          <div class="flex flex-col">
+            <span class="font-title-caps text-title-caps text-on-surface">SPHERE</span>
+            <span class="font-telemetry-code text-[10px] text-secondary tracking-widest uppercase font-semibold">Community</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden xl:flex items-center gap-space-md" data-active-classes="text-secondary font-semibold">
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="home" href="index.html">HOME</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="leadership" href="leadership.html">LEADERSHIP</a>
+        <a class="font-title-caps text-title-caps text-secondary font-semibold py-space-xs px-space-xs" data-path="about" href="about.html">ABOUT</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="domains" href="domains.html">DOMAINS</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="events" href="events.html">EVENTS</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="projects" href="projects.html">PROJECTS</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="team" href="team.html">TEAM</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="faq" href="faq.html">FAQ</a>
+      </nav>
+
+      <!-- Action Button / Mobile Menu Toggle -->
+      <div class="flex items-center gap-space-md">
+        <a class="hidden sm:inline-flex items-center justify-center px-space-lg py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-caps text-label-caps transition-all shadow-[0_0_20px_rgba(17,90,254,0.25)] hover:shadow-[0_0_25px_rgba(17,90,254,0.45)]" href="#join">JOIN COMMUNITY</a>
+        <button aria-label="Toggle mobile menu" class="xl:hidden text-on-surface min-w-[44px] min-h-[44px] flex items-center justify-center p-2" id="mobile-menu-toggle">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer Overlay -->
+  <div class="fixed inset-0 z-60 bg-surface/95 backdrop-blur-xl flex flex-col p-8 overflow-y-auto transform translate-x-full transition-transform duration-300 xl:hidden pointer-events-none opacity-0 invisible" id="mobile-menu-overlay">
+    <button aria-label="Close menu" class="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface min-w-[44px] min-h-[44px] flex items-center justify-center p-2" id="mobile-menu-close">
+      <span class="material-symbols-outlined text-[32px]">close</span>
+    </button>
+    <nav class="flex flex-col gap-6 mt-16">
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="index.html">Home</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="leadership.html">Leadership</a>
+      <a class="font-headline-md text-headline-md text-secondary font-semibold" href="about.html">About</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="domains.html">Domains</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="events.html">Events</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="projects.html">Projects</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="team.html">Team</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="faq.html">FAQ</a>
+    </nav>
+    <div class="mt-auto pt-8">
+      <a class="inline-flex items-center justify-center w-full px-8 py-4 bg-secondary text-on-secondary font-label-caps text-label-caps rounded-full shadow-[0_0_20px_rgba(17,90,254,0.3)]" href="#join">Join Sphere</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="pt-28 md:pt-36 flex-1 flex flex-col min-h-[80vh] px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto mb-20 space-y-20">
+
+    <!-- 1. HERO HEADER SECTION -->
+    <div class="text-center w-full max-w-4xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/10 border border-secondary/20 text-secondary font-label-caps text-xs tracking-widest uppercase">
+        <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+        <span>ABOUT SPHERE COMMUNITY</span>
+      </div>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl text-on-surface font-extrabold tracking-tight">
+        About <span class="text-secondary">Sphere Community</span>
+      </h1>
+      <p class="font-headline-sm text-lg sm:text-xl text-on-surface-variant font-medium max-w-2xl mx-auto">
+        Founded to Build, Learn &amp; Lead
+      </p>
+    </div>
+
+    <!-- 2. FOUNDATION & PURPOSE CARD -->
+    <section class="w-full max-w-5xl mx-auto p-6 sm:p-10 md:p-12 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm space-y-6 relative overflow-hidden">
+      <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-sky-400/5 blur-3xl pointer-events-none"></div>
+
+      <div class="space-y-4 relative z-10 text-on-surface font-body-lg text-base sm:text-lg leading-relaxed">
+        <p>
+          <strong class="text-on-surface font-bold">Sphere Community</strong> is a student-driven technology community founded with the vision of creating a space where students can move beyond traditional classroom learning and actively <strong class="text-secondary font-semibold">build, experiment, collaborate, and innovate</strong>.
         </p>
-</div>
-<!-- Intro Text -->
-<div class="w-full max-w-5xl mx-auto p-5 sm:p-8 md:p-12 rounded-2xl bg-surface-container-lowest border border-outline shadow-sm space-y-6">
-<p class="text-on-surface leading-relaxed">
-            Sphere Community is a student-led technology community dedicated to transforming passionate learners into skilled developers, innovators, and future technology leaders. We unite students from <strong class="text-primary">Computer Science, Data Science, Cyber Security, and Artificial Intelligence &amp; Machine Learning</strong> to collaborate on impactful projects, compete in hackathons, contribute to open source, and explore cutting-edge technologies.
+        <p class="text-on-surface-variant">
+          Sphere Community was founded by <strong class="text-on-surface font-semibold">Anish Mogam</strong>, with <strong class="text-on-surface font-semibold">Madhura Lakade</strong> and <strong class="text-on-surface font-semibold">Shreyash Atre</strong> as Co-Founders. Together, the founding team established Sphere Community as a platform where students with different technical interests can come together, exchange knowledge, work on meaningful projects, participate in hackathons, explore emerging technologies, and develop the skills required to become future technology leaders.
         </p>
-<p class="text-on-surface-variant leading-relaxed">
-            Our community believes that the best way to learn technology is by building. Through hands-on workshops, coding sessions, mentorship, technical talks, team projects, and national hackathons, members gain practical experience that extends far beyond the classroom.
-        </p>
-<p class="text-on-surface-variant leading-relaxed">
-            Whether you're writing your first program, developing AI-powered applications, securing digital systems, or creating scalable software, Sphere provides an environment where curiosity is encouraged, collaboration is valued, and innovation is celebrated.
-        </p>
-</div>
-<!-- Vision & Mission Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mx-auto">
-<!-- Vision -->
-<div class="p-8 rounded-2xl bg-surface-container-lowest border border-outline shadow-sm border-t-2 border-t-primary/50 relative group hover:shadow-[0_0_30px_rgba(0,207,255,0.1)] transition-all">
-<div class="absolute top-0 right-8 w-8 h-1 bg-primary shadow-[0_0_10px_#00cfff]"></div>
-<h2 class="font-headline-lg text-2xl text-on-surface font-bold mb-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-primary">visibility</span> Our Vision
-            </h2>
-<p class="text-on-surface-variant text-sm md:text-base leading-relaxed mb-4">
-                To become one of India's leading student technology communities by empowering students with practical skills, fostering innovation, and creating opportunities to build impactful solutions that address real-world challenges.
+      </div>
+
+      <!-- Atmospheric Quote Block -->
+      <div class="my-6 p-6 sm:p-8 rounded-2xl bg-surface-container-low border-l-4 border-secondary shadow-sm relative z-10">
+        <span class="material-symbols-outlined text-secondary/30 text-3xl absolute top-3 right-4">format_quote</span>
+        <blockquote class="font-headline-sm text-lg sm:text-xl text-on-surface font-semibold italic leading-snug">
+          “Learning becomes more meaningful when you build, collaborate, and apply what you learn to real-world problems.”
+        </blockquote>
+      </div>
+
+      <p class="text-on-surface-variant font-body-lg text-base sm:text-lg leading-relaxed relative z-10">
+        Sphere Community aims to bridge the gap between <strong class="text-on-surface font-semibold">academic education and practical technology</strong> by giving students opportunities to work together on projects, take part in competitions, contribute to open source, attend technical sessions, and gain experience through hands-on learning.
+      </p>
+    </section>
+
+    <!-- 3. VISION & MISSION DUAL MATRIX -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mx-auto">
+      <!-- Vision Card -->
+      <div class="p-8 sm:p-10 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm border-t-4 border-t-secondary relative flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-secondary-container/15 flex items-center justify-center text-secondary mb-6 shadow-sm">
+            <span class="material-symbols-outlined text-[28px]">track_changes</span>
+          </div>
+          <h2 class="font-headline-lg text-2xl sm:text-3xl text-on-surface font-bold mb-4 flex items-center gap-2">
+            Our Vision
+          </h2>
+          <div class="space-y-4 text-on-surface-variant text-sm sm:text-base leading-relaxed">
+            <p>
+              Our vision is to build a strong and inclusive technology community where students are encouraged to <strong class="text-on-surface font-semibold">think beyond conventional learning, transform ideas into real-world solutions, and become confident creators and leaders in technology</strong>.
             </p>
-<p class="text-on-surface-variant text-sm md:text-base leading-relaxed">
-                We envision a future where every Sphere member graduates with not only strong technical expertise but also the confidence, leadership, and collaborative mindset to excel in the global technology ecosystem.
+            <p>
+              We envision Sphere Community as a place where curiosity leads to experimentation, experimentation leads to innovation, and collaboration turns individual ideas into impactful solutions.
             </p>
-</div>
-<!-- Mission -->
-<div class="p-8 rounded-2xl bg-surface-container-lowest border border-outline shadow-sm border-t-2 border-t-secondary/50 relative group hover:shadow-[0_0_30px_rgba(116,246,49,0.1)] transition-all">
-<div class="absolute top-0 right-8 w-8 h-1 bg-secondary shadow-[0_0_10px_#74f631]"></div>
-<h2 class="font-headline-lg text-2xl text-on-surface font-bold mb-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-secondary">rocket_launch</span> Our Mission
-            </h2>
-<ul class="space-y-3 text-on-surface-variant text-sm md:text-base">
-<li class="flex items-start gap-2"><span class="text-secondary mt-1">&gt;</span> Empower students through hands-on learning and real-world projects.</li>
-<li class="flex items-start gap-2"><span class="text-secondary mt-1">&gt;</span> Encourage participation in national and international hackathons.</li>
-<li class="flex items-start gap-2"><span class="text-secondary mt-1">&gt;</span> Promote open-source contributions and collaborative development.</li>
-<li class="flex items-start gap-2"><span class="text-secondary mt-1">&gt;</span> Bridge the gap between academic knowledge and industry expectations.</li>
-<li class="flex items-start gap-2"><span class="text-secondary mt-1">&gt;</span> Build a supportive community where students learn, mentor, and grow together.</li>
-<li class="flex items-start gap-2"><span class="text-secondary mt-1">&gt;</span> Inspire innovation through emerging technologies including AI, Cyber Security, Data Science, Cloud Computing, and Software Engineering.</li>
-</ul>
-</div>
-</div>
-<!-- What We Do -->
-<div class="w-full max-w-5xl mx-auto">
-<h2 class="font-headline-lg text-3xl text-center text-on-surface font-bold mb-8">What We Do</h2>
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-<div class="bg-surface-container-lowest border border-outline shadow-sm p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300">
-<div class="text-4xl mb-4">💻</div>
-<div class="font-bold text-primary">Build Real-World Projects</div>
-</div>
-<div class="bg-surface-container-lowest border border-outline shadow-sm p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300">
-<div class="text-4xl mb-4">🚀</div>
-<div class="font-bold text-secondary">Participate in Hackathons</div>
-</div>
-<div class="bg-surface-container-lowest border border-outline shadow-sm p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300">
-<div class="text-4xl mb-4">🧠</div>
-<div class="font-bold text-primary">Conduct Technical Workshops</div>
-</div>
-<div class="bg-surface-container-lowest border border-outline shadow-sm p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300">
-<div class="text-4xl mb-4">🤝</div>
-<div class="font-bold text-secondary">Collaborate on Open Source</div>
-</div>
-<div class="bg-surface-container-lowest border border-outline shadow-sm p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300">
-<div class="text-4xl mb-4">🌐</div>
-<div class="font-bold text-primary">Learn Emerging Technologies</div>
-</div>
-<div class="bg-surface-container-lowest border border-outline shadow-sm p-6 rounded-xl text-center hover:-translate-y-2 transition-transform duration-300">
-<div class="text-4xl mb-4">🏆</div>
-<div class="font-bold text-secondary">Develop Future Tech Leaders</div>
-</div>
-</div>
-</div>
-<!-- Motto -->
-<div class="w-full max-w-5xl mx-auto text-center p-12 bg-surface-container-lowest border border-outline shadow-sm rounded-2xl border border-primary/20 bg-primary/5">
-<h2 class="text-4xl md:text-5xl font-display-lg font-bold text-on-surface tracking-tight mb-4">Code. Collaborate. Create.</h2>
-<p class="text-xl text-primary font-body-lg">Building tomorrow's innovators, one project at a time.</p>
-</div>
-</main>
-<footer class="relative z-10 w-full bg-surface-container-lowest mt-space-2xl border-t border-surface-container-high/60">
-<div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-2xl">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter-lg mb-space-xl">
-<div class="lg:col-span-2 flex flex-col gap-space-md">
-<div class="flex items-center gap-3">
-<img alt="SPHERE LOGO PFP.png" class="h-8 w-8 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]" src="assets/images/sphere-logo.png"/>
-<span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight uppercase">SPHERE COMMUNITY</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+          </div>
+        </div>
+        <div class="mt-8 pt-4 border-t border-surface-container flex items-center gap-2 text-xs font-telemetry-code text-secondary uppercase tracking-widest font-semibold">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          <span>LONG-RANGE TELEMETRY</span>
+        </div>
+      </div>
+
+      <!-- Mission Card -->
+      <div class="p-8 sm:p-10 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm border-t-4 border-t-secondary relative flex flex-col justify-between hover:shadow-md transition-shadow">
+        <div>
+          <div class="w-12 h-12 rounded-2xl bg-secondary-container/15 flex items-center justify-center text-secondary mb-6 shadow-sm">
+            <span class="material-symbols-outlined text-[28px]">rocket_launch</span>
+          </div>
+          <h2 class="font-headline-lg text-2xl sm:text-3xl text-on-surface font-bold mb-4 flex items-center gap-2">
+            Our Mission
+          </h2>
+          <p class="text-on-surface-variant text-sm sm:text-base leading-relaxed mb-4">
+            Our mission is to provide students with a platform where they can:
+          </p>
+          <ul class="space-y-2.5 text-on-surface-variant text-sm sm:text-base">
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Learn technologies beyond the classroom.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Build practical and real-world projects.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Participate in hackathons and technical competitions.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Collaborate with other students and developers.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Contribute to open-source projects.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Explore emerging and future technologies.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Develop problem-solving and technical skills.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Improve communication and teamwork.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Take leadership responsibilities.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">check_circle</span>
+              <span>Turn ideas into working solutions.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="mt-8 pt-4 border-t border-surface-container flex items-center gap-2 text-xs font-telemetry-code text-secondary uppercase tracking-widest font-semibold">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          <span>ACTIVE DIRECTIVE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WHAT WE DO SECTION -->
+    <section class="w-full max-w-5xl mx-auto space-y-10">
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/10 border border-secondary/20 text-secondary font-label-caps text-xs tracking-widest uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          <span>CORE OPERATIONS</span>
+        </div>
+        <h2 class="font-headline-lg text-3xl sm:text-4xl text-on-surface font-extrabold tracking-tight">
+          What We Do
+        </h2>
+        <p class="font-body-md text-on-surface-variant max-w-xl mx-auto">
+          From hands-on software development to open-source and competitive hackathons, our initiatives empower members across the tech spectrum.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1: Build Real-World Projects -->
+        <div class="group p-6 sm:p-8 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm hover:shadow-lg hover:border-secondary/30 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-secondary-container/10 border border-secondary/15 flex items-center justify-center text-secondary text-2xl mb-5 group-hover:scale-110 transition-transform">
+              💻
+            </div>
+            <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2.5">
+              Build Real-World Projects
+            </h3>
+            <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+              We encourage members to transform ideas into practical projects. From software applications and AI systems to innovative prototypes, members get opportunities to work on solutions that go beyond theoretical concepts.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-container/60 flex items-center gap-1.5 text-xs font-telemetry-code text-secondary font-semibold">
+            <span>PROJECTS</span>
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Participate in Hackathons -->
+        <div class="group p-6 sm:p-8 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm hover:shadow-lg hover:border-secondary/30 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-secondary-container/10 border border-secondary/15 flex items-center justify-center text-secondary text-2xl mb-5 group-hover:scale-110 transition-transform">
+              🚀
+            </div>
+            <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2.5">
+              Participate in Hackathons
+            </h3>
+            <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+              Hackathons provide an environment where students can collaborate under real-world constraints, rapidly develop ideas, solve problems, and present their solutions. Sphere Community encourages members to participate in hackathons and other technical competitions as teams as well as individuals.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-container/60 flex items-center gap-1.5 text-xs font-telemetry-code text-secondary font-semibold">
+            <span>HACKATHONS</span>
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Conduct Technical Workshops -->
+        <div class="group p-6 sm:p-8 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm hover:shadow-lg hover:border-secondary/30 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-secondary-container/10 border border-secondary/15 flex items-center justify-center text-secondary text-2xl mb-5 group-hover:scale-110 transition-transform">
+              🧠
+            </div>
+            <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2.5">
+              Conduct Technical Workshops
+            </h3>
+            <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+              We organize technical workshops, learning sessions, demonstrations, and knowledge-sharing activities to help members understand technologies through practical experience.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-container/60 flex items-center gap-1.5 text-xs font-telemetry-code text-secondary font-semibold">
+            <span>WORKSHOPS</span>
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Collaborate on Open Source -->
+        <div class="group p-6 sm:p-8 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm hover:shadow-lg hover:border-secondary/30 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-secondary-container/10 border border-secondary/15 flex items-center justify-center text-secondary text-2xl mb-5 group-hover:scale-110 transition-transform">
+              🤝
+            </div>
+            <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2.5">
+              Collaborate on Open Source
+            </h3>
+            <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+              Open source provides an opportunity to learn how real-world software projects are developed and maintained. Members are encouraged to explore repositories, contribute code, collaborate with developers, and understand professional development workflows.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-container/60 flex items-center gap-1.5 text-xs font-telemetry-code text-secondary font-semibold">
+            <span>OPEN SOURCE</span>
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </div>
+        </div>
+
+        <!-- Card 5: Learn Emerging Technologies -->
+        <div class="group p-6 sm:p-8 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm hover:shadow-lg hover:border-secondary/30 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-secondary-container/10 border border-secondary/15 flex items-center justify-center text-secondary text-2xl mb-5 group-hover:scale-110 transition-transform">
+              🌐
+            </div>
+            <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2.5">
+              Learn Emerging Technologies
+            </h3>
+            <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+              Technology is constantly evolving. Sphere Community encourages members to explore areas such as <strong class="text-on-surface font-semibold">Artificial Intelligence, Machine Learning, Web Development, Cloud Computing, Cybersecurity, Data Science, Open Source, DevOps, and other emerging technologies</strong>.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-container/60 flex items-center gap-1.5 text-xs font-telemetry-code text-secondary font-semibold">
+            <span>INNOVATION</span>
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </div>
+        </div>
+
+        <!-- Card 6: Develop Future Tech Leaders -->
+        <div class="group p-6 sm:p-8 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm hover:shadow-lg hover:border-secondary/30 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-secondary-container/10 border border-secondary/15 flex items-center justify-center text-secondary text-2xl mb-5 group-hover:scale-110 transition-transform">
+              🏆
+            </div>
+            <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2.5">
+              Develop Future Tech Leaders
+            </h3>
+            <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+              Technical knowledge is only one part of becoming a successful technologist. Sphere Community also focuses on developing <strong class="text-on-surface font-semibold">leadership, communication, teamwork, project management, problem-solving, and decision-making skills</strong>. Our goal is to help members become not just better developers, but capable individuals who can <strong class="text-on-surface font-semibold">lead teams, build products, and create meaningful technological impact</strong>.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-surface-container/60 flex items-center gap-1.5 text-xs font-telemetry-code text-secondary font-semibold">
+            <span>LEADERSHIP</span>
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FOUNDING TEAM SECTION -->
+    <section class="w-full max-w-5xl mx-auto space-y-10">
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/10 border border-secondary/20 text-secondary font-label-caps text-xs tracking-widest uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          <span>LEADERSHIP FOUNDATION</span>
+        </div>
+        <h2 class="font-headline-lg text-3xl sm:text-4xl text-on-surface font-extrabold tracking-tight">
+          Founding Team
+        </h2>
+        <p class="font-body-md text-on-surface-variant max-w-xl mx-auto">
+          The founders who conceived and established Sphere Community to empower students through peer collaboration and hands-on creation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Anish Mogam -->
+        <div class="group rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm hover:shadow-xl hover:border-secondary/40 transition-all duration-300 p-6 sm:p-8 flex flex-col items-center text-center relative overflow-hidden">
+          <div class="relative w-32 h-32 sm:w-36 sm:h-36 mb-6">
+            <div class="absolute -inset-2 rounded-full bg-secondary/10 blur-md group-hover:bg-secondary/20 transition-all"></div>
+            <img src="assets/images/anish.jpg" alt="Anish Mogam" class="relative z-10 w-full h-full object-cover rounded-full shadow-[0_0_0_2px_#ffffff,0_0_0_4px_#3B82FF,0_8px_24px_rgba(20,91,255,0.25)] group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <span class="px-3 py-1 rounded-full bg-secondary text-on-secondary font-label-caps text-[11px] font-bold tracking-widest uppercase mb-3 shadow-sm">
+            Founder
+          </span>
+          <h3 class="font-headline-sm text-xl font-bold text-on-surface mb-2">
+            Anish Mogam
+          </h3>
+          <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+            Anish Mogam founded Sphere Community with the vision of creating a student-led technology ecosystem where students could learn through practical experience, collaborate on projects, participate in hackathons, and explore the rapidly changing world of technology.
+          </p>
+        </div>
+
+        <!-- Madhura Lakade -->
+        <div class="group rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm hover:shadow-xl hover:border-secondary/40 transition-all duration-300 p-6 sm:p-8 flex flex-col items-center text-center relative overflow-hidden">
+          <div class="relative w-32 h-32 sm:w-36 sm:h-36 mb-6">
+            <div class="absolute -inset-2 rounded-full bg-secondary/10 blur-md group-hover:bg-secondary/20 transition-all"></div>
+            <img src="assets/images/madhura.jpg" alt="Madhura Lakade" class="relative z-10 w-full h-full object-cover rounded-full shadow-[0_0_0_2px_#ffffff,0_0_0_4px_#3B82FF,0_8px_24px_rgba(20,91,255,0.25)] group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-[11px] font-bold tracking-widest uppercase mb-3 shadow-sm">
+            Co-Founder
+          </span>
+          <h3 class="font-headline-sm text-xl font-bold text-on-surface mb-2">
+            Madhura Lakade
+          </h3>
+          <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+            Madhura Lakade is a Co-Founder of Sphere Community and contributes to building the community, supporting collaboration, and helping create an environment where members can learn and grow together.
+          </p>
+        </div>
+
+        <!-- Shreyash Atre -->
+        <div class="group rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm hover:shadow-xl hover:border-secondary/40 transition-all duration-300 p-6 sm:p-8 flex flex-col items-center text-center relative overflow-hidden">
+          <div class="relative w-32 h-32 sm:w-36 sm:h-36 mb-6">
+            <div class="absolute -inset-2 rounded-full bg-secondary/10 blur-md group-hover:bg-secondary/20 transition-all"></div>
+            <img src="assets/images/shreyash.jpg" alt="Shreyash Atre" class="relative z-10 w-full h-full object-cover rounded-full shadow-[0_0_0_2px_#ffffff,0_0_0_4px_#3B82FF,0_8px_24px_rgba(20,91,255,0.25)] group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-[11px] font-bold tracking-widest uppercase mb-3 shadow-sm">
+            Co-Founder
+          </span>
+          <h3 class="font-headline-sm text-xl font-bold text-on-surface mb-2">
+            Shreyash Atre
+          </h3>
+          <p class="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+            Shreyash Atre is a Co-Founder of Sphere Community and contributes to the development of the community, its activities, collaborations, and initiatives focused on student growth and technology.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. WHAT SPHERE COMMUNITY REPRESENTS -->
+    <section class="w-full max-w-5xl mx-auto p-6 sm:p-10 md:p-12 rounded-3xl bg-surface-container-lowest border border-surface-container shadow-sm relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-3xl space-y-6 relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/10 border border-secondary/20 text-secondary font-label-caps text-xs tracking-widest uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          <span>CORE PHILOSOPHY</span>
+        </div>
+        <h2 class="font-headline-lg text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight">
+          What Sphere Community Represents
+        </h2>
+        <div class="space-y-4 font-body-lg text-base sm:text-lg text-on-surface leading-relaxed">
+          <p class="font-semibold text-lg sm:text-xl text-secondary">
+            Sphere Community is more than a coding or technical club.
+          </p>
+          <p>
+            It is a <strong class="text-on-surface font-bold">community built around people, ideas, technology, and collaboration</strong>.
+          </p>
+          <p class="text-on-surface-variant">
+            We believe that every student has the potential to create something meaningful when given the right environment, resources, guidance, and people to collaborate with.
+          </p>
+          <div class="p-6 rounded-2xl bg-surface-container-low border border-surface-container text-on-surface font-medium leading-relaxed mt-4">
+            From the first idea to the final product, from the first line of code to a complete project, and from participating in a hackathon to leading a team — <span class="text-secondary font-semibold">Sphere Community aims to provide the environment to take that journey together.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. LOOKING AHEAD & BANNER CALLOUT -->
+    <section class="w-full max-w-5xl mx-auto p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-surface-container-lowest via-surface-container-low to-surface-container border border-surface-container shadow-lg text-center relative overflow-hidden">
+      <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-secondary/10 blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-sky-400/10 blur-2xl pointer-events-none"></div>
+
+      <div class="max-w-2xl mx-auto space-y-6 relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/10 border border-secondary/20 text-secondary font-label-caps text-xs tracking-widest uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          <span>FUTURE HORIZON</span>
+        </div>
+        <h2 class="font-headline-lg text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+          Looking Ahead
+        </h2>
+        <p class="font-body-lg text-base sm:text-lg text-on-surface-variant leading-relaxed">
+          Sphere Community aims to continuously expand its activities, projects, collaborations, technical initiatives, and learning opportunities.
+        </p>
+        <p class="font-body-md text-on-surface-variant">
+          As the community grows, our goal remains the same:
+        </p>
+
+        <!-- Tagline Pills -->
+        <div class="py-4">
+          <div class="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-6 py-3 rounded-2xl bg-surface-container-lowest border border-surface-container shadow-sm font-headline-sm text-base sm:text-xl font-bold text-secondary">
+            <span>Create.</span>
+            <span>Collaborate.</span>
+            <span>Innovate.</span>
+            <span>Lead.</span>
+          </div>
+        </div>
+
+        <div class="space-y-1 pt-2">
+          <h4 class="font-title-caps text-sm tracking-wider uppercase font-bold text-on-surface">
+            Sphere Community
+          </h4>
+          <p class="font-telemetry-code text-xs text-secondary tracking-widest uppercase font-semibold">
+            Learn. Build. Collaborate. Lead.
+          </p>
+        </div>
+
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#join" class="btn-primary w-full sm:w-auto px-8 py-3.5 text-sm">
+            <span>Join Community</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+          <a href="leadership.html" class="btn-secondary w-full sm:w-auto px-8 py-3.5 text-sm">
+            <span>Explore Leadership</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 w-full bg-surface-container-lowest mt-space-2xl border-t border-surface-container-high/60">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gutter-lg mb-space-xl">
+        <div class="lg:col-span-2 flex flex-col gap-space-md">
+          <div class="flex items-center gap-3">
+            <img alt="SPHERE LOGO" class="h-8 w-8 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]" src="assets/images/sphere-logo.png"/>
+            <span class="font-headline-sm text-headline-sm text-on-surface font-bold tracking-tight uppercase">SPHERE COMMUNITY</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
             Building the next generation of innovators. Synthesizing technology, talent, and collaboration for real-world impact.
           </p>
-<div class="flex items-center gap-2 font-telemetry-code text-telemetry-code text-[#2563eb] bg-[#eff6ff] px-3 py-1.5 rounded-full w-fit mt-2">
-<span class="material-symbols-outlined text-[14px]">satellite_alt</span>
-<span class="tracking-widest font-bold">SYSTEMS: NOMINAL</span>
-</div>
-</div>
-<div class="flex flex-col gap-space-sm">
-<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Platform</span>
-<div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
-<a class="text-on-surface-variant hover:text-secondary transition-colors" href="projects.html">Projects</a>
-<a class="text-on-surface-variant hover:text-secondary transition-colors" href="events.html">Events</a>
-<a class="text-on-surface-variant hover:text-secondary transition-colors" href="domains.html">Domains</a>
-</div>
-</div>
-<div class="flex flex-col gap-space-sm">
-<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Legal</span>
-<div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
-<a class="text-on-surface-variant hover:text-secondary transition-colors" href="privacy.html">Privacy Policy</a>
-<a class="text-on-surface-variant hover:text-secondary transition-colors" href="terms.html">Terms of Service</a>
-<a class="text-on-surface-variant hover:text-secondary transition-colors" href="brand.html">Brand Assets</a>
-</div>
-</div>
-<div class="flex flex-col gap-space-sm">
-<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Connect</span>
-<div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
-<a class="text-on-surface-variant hover:text-secondary transition-colors" href="mailto:spherecclub@gmail.com">Contact Us</a>
-<a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://discord.gg/sphere" target="_blank">Join Discord</a>
-<a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://www.instagram.com/spherecclub/" target="_blank">Instagram</a>
-</div>
-</div>
-</div>
-<div class="flex flex-col md:flex-row items-center justify-between gap-space-md bg-[#f0f4ff] rounded-xl px-6 py-5 mt-8">
-<p class="font-body-sm text-body-sm text-on-surface-variant m-0">© 2026 Sphere Community. Engineered for the Future.</p>
-<div class="flex items-center gap-2">
-<span class="font-telemetry-code text-telemetry-code text-on-surface-variant text-[12px] tracking-widest">Sphere Orbital v2.0</span>
-<span class="w-2 h-2 rounded-full bg-[#3b82f6]"></span>
-</div>
-</div>
-</div>
-</footer>
-<script class="" src="js/main.js"></script>
-</body></html>
+          <div class="flex items-center gap-2 font-telemetry-code text-telemetry-code text-[#2563eb] bg-[#eff6ff] px-3 py-1.5 rounded-full w-fit mt-2">
+            <span class="material-symbols-outlined text-[14px]">satellite_alt</span>
+            <span class="tracking-widest font-bold">SYSTEMS: NOMINAL</span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-sm">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Platform</span>
+          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="projects.html">Projects</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="events.html">Events</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="domains.html">Domains</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-sm">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Legal</span>
+          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="privacy.html">Privacy Policy</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="terms.html">Terms of Service</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="brand.html">Brand Assets</a>
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-sm">
+          <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest text-[11px] font-bold">Connect</span>
+          <div class="flex flex-col gap-3 font-body-md text-body-md mt-2">
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="mailto:spherecclub@gmail.com">Contact Us</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://discord.gg/sphere" target="_blank">Join Discord</a>
+            <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://www.instagram.com/spherecclub/" target="_blank">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row items-center justify-between gap-space-md bg-[#f0f4ff] rounded-xl px-6 py-5 mt-8">
+        <p class="font-body-sm text-body-sm text-on-surface-variant m-0">© 2026 Sphere Community. Engineered for the Future.</p>
+        <div class="flex items-center gap-2">
+          <span class="font-telemetry-code text-telemetry-code text-on-surface-variant text-[12px] tracking-widest">Sphere Orbital v2.0</span>
+          <span class="w-2 h-2 rounded-full bg-[#3b82f6]"></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
