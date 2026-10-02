@@ -516,7 +516,59 @@ const galleryCol = collection(db, 'gallery');
 const addGalleryForm = document.getElementById('add-gallery-form');
 const galleryAdminList = document.getElementById('gallery-admin-list');
 const galleryAdminSearch = document.getElementById('gallery-admin-search');
+const galEventSelect = document.getElementById('gal-event-select');
 let cachedGallery = [];
+
+// Dedicated Gallery Image Compression with Firestore 1MB boundary guarantee
+function compressGalleryImage(file, maxWidth = 1000, initialQuality = 0.8) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+
+                if (width > maxWidth) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                let quality = initialQuality;
+                let dataURL = canvas.toDataURL('image/jpeg', quality);
+
+                // Firestore documents cannot exceed 1,048,576 bytes.
+                // Keep dataURL safely under 650KB (< 650,000 chars)
+                while (dataURL.length > 650000 && quality > 0.35) {
+                    quality -= 0.12;
+                    dataURL = canvas.toDataURL('image/jpeg', quality);
+                }
+
+                // If still large after lowering quality, scale dimensions down
+                if (dataURL.length > 700000) {
+                    const scaled = document.createElement('canvas');
+                    scaled.width = Math.round(width * 0.7);
+                    scaled.height = Math.round(height * 0.7);
+                    const sCtx = scaled.getContext('2d');
+                    sCtx.drawImage(canvas, 0, 0, scaled.width, scaled.height);
+                    dataURL = scaled.toDataURL('image/jpeg', 0.65);
+                }
+
+                resolve(dataURL);
+            };
+            img.onerror = () => reject(new Error("Failed to process image file. Please use JPG, PNG, or WebP."));
+            img.src = e.target.result;
+        };
+        reader.onerror = () => reject(new Error("Could not read image file."));
+        reader.readAsDataURL(file);
+    });
+}
 
 function updateGalleryEventOptions(events) {
     const select = document.getElementById('gal-event-select');
@@ -587,8 +639,8 @@ if (addGalleryForm) {
         try {
             let imageData = '';
             if (hasNewFile) {
-                // Compress image for gallery with high fidelity (1200px max width, 0.85 quality)
-                imageData = await compressImage(fileInput.files[0], 1200, 0.85);
+                // Compress image for gallery with high fidelity and strict size safety (< 700KB)
+                imageData = await compressGalleryImage(fileInput.files[0], 1000, 0.8);
             } else if (hasNewUrl) {
                 imageData = urlInput.value.trim();
             }
@@ -707,11 +759,16 @@ async function loadGallery() {
     if (!galleryAdminList) return;
     galleryAdminList.innerHTML = '<p class="text-on-surface-variant/60 text-center col-span-full py-8">Fetching gallery photos...</p>';
     try {
-        const q = query(galleryCol, orderBy('createdAt', 'desc'));
-        const snapshot = await getDocs(q);
+        const snapshot = await getDocs(galleryCol);
         cachedGallery = [];
         snapshot.forEach(docSnap => {
             cachedGallery.push({ id: docSnap.id, ...docSnap.data() });
+        });
+
+        cachedGallery.sort((a, b) => {
+            const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : (a.createdAt?.seconds ? a.createdAt.seconds * 1000 : 0);
+            const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : (b.createdAt?.seconds ? b.createdAt.seconds * 1000 : 0);
+            return timeB - timeA;
         });
 
         if (metricGallery) metricGallery.textContent = cachedGallery.length;
