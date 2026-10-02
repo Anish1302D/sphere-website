@@ -88,7 +88,7 @@
               <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
               <span>VISUAL ARCHIVE // SPHERE EVENTS</span>
             </div>
-            <h1 class="font-display-hero text-3xl sm:text-4xl lg:text-5xl font-extrabold text-on-surface tracking-tight uppercase">
+            <h1 class="font-display-hero text-2xl sm:text-4xl lg:text-5xl font-extrabold text-on-surface tracking-tight uppercase break-words">
               Event Gallery &amp; Chronicle
             </h1>
             <p class="font-body-lg text-base sm:text-lg text-on-surface-variant mt-3 leading-relaxed">
@@ -97,67 +97,85 @@
           </div>
 
           <!-- Quick Telemetry Card -->
-          <div class="shrink-0 flex flex-wrap sm:flex-nowrap items-center gap-3">
+          <div class="shrink-0 flex items-center gap-3">
             <div class="px-4 py-3 rounded-2xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center gap-3">
               <div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center">
                 <span class="material-symbols-outlined text-[22px]">photo_camera</span>
               </div>
               <div>
                 <div class="font-telemetry-code text-xs text-on-surface-variant uppercase">ARCHIVED PHOTOS</div>
-                <div id="gallery-counter-stat" class="font-headline-sm text-lg font-bold text-on-surface">Loading...</div>
+                <div id="gallery-counter-stat" class="font-headline-sm text-lg font-bold text-on-surface">5 Captured</div>
               </div>
             </div>
-
-            <a href="admin.html" class="hidden md:inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-surface-container hover:bg-surface-container-high border border-surface-container text-on-surface text-xs font-title-caps uppercase tracking-wider font-semibold transition-colors">
-              <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
-              <span>Add Photos (Admin)</span>
-            </a>
           </div>
         </div>
       </div>
 
       <!-- Controls & Filter Toolbar -->
-      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-8 bg-surface-container-lowest/80 backdrop-blur-md p-4 rounded-2xl border border-surface-container shadow-sm">
+      <div class="mb-8 bg-surface-container-lowest/80 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl border border-surface-container shadow-sm space-y-3.5">
         
-        <!-- Category Filter Pills -->
-        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 lg:pb-0" id="gallery-category-filters">
-          <button class="gallery-cat-btn active px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all bg-secondary-container text-on-secondary-container shadow-sm whitespace-nowrap" data-category="all">
-            All Photos
+        <!-- Category Filter Pills Rail (Full width, Horizontally Scrollable) -->
+        <div class="relative flex items-center">
+          <!-- Left Scroll Arrow -->
+          <button id="gallery-cat-scroll-left" type="button" aria-label="Scroll categories left"
+            class="hidden sm:flex shrink-0 w-8 h-8 rounded-xl items-center justify-center bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant hover:text-on-surface transition-all mr-1.5 cursor-pointer select-none">
+            <span class="material-symbols-outlined text-[18px]">chevron_left</span>
           </button>
-          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="hackathons">
-            Hackathons
-          </button>
-          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="workshops">
-            Workshops
-          </button>
-          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="demodays">
-            Demo Days &amp; Pitch
-          </button>
-          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="hardware">
-            Hardware &amp; Labs
-          </button>
-          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="community">
-            Community &amp; Social
+
+          <!-- Category Buttons Track -->
+          <div class="flex items-center gap-2 overflow-x-auto scroll-smooth py-1 px-0.5 flex-1 no-scrollbar select-none cursor-grab active:cursor-grabbing" id="gallery-category-filters" style="-webkit-overflow-scrolling: touch; touch-action: pan-x;">
+            <button class="gallery-cat-btn shrink-0 active px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all bg-secondary-container text-on-secondary-container shadow-sm whitespace-nowrap" data-category="all">
+              All Photos
+            </button>
+            <button class="gallery-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="hackathons">
+              Hackathons
+            </button>
+            <button class="gallery-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="workshops">
+              Workshops
+            </button>
+            <button class="gallery-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="demodays">
+              Demo Days &amp; Pitch
+            </button>
+            <button class="gallery-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="hardware">
+              Hardware &amp; Labs
+            </button>
+            <button class="gallery-cat-btn shrink-0 px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="community">
+              Community &amp; Social
+            </button>
+          </div>
+
+          <!-- Right Scroll Arrow -->
+          <button id="gallery-cat-scroll-right" type="button" aria-label="Scroll categories right"
+            class="hidden sm:flex shrink-0 w-8 h-8 rounded-xl items-center justify-center bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/40 text-on-surface-variant hover:text-on-surface transition-all ml-1.5 cursor-pointer select-none">
+            <span class="material-symbols-outlined text-[18px]">chevron_right</span>
           </button>
         </div>
 
-        <!-- Search and Event Filter Dropdown -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <!-- Event Dropdown -->
-          <div class="relative min-w-[200px]">
-            <select id="gallery-event-filter" class="w-full px-3.5 py-2 pr-8 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none appearance-none cursor-pointer">
-              <option value="all">All Events</option>
-            </select>
-            <span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span>
+        <!-- Secondary Controls: Search, Event Dropdown & Results Status -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-3 border-t border-surface-container/60">
+          <div class="flex items-center gap-2 text-xs font-telemetry-code text-on-surface-variant">
+            <span class="material-symbols-outlined text-[16px] text-secondary">tune</span>
+            <span id="gallery-filter-status">FILTER &amp; SEARCH ARCHIVE</span>
           </div>
 
-          <!-- Live Search Bar -->
-          <div class="relative min-w-[220px]">
-            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
-            <input type="text" id="gallery-search-input" placeholder="Search caption or event..."
-              class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"/>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <!-- Event Dropdown -->
+            <div class="relative min-w-[200px]">
+              <select id="gallery-event-filter" class="w-full px-3.5 py-2 pr-8 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none appearance-none cursor-pointer">
+                <option value="all">All Events</option>
+              </select>
+              <span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span>
+            </div>
+
+            <!-- Live Search Bar -->
+            <div class="relative min-w-[220px]">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+              <input type="text" id="gallery-search-input" placeholder="Search caption or event..."
+                class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"/>
+            </div>
           </div>
         </div>
+
       </div>
 
       <!-- Gallery Grid Container -->
@@ -179,25 +197,6 @@
         <button id="gallery-reset-filters" class="px-5 py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs uppercase font-bold transition-all">
           Reset Filters
         </button>
-      </div>
-
-      <!-- Admin Callout Banner -->
-      <div class="mt-16 p-8 rounded-3xl bg-gradient-to-r from-surface-container-lowest to-surface-container border border-surface-container shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-4">
-          <div class="w-14 h-14 rounded-2xl bg-secondary-container/20 border border-secondary/30 flex items-center justify-center text-secondary shrink-0 shadow-inner">
-            <span class="material-symbols-outlined text-[28px]">cloud_upload</span>
-          </div>
-          <div>
-            <h3 class="font-headline-sm text-lg font-bold text-on-surface">Sphere Admin or Event Lead?</h3>
-            <p class="font-body-sm text-xs text-on-surface-variant mt-0.5 max-w-xl">
-              Upload event snapshots, keynote photos, team pictures, and victory ceremonies directly to this gallery in real time via Mission Control.
-            </p>
-          </div>
-        </div>
-        <a href="admin.html" class="shrink-0 px-6 py-3 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold transition-all shadow-[0_0_15px_rgba(17,90,254,0.25)] flex items-center gap-2">
-          <span>ACCESS MISSION CONTROL</span>
-          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-        </a>
       </div>
 
     </div>

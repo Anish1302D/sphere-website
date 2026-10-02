@@ -55,6 +55,16 @@ const DEFAULT_GALLERY_PHOTOS = [
         description: "Prototyping quadrupeds, custom microcontrollers, and sensor arrays in the campus makerspace laboratory.",
         image: "assets/images/gallery-hardware-lab.jpg",
         isSample: true
+    },
+    {
+        id: 'sample-5',
+        title: "Campus Innovation Hub — Community Networking Night",
+        eventName: "Sphere Campus Meetup",
+        category: "community",
+        date: "February 2026",
+        description: "Builders, designers, and founders connect over open-source projects, peer code reviews, and lightning tech talks in the innovation lounge.",
+        image: "assets/images/gallery-community-meetup.jpg",
+        isSample: true
     }
 ];
 
@@ -71,6 +81,10 @@ const galleryGrid = document.getElementById('gallery-grid');
 const emptyState = document.getElementById('gallery-empty-state');
 const counterStat = document.getElementById('gallery-counter-stat');
 const categoryButtons = document.querySelectorAll('.gallery-cat-btn');
+const catContainer = document.getElementById('gallery-category-filters');
+const catScrollLeft = document.getElementById('gallery-cat-scroll-left');
+const catScrollRight = document.getElementById('gallery-cat-scroll-right');
+const filterStatus = document.getElementById('gallery-filter-status');
 const eventFilterSelect = document.getElementById('gallery-event-filter');
 const searchInput = document.getElementById('gallery-search-input');
 const resetBtn = document.getElementById('gallery-reset-filters');
@@ -228,6 +242,14 @@ function renderGallery() {
         counterStat.textContent = `${allPhotos.length} Captured`;
     }
 
+    if (filterStatus) {
+        if (selectedCategory === 'all' && selectedEvent === 'all' && !searchQuery) {
+            filterStatus.textContent = `ALL ${filteredPhotos.length} ARCHIVED PHOTOGRAPHS`;
+        } else {
+            filterStatus.textContent = `SHOWING ${filteredPhotos.length} OF ${allPhotos.length} PHOTOGRAPHS`;
+        }
+    }
+
     if (filteredPhotos.length === 0) {
         galleryGrid.innerHTML = '';
         if (emptyState) emptyState.classList.remove('hidden');
@@ -363,6 +385,25 @@ function nextLightbox() {
 
 // Wire Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
+    // Check URL query parameter or hash for initial category filter (e.g. ?category=community or #community)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialCategory = urlParams.get('category') || (window.location.hash ? window.location.hash.substring(1).toLowerCase() : null);
+    if (initialCategory) {
+        const matchingBtn = Array.from(categoryButtons).find(b => b.getAttribute('data-category') === initialCategory);
+        if (matchingBtn) {
+            categoryButtons.forEach(b => {
+                b.classList.remove('active', 'bg-secondary-container', 'text-on-secondary-container', 'shadow-sm');
+                b.classList.add('text-on-surface-variant');
+            });
+            matchingBtn.classList.add('active', 'bg-secondary-container', 'text-on-secondary-container', 'shadow-sm');
+            matchingBtn.classList.remove('text-on-surface-variant');
+            selectedCategory = initialCategory;
+            setTimeout(() => {
+                matchingBtn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+            }, 150);
+        }
+    }
+
     fetchGalleryPhotos();
 
     // Category button filters
@@ -376,9 +417,109 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.classList.remove('text-on-surface-variant');
 
             selectedCategory = btn.getAttribute('data-category') || 'all';
+            btn.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
             applyFilters();
         });
     });
+
+    // Category track horizontal scroll interactions
+    if (catContainer) {
+        // 1. Mouse wheel horizontal scrolling
+        catContainer.addEventListener('wheel', (e) => {
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                e.preventDefault();
+                catContainer.scrollLeft += e.deltaY;
+                updateScrollArrows();
+            }
+        }, { passive: false });
+
+        // 2. Mouse drag-to-scroll for desktop users
+        let isDown = false;
+        let startX = 0;
+        let scrollStart = 0;
+        let hasDragged = false;
+
+        catContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            hasDragged = false;
+            startX = e.pageX - catContainer.offsetLeft;
+            scrollStart = catContainer.scrollLeft;
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDown) {
+                isDown = false;
+                setTimeout(() => { hasDragged = false; }, 50);
+            }
+        });
+
+        catContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            const x = e.pageX - catContainer.offsetLeft;
+            const walk = (x - startX);
+            if (Math.abs(walk) > 4) {
+                hasDragged = true;
+                e.preventDefault();
+                catContainer.scrollLeft = scrollStart - walk;
+                updateScrollArrows();
+            }
+        });
+
+        // Prevent button click triggering if user was dragging
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if (hasDragged) {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                }
+            }, true);
+        });
+
+        // 3. Arrow buttons navigation
+        if (catScrollLeft) {
+            catScrollLeft.addEventListener('click', () => {
+                catContainer.scrollBy({ left: -220, behavior: 'smooth' });
+                setTimeout(updateScrollArrows, 320);
+            });
+        }
+        if (catScrollRight) {
+            catScrollRight.addEventListener('click', () => {
+                catContainer.scrollBy({ left: 220, behavior: 'smooth' });
+                setTimeout(updateScrollArrows, 320);
+            });
+        }
+
+        // 4. Update scroll arrow states
+        function updateScrollArrows() {
+            if (!catContainer) return;
+            const maxScroll = catContainer.scrollWidth - catContainer.clientWidth;
+            if (maxScroll <= 5) {
+                if (catScrollLeft) catScrollLeft.classList.add('opacity-30', 'pointer-events-none');
+                if (catScrollRight) catScrollRight.classList.add('opacity-30', 'pointer-events-none');
+                return;
+            }
+            if (catScrollLeft) {
+                const atStart = catContainer.scrollLeft <= 5;
+                if (atStart) {
+                    catScrollLeft.classList.add('opacity-30', 'pointer-events-none');
+                } else {
+                    catScrollLeft.classList.remove('opacity-30', 'pointer-events-none');
+                }
+            }
+            if (catScrollRight) {
+                const atEnd = catContainer.scrollLeft >= maxScroll - 5;
+                if (atEnd) {
+                    catScrollRight.classList.add('opacity-30', 'pointer-events-none');
+                } else {
+                    catScrollRight.classList.remove('opacity-30', 'pointer-events-none');
+                }
+            }
+        }
+
+        catContainer.addEventListener('scroll', updateScrollArrows);
+        window.addEventListener('resize', updateScrollArrows);
+        setTimeout(updateScrollArrows, 150);
+    }
 
     // Event dropdown filter
     if (eventFilterSelect) {
