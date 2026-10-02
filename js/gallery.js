@@ -10,65 +10,10 @@ import { db } from './firebase-config.js';
 import { 
     collection, 
     getDocs, 
-    query, 
-    orderBy 
+    onSnapshot 
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Curated default high-res photographs for instant initial loading
-const DEFAULT_GALLERY_PHOTOS = [
-    {
-        id: 'sample-1',
-        title: "SphereHacks '25 — 36-Hour National Sprint",
-        eventName: "SphereHacks 2025",
-        category: "hackathons",
-        date: "November 2025",
-        description: "Over 400 builders gathered under stadium floodlights pushing production code through the night at our flagship collegiate hackathon.",
-        image: "assets/images/gallery-hackathon-night.jpg",
-        isSample: true
-    },
-    {
-        id: 'sample-2',
-        title: "Global AI Summit — Machine Learning Keynote",
-        eventName: "Sphere AI Summit 2025",
-        category: "workshops",
-        date: "December 2025",
-        description: "Deep-dive technical workshop on transformer architectures and distributed GPU inference held in the main conference hall.",
-        image: "assets/images/gallery-workshop-stage.jpg",
-        isSample: true
-    },
-    {
-        id: 'sample-3',
-        title: "Sphere Grand Finale Champions & $25K Bounties",
-        eventName: "Innovatech Hackathon",
-        category: "demodays",
-        date: "January 2026",
-        description: "The winning student engineering squad celebrates on stage after taking 1st place in the national prototype showcase.",
-        image: "assets/images/gallery-awards-celebration.jpg",
-        isSample: true
-    },
-    {
-        id: 'sample-4',
-        title: "Robotics & Embedded Systems Hackerspace Sprint",
-        eventName: "Hardware Lab Sprint '26",
-        category: "hardware",
-        date: "February 2026",
-        description: "Prototyping quadrupeds, custom microcontrollers, and sensor arrays in the campus makerspace laboratory.",
-        image: "assets/images/gallery-hardware-lab.jpg",
-        isSample: true
-    },
-    {
-        id: 'sample-5',
-        title: "Campus Innovation Hub — Community Networking Night",
-        eventName: "Sphere Campus Meetup",
-        category: "community",
-        date: "February 2026",
-        description: "Builders, designers, and founders connect over open-source projects, peer code reviews, and lightning tech talks in the innovation lounge.",
-        image: "assets/images/gallery-community-meetup.jpg",
-        isSample: true
-    }
-];
-
-// State
+// State (strictly driven by genuine Firestore uploads - zero mock/sample photos)
 let allPhotos = [];
 let filteredPhotos = [];
 let currentLightboxIndex = -1;
@@ -139,44 +84,65 @@ function getCategoryDisplayName(cat) {
     }
 }
 
-// Fetch photos from Firestore
-async function fetchGalleryPhotos() {
+function mapDocToPhoto(docSnap) {
+    const data = docSnap.data();
+    return {
+        id: docSnap.id,
+        title: data.title || 'Untitled Photo',
+        eventName: data.eventName || data.event || 'Sphere Event',
+        category: normalizeCategory(data.category),
+        date: data.date || '2026',
+        description: data.description || '',
+        image: data.image || '',
+        isFeatured: !!data.isFeatured,
+        createdAt: data.createdAt || null
+    };
+}
+
+function sortPhotosDescending(photos) {
+    return photos.sort((a, b) => {
+        const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : (a.createdAt?.seconds ? a.createdAt.seconds * 1000 : (new Date(a.date || 0).getTime() || 0));
+        const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : (b.createdAt?.seconds ? b.createdAt.seconds * 1000 : (new Date(b.date || 0).getTime() || 0));
+        return timeB - timeA;
+    });
+}
+
+// Live real-time Firestore synchronization
+function initGallerySync() {
     try {
         const galleryCol = collection(db, 'gallery');
-        const q = query(galleryCol, orderBy('createdAt', 'desc'));
-        const snapshot = await getDocs(q);
-
-        const firestorePhotos = [];
-        snapshot.forEach(docSnap => {
-            const data = docSnap.data();
-            firestorePhotos.push({
-                id: docSnap.id,
-                title: data.title || 'Untitled Photo',
-                eventName: data.eventName || data.event || 'Sphere Event',
-                category: normalizeCategory(data.category),
-                date: data.date || '2026',
-                description: data.description || '',
-                image: data.image || '',
-                isFeatured: !!data.isFeatured
+        onSnapshot(galleryCol, (snapshot) => {
+            const photos = [];
+            snapshot.forEach(docSnap => {
+                photos.push(mapDocToPhoto(docSnap));
             });
+            allPhotos = sortPhotosDescending(photos);
+            populateEventDropdown();
+            applyFilters();
+        }, (err) => {
+            console.warn("Real-time listener issue, doing one-time fetch:", err);
+            fetchGalleryOnce();
         });
+    } catch (err) {
+        console.warn("Real-time listener setup error, falling back:", err);
+        fetchGalleryOnce();
+    }
+}
 
-        // Merge: Firestore uploads come first, supplemented by curated defaults if list is small
-        if (firestorePhotos.length > 0) {
-            // Keep default samples that don't duplicate any firestore titles
-            const existingTitles = new Set(firestorePhotos.map(p => p.title.toLowerCase()));
-            const complementarySamples = DEFAULT_GALLERY_PHOTOS.filter(s => !existingTitles.has(s.title.toLowerCase()));
-            allPhotos = [...firestorePhotos, ...complementarySamples];
-        } else {
-            allPhotos = [...DEFAULT_GALLERY_PHOTOS];
-        }
-
+async function fetchGalleryOnce() {
+    try {
+        const galleryCol = collection(db, 'gallery');
+        const snapshot = await getDocs(galleryCol);
+        const photos = [];
+        snapshot.forEach(docSnap => {
+            photos.push(mapDocToPhoto(docSnap));
+        });
+        allPhotos = sortPhotosDescending(photos);
         populateEventDropdown();
         applyFilters();
-
     } catch (error) {
-        console.warn("Could not fetch gallery from Firestore, falling back to local archive:", error);
-        allPhotos = [...DEFAULT_GALLERY_PHOTOS];
+        console.error("Could not fetch gallery from Firestore:", error);
+        allPhotos = [];
         populateEventDropdown();
         applyFilters();
     }
@@ -242,6 +208,31 @@ function renderGallery() {
         counterStat.textContent = `${allPhotos.length} Captured`;
     }
 
+    if (filteredPhotos.length === 0) {
+        galleryGrid.innerHTML = '';
+        if (emptyState) {
+            emptyState.classList.remove('hidden');
+            const titleEl = emptyState.querySelector('h3');
+            const descEl = emptyState.querySelector('p');
+            const resetBtnEl = document.getElementById('gallery-reset-filters');
+            if (allPhotos.length === 0) {
+                if (titleEl) titleEl.textContent = 'No Photographs Uploaded Yet';
+                if (descEl) descEl.textContent = 'The Sphere event archive is live. Photos published in Mission Control will appear here automatically.';
+                if (resetBtnEl) resetBtnEl.classList.add('hidden');
+                if (filterStatus) filterStatus.textContent = 'ARCHIVE READY // 0 PHOTOGRAPHS';
+            } else {
+                if (titleEl) titleEl.textContent = 'No Photographs Found';
+                if (descEl) descEl.textContent = 'No pictures match your selected filter criteria or search keyword.';
+                if (resetBtnEl) resetBtnEl.classList.remove('hidden');
+                if (filterStatus) filterStatus.textContent = `0 OF ${allPhotos.length} PHOTOGRAPHS MATCH`;
+            }
+        }
+        return;
+    }
+
+    if (emptyState) emptyState.classList.add('hidden');
+    galleryGrid.innerHTML = '';
+
     if (filterStatus) {
         if (selectedCategory === 'all' && selectedEvent === 'all' && !searchQuery) {
             filterStatus.textContent = `ALL ${filteredPhotos.length} ARCHIVED PHOTOGRAPHS`;
@@ -249,15 +240,6 @@ function renderGallery() {
             filterStatus.textContent = `SHOWING ${filteredPhotos.length} OF ${allPhotos.length} PHOTOGRAPHS`;
         }
     }
-
-    if (filteredPhotos.length === 0) {
-        galleryGrid.innerHTML = '';
-        if (emptyState) emptyState.classList.remove('hidden');
-        return;
-    }
-
-    if (emptyState) emptyState.classList.add('hidden');
-    galleryGrid.innerHTML = '';
 
     filteredPhotos.forEach((photo, index) => {
         const card = document.createElement('div');
@@ -404,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    fetchGalleryPhotos();
+    initGallerySync();
 
     // Category button filters
     categoryButtons.forEach(btn => {
