@@ -33,6 +33,7 @@
       <nav class="hidden xl:flex items-center gap-space-md">
         <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="index.html">HOME</a>
         <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="events.html">EVENTS</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="gallery.html">GALLERY</a>
         <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="projects.html">PROJECTS</a>
         <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="team.html">TEAM</a>
         <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-secondary transition-colors py-1 px-2" href="leadership.html">LEADERSHIP</a>
@@ -64,6 +65,7 @@
     <nav class="flex flex-col gap-6 mt-16">
       <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="index.html">Home</a>
       <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="events.html">Events</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="gallery.html">Gallery</a>
       <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="projects.html">Projects</a>
       <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="team.html">Team</a>
       <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="leadership.html">Leadership</a>
@@ -93,6 +95,10 @@
         <div class="px-3 py-1.5 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center gap-2">
           <span class="material-symbols-outlined text-secondary text-[18px]">event</span>
           <span class="font-telemetry-code text-xs font-semibold text-on-surface"><span id="metric-events-count">0</span> Events</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[18px]">photo_library</span>
+          <span class="font-telemetry-code text-xs font-semibold text-on-surface"><span id="metric-gallery-count">0</span> Photos</span>
         </div>
         <div class="px-3 py-1.5 rounded-xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center gap-2">
           <span class="material-symbols-outlined text-secondary text-[18px]">rocket_launch</span>
@@ -162,6 +168,10 @@
           <button class="tab-btn active shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all bg-secondary-container text-on-secondary-container shadow-sm min-h-[40px]" data-target="tab-events">
             <span class="material-symbols-outlined text-[18px]">event</span>
             <span>Events</span>
+          </button>
+          <button class="tab-btn shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high min-h-[40px]" data-target="tab-gallery">
+            <span class="material-symbols-outlined text-[18px]">photo_library</span>
+            <span>Event Gallery</span>
           </button>
           <button class="tab-btn shrink-0 whitespace-nowrap px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold flex items-center gap-2 transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high min-h-[40px]" data-target="tab-projects">
             <span class="material-symbols-outlined text-[18px]">rocket_launch</span>
@@ -315,6 +325,141 @@
 
             <div id="events-list" class="space-y-3 flex-1 overflow-y-auto max-h-[650px] pr-1">
               <p class="text-on-surface-variant/60 text-center py-12">Loading events from Firestore...</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ====================================================
+           TAB: EVENT GALLERY MANAGEMENT
+           ==================================================== -->
+      <div id="tab-gallery" class="tab-content hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Gallery Form (Add / Edit) -->
+          <div class="lg:col-span-5 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4 pb-3 border-b border-surface-container">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[22px]">add_a_photo</span>
+                  <h3 id="gallery-form-title" class="font-headline-sm text-lg font-bold text-on-surface">Add Photo to Gallery</h3>
+                </div>
+                <button id="gal-cancel-edit-btn" type="button" class="hidden text-xs text-on-surface-variant hover:text-error font-medium underline">
+                  Cancel Edit
+                </button>
+              </div>
+
+              <form id="add-gallery-form" class="space-y-4">
+                <input type="hidden" id="gal-edit-id" value=""/>
+
+                <!-- Associated Event Selection -->
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold" for="gal-event-select">Associated Event *</label>
+                    <button type="button" id="gal-toggle-custom-event" class="text-[11px] text-secondary hover:underline font-medium">
+                      + Custom Event Name
+                    </button>
+                  </div>
+                  <select id="gal-event-select"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none">
+                    <option value="">-- Choose from Published Events --</option>
+                  </select>
+                  <input type="text" id="gal-event-custom" placeholder="Or enter custom event name (e.g. SphereHacks '26)"
+                    class="hidden mt-2 w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                </div>
+
+                <!-- Photo Caption / Title -->
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="gal-title">Photo Caption / Title *</label>
+                  <input type="text" id="gal-title" required placeholder="e.g. Grand Finale Winners on Main Stage"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                </div>
+
+                <!-- Category and Date in 2 columns -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="gal-category">Category</label>
+                    <select id="gal-category"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none">
+                      <option value="hackathons">Hackathon</option>
+                      <option value="workshops">Workshop</option>
+                      <option value="demodays">Demo Day / Pitch</option>
+                      <option value="hardware">Hardware Lab</option>
+                      <option value="community">Community / Social</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="gal-date">Event Date / Period</label>
+                    <input type="text" id="gal-date" placeholder="e.g. October 2026"
+                      class="w-full px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none" />
+                  </div>
+                </div>
+
+                <!-- Description / Context -->
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1" for="gal-desc">Description / Story (Optional)</label>
+                  <textarea id="gal-desc" rows="3" placeholder="Context about the moment, speakers, prize bounty, or builders featured..."
+                    class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-sm focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none"></textarea>
+                </div>
+
+                <!-- Image Upload & Preview -->
+                <div>
+                  <label class="block font-title-caps text-[11px] text-on-surface-variant uppercase font-semibold mb-1">Photograph *</label>
+                  <div class="space-y-2">
+                    <input type="file" id="gal-image-file" accept="image/*"
+                      class="w-full text-xs text-on-surface-variant file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-secondary-container/15 file:text-secondary hover:file:bg-secondary-container/25 cursor-pointer" />
+                    <input type="url" id="gal-image" placeholder="Or paste high-res image URL (https://...)"
+                      class="w-full px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary outline-none" />
+                    <div id="gal-image-preview" class="hidden relative w-full h-40 rounded-xl overflow-hidden border border-surface-container mt-2 group">
+                      <img id="gal-preview-img" src="" alt="Preview" class="w-full h-full object-cover"/>
+                      <button type="button" id="gal-clear-preview-btn" class="absolute top-2 right-2 p-1.5 rounded-lg bg-black/60 text-white hover:bg-black/80 transition-colors" title="Remove image">
+                        <span class="material-symbols-outlined text-[16px]">close</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Featured Badge Toggle -->
+                <div class="flex items-center gap-2 pt-1">
+                  <input type="checkbox" id="gal-featured" class="rounded text-secondary focus:ring-secondary border-outline-variant" checked/>
+                  <label for="gal-featured" class="text-xs font-body-sm text-on-surface font-medium cursor-pointer">
+                    Feature on Gallery Spotlight / Highlights
+                  </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button id="gal-submit-btn" type="submit"
+                  class="w-full mt-4 py-3 px-6 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold transition-all shadow-[0_0_15px_rgba(17,90,254,0.25)] flex items-center justify-center gap-2">
+                  <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+                  <span>Upload to Gallery</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Gallery Photos Live Manager -->
+          <div class="lg:col-span-7 bg-surface-container-lowest border border-surface-container rounded-2xl p-6 shadow-sm flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-surface-container">
+              <div>
+                <h3 class="font-headline-sm text-lg font-bold text-on-surface">Gallery Photographs</h3>
+                <p class="font-body-sm text-xs text-on-surface-variant">Live in Firestore, dynamically rendered on the public Gallery page.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="relative min-w-[180px]">
+                  <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">search</span>
+                  <input type="text" id="gallery-admin-search" placeholder="Search photos..."
+                    class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant text-xs text-on-surface outline-none focus:border-secondary"/>
+                </div>
+                <a href="gallery.html" target="_blank" class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="View Public Gallery">
+                  <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Grid of Cards in Admin -->
+            <div id="gallery-admin-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 overflow-y-auto max-h-[680px] pr-1">
+              <p class="text-on-surface-variant/60 text-center col-span-full py-12">Loading gallery photos from Firestore...</p>
             </div>
           </div>
 

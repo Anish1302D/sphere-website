@@ -37,6 +37,7 @@ const adminUserDisplay = document.getElementById('admin-user-display');
 const quickMetricsBar = document.getElementById('quick-metrics-bar');
 
 const metricEvents = document.getElementById('metric-events-count');
+const metricGallery = document.getElementById('metric-gallery-count');
 const metricProjects = document.getElementById('metric-projects-count');
 const metricTeam = document.getElementById('metric-team-count');
 
@@ -172,6 +173,40 @@ function setupImagePreview(fileInputId, previewContainerId, previewImgId) {
 setupImagePreview('ev-image-file', 'ev-image-preview', 'ev-preview-img');
 setupImagePreview('proj-image-file', 'proj-image-preview', 'proj-preview-img');
 setupImagePreview('tm-image-file', 'tm-image-preview', 'tm-preview-img');
+setupImagePreview('gal-image-file', 'gal-image-preview', 'gal-preview-img');
+
+const galClearPreviewBtn = document.getElementById('gal-clear-preview-btn');
+if (galClearPreviewBtn) {
+    galClearPreviewBtn.addEventListener('click', () => {
+        const fileInput = document.getElementById('gal-image-file');
+        const urlInput = document.getElementById('gal-image');
+        const preview = document.getElementById('gal-image-preview');
+        const previewImg = document.getElementById('gal-preview-img');
+        if (fileInput) fileInput.value = '';
+        if (urlInput) urlInput.value = '';
+        if (previewImg) previewImg.src = '';
+        if (preview) preview.classList.add('hidden');
+    });
+}
+
+const galToggleCustomEvent = document.getElementById('gal-toggle-custom-event');
+const galEventCustom = document.getElementById('gal-event-custom');
+if (galToggleCustomEvent) {
+    galToggleCustomEvent.addEventListener('click', () => {
+        if (galEventCustom) {
+            const isHidden = galEventCustom.classList.contains('hidden');
+            if (isHidden) {
+                galEventCustom.classList.remove('hidden');
+                galEventCustom.focus();
+                galToggleCustomEvent.textContent = '← Choose from List';
+            } else {
+                galEventCustom.classList.add('hidden');
+                galEventCustom.value = '';
+                galToggleCustomEvent.textContent = '+ Custom Event Name';
+            }
+        }
+    });
+}
 
 // --- TABS LOGIC ---
 const tabBtns = document.querySelectorAll('.tab-btn');
@@ -193,6 +228,7 @@ tabBtns.forEach(btn => {
         });
 
         if (targetId === 'tab-events') loadEvents();
+        if (targetId === 'tab-gallery') loadGallery();
         if (targetId === 'tab-projects') loadProjects();
         if (targetId === 'tab-team') loadTeam();
         if (targetId === 'tab-showcase') loadHomepageShowcase();
@@ -212,6 +248,7 @@ onAuthStateChanged(auth, (user) => {
         adminUserDisplay.textContent = user.email || 'Admin';
 
         loadEvents();
+        loadGallery();
         loadProjects();
         loadTeam();
         loadHomepageShowcase();
@@ -374,6 +411,7 @@ async function loadEvents() {
 
         if (metricEvents) metricEvents.textContent = cachedEvents.length;
         renderEventsList(cachedEvents);
+        updateGalleryEventOptions(cachedEvents);
     } catch (e) {
         eventsList.innerHTML = '<p class="text-error text-center py-8">Error loading events: ' + e.message + '</p>';
     }
@@ -468,6 +506,293 @@ if (eventsSearch) {
             (ev.location && ev.location.toLowerCase().includes(val))
         );
         renderEventsList(filtered);
+    });
+}
+
+// ========================================================
+// 1.5. EVENT GALLERY MANAGEMENT LOGIC
+// ========================================================
+const galleryCol = collection(db, 'gallery');
+const addGalleryForm = document.getElementById('add-gallery-form');
+const galleryAdminList = document.getElementById('gallery-admin-list');
+const galleryAdminSearch = document.getElementById('gallery-admin-search');
+let cachedGallery = [];
+
+function updateGalleryEventOptions(events) {
+    const select = document.getElementById('gal-event-select');
+    if (!select) return;
+    const currentVal = select.value;
+    select.innerHTML = '<option value="">-- Choose from Published Events --</option>';
+    events.forEach(ev => {
+        if (ev.title) {
+            const opt = document.createElement('option');
+            opt.value = ev.title;
+            opt.textContent = ev.title;
+            opt.setAttribute('data-date', ev.date || '');
+            opt.setAttribute('data-cat', ev.category || '');
+            select.appendChild(opt);
+        }
+    });
+    if (currentVal) select.value = currentVal;
+}
+
+if (galEventSelect) {
+    galEventSelect.addEventListener('change', (e) => {
+        const selectedOpt = e.target.selectedOptions[0];
+        if (selectedOpt && selectedOpt.value) {
+            const dateInput = document.getElementById('gal-date');
+            const catSelect = document.getElementById('gal-category');
+            if (dateInput && !dateInput.value && selectedOpt.getAttribute('data-date')) {
+                dateInput.value = selectedOpt.getAttribute('data-date');
+            }
+            if (catSelect && selectedOpt.getAttribute('data-cat')) {
+                let cat = selectedOpt.getAttribute('data-cat').toLowerCase();
+                if (cat.startsWith('hack')) cat = 'hackathons';
+                else if (cat.startsWith('work')) cat = 'workshops';
+                else if (cat.startsWith('demo') || cat.startsWith('pitch')) cat = 'demodays';
+                else if (cat.startsWith('hard') || cat.startsWith('lab')) cat = 'hardware';
+                else if (cat.startsWith('comm') || cat.startsWith('meet')) cat = 'community';
+                catSelect.value = cat;
+            }
+        }
+    });
+}
+
+if (addGalleryForm) {
+    addGalleryForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('gal-submit-btn');
+        const editId = document.getElementById('gal-edit-id').value;
+        const isEditing = !!editId;
+
+        const fileInput = document.getElementById('gal-image-file');
+        const urlInput = document.getElementById('gal-image');
+        const hasNewFile = fileInput && fileInput.files && fileInput.files[0];
+        const hasNewUrl = urlInput && urlInput.value.trim();
+
+        // Determine event name: custom or select
+        const customEventVal = (document.getElementById('gal-event-custom').value || '').trim();
+        const selectEventVal = (document.getElementById('gal-event-select').value || '').trim();
+        const eventName = customEventVal || selectEventVal || 'Sphere Event';
+
+        const title = (document.getElementById('gal-title').value || '').trim();
+        if (!title) {
+            showToast("Please provide a photo caption or title.", 'error');
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>${isEditing ? 'Updating Photo...' : 'Uploading Photo...'}</span>`;
+
+        try {
+            let imageData = '';
+            if (hasNewFile) {
+                // Compress image for gallery with high fidelity (1200px max width, 0.85 quality)
+                imageData = await compressImage(fileInput.files[0], 1200, 0.85);
+            } else if (hasNewUrl) {
+                imageData = urlInput.value.trim();
+            }
+
+            if (!isEditing && !imageData) {
+                showToast("Please select an image file or enter an image URL.", 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">add_photo_alternate</span><span>Upload to Gallery</span>';
+                return;
+            }
+
+            const photoData = {
+                title: title,
+                eventName: eventName,
+                category: document.getElementById('gal-category').value,
+                date: document.getElementById('gal-date').value.trim() || '2026',
+                description: document.getElementById('gal-desc').value.trim(),
+                isFeatured: document.getElementById('gal-featured').checked
+            };
+
+            if (imageData) {
+                photoData.image = imageData;
+            }
+
+            if (isEditing) {
+                await updateDoc(doc(db, 'gallery', editId), photoData);
+                showToast("Gallery photograph updated successfully!");
+            } else {
+                photoData.createdAt = serverTimestamp();
+                await addDoc(galleryCol, photoData);
+                showToast("New photo published to Gallery!");
+            }
+
+            cancelGalleryEdit();
+            await loadGallery();
+        } catch (error) {
+            console.error("Error saving gallery photo:", error);
+            showToast("Error saving photo: " + error.message, 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">add_photo_alternate</span><span>Upload to Gallery</span>';
+        }
+    });
+}
+
+async function editGalleryItem(docId) {
+    try {
+        const docSnap = await getDoc(doc(db, 'gallery', docId));
+        if (!docSnap.exists()) return;
+        const data = docSnap.data();
+
+        document.getElementById('gal-edit-id').value = docId;
+        document.getElementById('gal-title').value = data.title || '';
+        
+        // Match event name
+        const sel = document.getElementById('gal-event-select');
+        let matched = false;
+        if (sel) {
+            for (let i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].value === data.eventName) {
+                    sel.selectedIndex = i;
+                    matched = true;
+                    break;
+                }
+            }
+        }
+        if (!matched && data.eventName) {
+            document.getElementById('gal-event-custom').value = data.eventName;
+            document.getElementById('gal-event-custom').classList.remove('hidden');
+            if (galToggleCustomEvent) galToggleCustomEvent.textContent = '← Choose from List';
+        }
+
+        document.getElementById('gal-category').value = data.category || 'hackathons';
+        document.getElementById('gal-date').value = data.date || '';
+        document.getElementById('gal-desc').value = data.description || '';
+        document.getElementById('gal-featured').checked = data.isFeatured !== false;
+
+        if (data.image) {
+            document.getElementById('gal-preview-img').src = data.image;
+            document.getElementById('gal-image-preview').classList.remove('hidden');
+        }
+
+        document.getElementById('gallery-form-title').textContent = "Edit Photograph";
+        document.getElementById('gal-submit-btn').innerHTML = '<span class="material-symbols-outlined text-[18px]">edit</span><span>Update Photo</span>';
+        document.getElementById('gal-cancel-edit-btn').classList.remove('hidden');
+
+        document.getElementById('gallery-form-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (err) {
+        showToast("Error loading photo: " + err.message, 'error');
+    }
+}
+
+function cancelGalleryEdit() {
+    const editIdInput = document.getElementById('gal-edit-id');
+    if (editIdInput) editIdInput.value = '';
+    if (addGalleryForm) addGalleryForm.reset();
+    const preview = document.getElementById('gal-image-preview');
+    if (preview) preview.classList.add('hidden');
+    const previewImg = document.getElementById('gal-preview-img');
+    if (previewImg) previewImg.src = '';
+    const customEventInput = document.getElementById('gal-event-custom');
+    if (customEventInput) customEventInput.classList.add('hidden');
+    if (galToggleCustomEvent) galToggleCustomEvent.textContent = '+ Custom Event Name';
+    const titleEl = document.getElementById('gallery-form-title');
+    if (titleEl) titleEl.textContent = "Add Photo to Gallery";
+    const submitBtn = document.getElementById('gal-submit-btn');
+    if (submitBtn) submitBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">add_photo_alternate</span><span>Upload to Gallery</span>';
+    const cancelBtn = document.getElementById('gal-cancel-edit-btn');
+    if (cancelBtn) cancelBtn.classList.add('hidden');
+}
+
+const galCancelEditBtn = document.getElementById('gal-cancel-edit-btn');
+if (galCancelEditBtn) galCancelEditBtn.addEventListener('click', cancelGalleryEdit);
+
+async function loadGallery() {
+    if (!galleryAdminList) return;
+    galleryAdminList.innerHTML = '<p class="text-on-surface-variant/60 text-center col-span-full py-8">Fetching gallery photos...</p>';
+    try {
+        const q = query(galleryCol, orderBy('createdAt', 'desc'));
+        const snapshot = await getDocs(q);
+        cachedGallery = [];
+        snapshot.forEach(docSnap => {
+            cachedGallery.push({ id: docSnap.id, ...docSnap.data() });
+        });
+
+        if (metricGallery) metricGallery.textContent = cachedGallery.length;
+        renderGalleryAdminList(cachedGallery);
+    } catch (e) {
+        galleryAdminList.innerHTML = '<p class="text-error text-center col-span-full py-8">Error loading gallery: ' + e.message + '</p>';
+    }
+}
+
+function renderGalleryAdminList(items) {
+    if (!galleryAdminList) return;
+    if (!items.length) {
+        galleryAdminList.innerHTML = '<div class="col-span-full text-center py-12 text-on-surface-variant/50"><span class="material-symbols-outlined text-[36px] mb-2 opacity-50 block">photo_library</span><p>No gallery photos uploaded yet. Use the form on the left to add photos!</p></div>';
+        return;
+    }
+
+    galleryAdminList.innerHTML = '';
+    items.forEach(data => {
+        const card = document.createElement('div');
+        card.className = 'group p-3 rounded-2xl bg-surface-container-low border border-surface-container hover:border-secondary/30 transition-all flex flex-col justify-between gap-3';
+
+        const thumbHtml = data.image 
+            ? `<div class="relative w-full h-32 rounded-xl overflow-hidden bg-surface-container shrink-0">
+                 <img src="${data.image}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                 <div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-white font-label-caps text-[9px] uppercase font-bold tracking-wider">
+                   ${data.category || 'EVENT'}
+                 </div>
+                 ${data.isFeatured ? '<div class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-secondary text-on-secondary font-label-caps text-[8px] font-bold">FEATURED</div>' : ''}
+               </div>`
+            : `<div class="w-full h-32 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0"><span class="material-symbols-outlined text-[32px]">photo_camera</span></div>`;
+
+        card.innerHTML = `
+            ${thumbHtml}
+            <div class="flex-1 min-w-0">
+                <h4 class="font-headline-sm text-sm font-bold text-on-surface line-clamp-1">${data.title || 'Untitled Photograph'}</h4>
+                <div class="flex items-center gap-1.5 text-xs text-secondary font-telemetry-code mt-1 truncate">
+                    <span class="material-symbols-outlined text-[13px]">event</span>
+                    <span class="truncate">${data.eventName || 'Sphere Event'}</span>
+                </div>
+                <div class="text-[11px] text-on-surface-variant font-telemetry-code mt-0.5">
+                    ${data.date || '2026'}
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-2 pt-2 border-t border-surface-container">
+                <button class="edit-gal-btn p-2 rounded-lg bg-surface-container hover:bg-secondary/15 hover:text-secondary text-on-surface-variant transition-colors" data-id="${data.id}" title="Edit Photo">
+                    <span class="material-symbols-outlined text-[16px]">edit</span>
+                </button>
+                <button class="delete-gal-btn p-2 rounded-lg bg-surface-container hover:bg-error/15 hover:text-error text-on-surface-variant transition-colors" data-id="${data.id}" title="Delete Photo">
+                    <span class="material-symbols-outlined text-[16px]">delete</span>
+                </button>
+            </div>
+        `;
+        galleryAdminList.appendChild(card);
+    });
+
+    // Attach listeners
+    galleryAdminList.querySelectorAll('.edit-gal-btn').forEach(btn => {
+        btn.onclick = (e) => editGalleryItem(e.currentTarget.getAttribute('data-id'));
+    });
+
+    galleryAdminList.querySelectorAll('.delete-gal-btn').forEach(btn => {
+        btn.onclick = (e) => {
+            const id = e.currentTarget.getAttribute('data-id');
+            confirmDelete("Delete this photograph from the Gallery?", async () => {
+                await deleteDoc(doc(db, 'gallery', id));
+                showToast("Photograph removed from Gallery.");
+                loadGallery();
+            });
+        };
+    });
+}
+
+if (galleryAdminSearch) {
+    galleryAdminSearch.addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase().trim();
+        const filtered = cachedGallery.filter(item => 
+            (item.title && item.title.toLowerCase().includes(val)) ||
+            (item.eventName && item.eventName.toLowerCase().includes(val)) ||
+            (item.category && item.category.toLowerCase().includes(val))
+        );
+        renderGalleryAdminList(filtered);
     });
 }
 
