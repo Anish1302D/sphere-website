@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Event Gallery — Sphere Community</title>
+  <meta name="description" content="Visual archive of Sphere events, hackathons, workshops, and prototype demo days. Explore photographs of our builders in action."/>
+  <link rel="stylesheet" href="css/design-system.css"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-config.js"></script>
+</head>
+<body class="font-body-md text-body-md antialiased text-on-surface bg-background min-h-screen flex flex-col">
+
+  <!-- Page Atmosphere (Stitch Design) -->
+  <div class="page-atmosphere pointer-events-none">
+    <div class="atmosphere-blob atmosphere-blob-1"></div>
+    <div class="atmosphere-blob atmosphere-blob-2"></div>
+    <div class="atmosphere-blob atmosphere-blob-3"></div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(7,26,58,0.04)] border-b border-surface-container">
+    <div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="flex items-center gap-4">
+          <img alt="SPHERE LOGO" class="h-10 w-10 rounded-full object-cover drop-shadow-[0_0_8px_rgba(0,68,204,0.3)]" src="assets/images/sphere-logo.png"/>
+          <div class="flex flex-col">
+            <span class="font-title-caps text-title-caps text-on-surface">SPHERE</span>
+            <span class="font-telemetry-code text-[10px] text-secondary tracking-widest uppercase">Community</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden xl:flex items-center gap-space-md" data-active-classes="text-secondary font-semibold">
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="home" href="index.html">HOME</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="leadership" href="leadership.html">LEADERSHIP</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="about" href="about.html">ABOUT</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="domains" href="domains.html">DOMAINS</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="events" href="events.html">EVENTS</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="projects" href="projects.html">PROJECTS</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="team" href="team.html">TEAM</a>
+        <a class="font-title-caps text-title-caps text-secondary font-semibold transition-colors py-space-xs px-space-xs" data-path="gallery" href="gallery.html">GALLERY</a>
+        <a class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs" data-path="faq" href="faq.html">FAQ</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-space-md">
+        <a class="hidden sm:inline-flex items-center justify-center px-space-lg py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-label-caps text-label-caps transition-all shadow-[0_0_20px_rgba(17,90,254,0.25)] hover:shadow-[0_0_25px_rgba(17,90,254,0.45)]" href="#join">JOIN COMMUNITY</a>
+        <button id="mobile-menu-toggle" class="xl:hidden text-on-surface min-w-[44px] min-h-[44px] flex items-center justify-center p-2" aria-label="Toggle mobile menu">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer Overlay -->
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-60 bg-surface/95 backdrop-blur-xl flex flex-col p-8 overflow-y-auto transform translate-x-full transition-transform duration-300 xl:hidden pointer-events-none opacity-0 invisible">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface min-w-[44px] min-h-[44px] flex items-center justify-center p-2" aria-label="Close menu">
+      <span class="material-symbols-outlined text-[32px]">close</span>
+    </button>
+    <nav class="flex flex-col gap-6 mt-16">
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="index.html">Home</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="leadership.html">Leadership</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="about.html">About</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="domains.html">Domains</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="events.html">Events</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="projects.html">Projects</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="team.html">Team</a>
+      <a class="font-headline-md text-headline-md text-secondary font-bold" href="gallery.html">Gallery</a>
+      <a class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary" href="faq.html">FAQ</a>
+    </nav>
+    <div class="mt-auto pt-8">
+      <a href="#join" class="inline-flex items-center justify-center w-full px-8 py-4 bg-secondary text-on-secondary font-label-caps text-label-caps rounded-full shadow-[0_0_20px_rgba(17,90,254,0.3)]">Join Sphere</a>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <main class="relative z-10 w-full pt-28 pb-20 flex-1">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
+
+      <!-- Hero Header Section -->
+      <div class="relative overflow-hidden mb-12">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-surface-container">
+          <div class="max-w-3xl">
+            <!-- Overline Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-container/10 border border-secondary/20 text-secondary font-label-caps text-xs tracking-widest uppercase mb-3">
+              <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+              <span>VISUAL ARCHIVE // SPHERE EVENTS</span>
+            </div>
+            <h1 class="font-display-hero text-3xl sm:text-4xl lg:text-5xl font-extrabold text-on-surface tracking-tight uppercase">
+              Event Gallery &amp; Chronicle
+            </h1>
+            <p class="font-body-lg text-base sm:text-lg text-on-surface-variant mt-3 leading-relaxed">
+              Step inside the Sphere arena. Explore photo dispatches from our national hackathons, technical sprint cohorts, hardware maker labs, and demo day pitches.
+            </p>
+          </div>
+
+          <!-- Quick Telemetry Card -->
+          <div class="shrink-0 flex flex-wrap sm:flex-nowrap items-center gap-3">
+            <div class="px-4 py-3 rounded-2xl bg-surface-container-lowest border border-surface-container shadow-sm flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined text-[22px]">photo_camera</span>
+              </div>
+              <div>
+                <div class="font-telemetry-code text-xs text-on-surface-variant uppercase">ARCHIVED PHOTOS</div>
+                <div id="gallery-counter-stat" class="font-headline-sm text-lg font-bold text-on-surface">Loading...</div>
+              </div>
+            </div>
+
+            <a href="admin.html" class="hidden md:inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-surface-container hover:bg-surface-container-high border border-surface-container text-on-surface text-xs font-title-caps uppercase tracking-wider font-semibold transition-colors">
+              <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+              <span>Add Photos (Admin)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls & Filter Toolbar -->
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-8 bg-surface-container-lowest/80 backdrop-blur-md p-4 rounded-2xl border border-surface-container shadow-sm">
+        
+        <!-- Category Filter Pills -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 lg:pb-0" id="gallery-category-filters">
+          <button class="gallery-cat-btn active px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all bg-secondary-container text-on-secondary-container shadow-sm whitespace-nowrap" data-category="all">
+            All Photos
+          </button>
+          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="hackathons">
+            Hackathons
+          </button>
+          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="workshops">
+            Workshops
+          </button>
+          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="demodays">
+            Demo Days &amp; Pitch
+          </button>
+          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="hardware">
+            Hardware &amp; Labs
+          </button>
+          <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs font-title-caps uppercase tracking-wider font-bold transition-all text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high whitespace-nowrap" data-category="community">
+            Community &amp; Social
+          </button>
+        </div>
+
+        <!-- Search and Event Filter Dropdown -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <!-- Event Dropdown -->
+          <div class="relative min-w-[200px]">
+            <select id="gallery-event-filter" class="w-full px-3.5 py-2 pr-8 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none appearance-none cursor-pointer">
+              <option value="all">All Events</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span>
+          </div>
+
+          <!-- Live Search Bar -->
+          <div class="relative min-w-[220px]">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+            <input type="text" id="gallery-search-input" placeholder="Search caption or event..."
+              class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant text-on-surface text-xs focus:border-secondary focus:ring-2 focus:ring-secondary/20 outline-none transition-all"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery Grid Container -->
+      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by js/gallery.js -->
+        <div class="col-span-full text-center py-20">
+          <div class="w-12 h-12 rounded-full border-4 border-secondary/20 border-t-secondary animate-spin mx-auto mb-4"></div>
+          <p class="font-body-md text-sm text-on-surface-variant">Loading event gallery photographs...</p>
+        </div>
+      </div>
+
+      <!-- Empty State Container -->
+      <div id="gallery-empty-state" class="hidden text-center py-20 bg-surface-container-lowest/50 border border-surface-container rounded-3xl p-8 max-w-lg mx-auto">
+        <div class="w-16 h-16 rounded-2xl bg-secondary-container/10 border border-secondary/20 flex items-center justify-center mx-auto mb-4 text-secondary">
+          <span class="material-symbols-outlined text-[32px]">photo_library</span>
+        </div>
+        <h3 class="font-headline-sm text-lg font-bold text-on-surface mb-2">No Photographs Found</h3>
+        <p class="font-body-sm text-xs text-on-surface-variant mb-6">No pictures match your selected filter criteria or search keyword.</p>
+        <button id="gallery-reset-filters" class="px-5 py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs uppercase font-bold transition-all">
+          Reset Filters
+        </button>
+      </div>
+
+      <!-- Admin Callout Banner -->
+      <div class="mt-16 p-8 rounded-3xl bg-gradient-to-r from-surface-container-lowest to-surface-container border border-surface-container shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-secondary-container/20 border border-secondary/30 flex items-center justify-center text-secondary shrink-0 shadow-inner">
+            <span class="material-symbols-outlined text-[28px]">cloud_upload</span>
+          </div>
+          <div>
+            <h3 class="font-headline-sm text-lg font-bold text-on-surface">Sphere Admin or Event Lead?</h3>
+            <p class="font-body-sm text-xs text-on-surface-variant mt-0.5 max-w-xl">
+              Upload event snapshots, keynote photos, team pictures, and victory ceremonies directly to this gallery in real time via Mission Control.
+            </p>
+          </div>
+        </div>
+        <a href="admin.html" class="shrink-0 px-6 py-3 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary font-title-caps text-xs tracking-wider uppercase font-bold transition-all shadow-[0_0_15px_rgba(17,90,254,0.25)] flex items-center gap-2">
+          <span>ACCESS MISSION CONTROL</span>
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================
+       LIGHTBOX VIEWER MODAL
+       ======================================================== -->
+  <div id="gallery-lightbox" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 p-4 sm:p-6 lg:p-8" role="dialog" aria-modal="true">
+    
+    <!-- Close Button -->
+    <button id="lightbox-close-btn" class="absolute top-5 right-5 z-20 text-white/80 hover:text-white p-3 rounded-full bg-black/40 hover:bg-black/60 transition-colors backdrop-blur-sm min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Close image viewer">
+      <span class="material-symbols-outlined text-[28px]">close</span>
+    </button>
+
+    <!-- Nav Arrows -->
+    <button id="lightbox-prev-btn" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white p-3 rounded-full bg-black/40 hover:bg-black/70 transition-all backdrop-blur-sm min-w-[48px] min-h-[48px] flex items-center justify-center" aria-label="Previous image">
+      <span class="material-symbols-outlined text-[32px]">keyboard_arrow_left</span>
+    </button>
+    <button id="lightbox-next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white/80 hover:text-white p-3 rounded-full bg-black/40 hover:bg-black/70 transition-all backdrop-blur-sm min-w-[48px] min-h-[48px] flex items-center justify-center" aria-label="Next image">
+      <span class="material-symbols-outlined text-[32px]">keyboard_arrow_right</span>
+    </button>
+
+    <!-- Modal Content Card -->
+    <div class="relative max-w-5xl w-full max-h-[90vh] bg-surface-container-lowest/95 border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col scale-95 transition-transform duration-300" id="lightbox-card">
+      
+      <!-- Image Display Area -->
+      <div class="relative w-full bg-black flex items-center justify-center overflow-hidden max-h-[65vh]">
+        <img id="lightbox-img" src="" alt="" class="max-h-[65vh] w-auto max-w-full object-contain select-none transition-all duration-300"/>
+        
+        <!-- Live Counter Pill in Lightbox -->
+        <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white font-telemetry-code text-[11px] flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          <span id="lightbox-counter">Photo 1 of 1</span>
+        </div>
+      </div>
+
+      <!-- Image Details Footer -->
+      <div class="p-6 bg-surface-container-lowest border-t border-surface-container flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1.5 max-w-2xl">
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="lightbox-event-tag" class="px-2.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-caps text-[10px] uppercase font-bold">EVENT</span>
+            <span id="lightbox-cat-tag" class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-caps text-[10px] uppercase font-semibold">TAG</span>
+            <span id="lightbox-date" class="font-telemetry-code text-xs text-on-surface-variant">DATE</span>
+          </div>
+          <h3 id="lightbox-title" class="font-headline-sm text-lg sm:text-xl font-bold text-on-surface">Photo Caption</h3>
+          <p id="lightbox-desc" class="font-body-sm text-xs sm:text-sm text-on-surface-variant leading-relaxed line-clamp-2"></p>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <a id="lightbox-download-btn" href="#" target="_blank" download class="px-4 py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-title-caps uppercase tracking-wider font-semibold transition-colors flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+            <span>View Full Res</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w-full bg-surface border-t border-surface-container py-8 mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <img src="assets/images/sphere-logo.png" alt="Sphere Logo" class="w-6 h-6 rounded-full"/>
+        <span class="font-title-caps text-xs text-on-surface">Sphere Community &copy; 2026</span>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-title-caps text-on-surface-variant">
+        <a href="events.html" class="hover:text-secondary transition-colors">Events</a>
+        <a href="projects.html" class="hover:text-secondary transition-colors">Projects</a>
+        <a href="gallery.html" class="text-secondary font-bold">Gallery</a>
+        <a href="admin.html" class="hover:text-secondary transition-colors">Mission Control</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script type="module" src="js/gallery.js"></script>
+</body>
+</html>

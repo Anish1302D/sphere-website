@@ -84,6 +84,12 @@
           >
           <a
             class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs"
+            data-path="gallery"
+            href="gallery.html"
+            >GALLERY</a
+          >
+          <a
+            class="font-title-caps text-title-caps text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-xs"
             data-path="faq"
             href="faq.html"
             >FAQ</a
@@ -153,6 +159,11 @@
           class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
           href="team.html"
           >Team</a
+        >
+        <a
+          class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
+          href="gallery.html"
+          >Gallery</a
         >
         <a
           class="font-headline-md text-headline-md text-on-surface-variant hover:text-secondary"
@@ -437,57 +448,72 @@
             </div>
             <!-- Historical Snapshot Gallery -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-              <div
-                class="relative rounded-xl overflow-hidden shadow-sm aspect-video"
+              <a href="gallery.html"
+                class="group relative rounded-xl overflow-hidden shadow-sm aspect-video block"
               >
                 <img
-                  class="w-full h-full object-cover"
-                  data-alt="A focused young software developer team presenting their project code on a screen during an intensive collegiate hackathon, crisp blue stadium light accents, professional documentary style."
-                  src="assets/images/sphere-logo.png"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  alt="SphereHacks National Hackathon"
+                  src="assets/images/gallery-hackathon-night.jpg"
                 />
                 <div
                   class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"
                 ></div>
                 <div class="absolute bottom-3 left-3 text-on-primary">
                   <span class="font-label-caps text-label-caps"
-                    >SPHEREHACKS '24 // BERKELEY</span
+                    >SPHEREHACKS '25 // NATIONAL</span
                   >
                 </div>
-              </div>
-              <div
-                class="relative rounded-xl overflow-hidden shadow-sm aspect-video"
+              </a>
+              <a href="gallery.html"
+                class="group relative rounded-xl overflow-hidden shadow-sm aspect-video block"
               >
                 <img
-                  class="w-full h-full object-cover"
-                  data-alt="A hardware prototyping workbench with custom circuit boards, microcontrollers, soldering iron, and laptops in a clean bright university workspace."
-                  src="assets/images/sphere-logo.png"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  alt="Hardware Robotics Lab Sprint"
+                  src="assets/images/gallery-hardware-lab.jpg"
                 />
                 <div
                   class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"
                 ></div>
                 <div class="absolute bottom-3 left-3 text-on-primary">
                   <span class="font-label-caps text-label-caps"
-                    >HARDWARE LAB // AUSTIN</span
+                    >HARDWARE LAB // MAKERSPACE</span
                   >
                 </div>
-              </div>
-              <div
-                class="relative rounded-xl overflow-hidden shadow-sm aspect-video"
+              </a>
+              <a href="gallery.html"
+                class="group relative rounded-xl overflow-hidden shadow-sm aspect-video block"
               >
                 <img
-                  class="w-full h-full object-cover"
-                  data-alt="Audience of tech students and venture capitalists listening intently to a founder pitch presentation on stage with a large data visualization slide."
-                  src="assets/images/sphere-logo.png"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  alt="Global AI Summit Keynote"
+                  src="assets/images/gallery-workshop-stage.jpg"
                 />
                 <div
                   class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"
                 ></div>
                 <div class="absolute bottom-3 left-3 text-on-primary">
                   <span class="font-label-caps text-label-caps"
-                    >FOUNDER SUMMIT // NYC</span
+                    >GLOBAL AI SUMMIT // KEYNOTE</span
                   >
                 </div>
+              </a>
+            </div>
+
+            <!-- Explore Gallery Link Banner -->
+            <div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 p-4 rounded-xl bg-surface-container-low border border-surface-container">
+              <div class="flex items-center gap-2.5">
+                <span class="material-symbols-outlined text-secondary text-[22px]">photo_library</span>
+                <div>
+                  <h4 class="font-headline-sm text-sm font-bold text-on-surface">Explore Sphere Visual Archive</h4>
+                  <p class="font-body-sm text-xs text-on-surface-variant">View high-definition photos, pitch day celebrations, and technical sessions.</p>
+                </div>
               </div>
+              <a href="gallery.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary text-xs font-title-caps uppercase tracking-wider font-bold transition-all shrink-0">
+                <span>VIEW EVENT GALLERY</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
             </div>
           </div>
         </section>
